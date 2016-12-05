@@ -1,0 +1,22 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit
+  \tkzDefPoint(1,5){A} \tkzDefPoint(5,2){B}  \tkzDrawSegment(A,B)
+  \tkzFindSlopeAngle(A,B)\tkzGetAngle{tkzang}
+  \tkzDefPointBy[rotation= center A angle \tkzang ](B) \tkzGetPoint{C}
+  \tkzDefPointBy[rotation= center A angle -\tkzang ](B) \tkzGetPoint{D}
+  \tkzCompass[length=1,dashed,color=red](A,C)
+  \tkzCompass[delta=10,Maroon](B,C)   \tkzDrawPoints(A,B,C,D)
+  \tkzLabelPoints(B,C,D)  \tkzLabelPoints[above left](A)
+  \tkzDrawSegments[style=dashed,color=bistre](A,C A,D)
+\end{tikzpicture}
+
+\end{document} 

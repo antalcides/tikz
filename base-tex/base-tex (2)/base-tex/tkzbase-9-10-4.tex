@@ -1,0 +1,29 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=2]
+  \tikzset{Style Tan/.style={solid,-,blue}}
+  \tikzset{xcoord style/.append style={below=4pt}}
+  \tikzset{ycoord style/.append style={left=4pt}}
+  \tkzInit[xmin=-2.5,xmax=5,ymin=-.5,ymax=3.5]
+  \tkzDrawX[noticks,label={}] \tkzDrawY[noticks,label={}]
+  \tkzFct[domain=-3:5,samples=200,id=f,line width=0.5pt,color=red]%
+         {(x-.5)*((x-.5)*(x-.5)-3)/16+.5}
+  \tkzDrawTangentLine[kl=1.5,kr=2](3)
+  \tkzDefPointByFct[draw](3)
+  \tkzLabelPoint(tkzPointResult){$A$}
+  \tkzPointShowCoord[xlabel=$a$,ylabel=$f(a)$](tkzPointResult)
+  \tkzDefPointByFct[draw](4)
+  \tkzLabelPoint[above left](tkzPointResult){$M$}
+  \tkzPointShowCoord[noxdraw,xlabel=$a+h$,ylabel=$f(a+h)$](tkzPointResult)
+  \tkzDefPoint(4,2){M'} \tkzDrawPoint(M') \tkzLabelPoint(M'){$M'$}
+  \tkzPointShowCoord[ylabel=$f'(a)\times h+f(a)$](M')
+\end{tikzpicture}
+
+\end{document} 

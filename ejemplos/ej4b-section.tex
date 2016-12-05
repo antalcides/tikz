@@ -1,0 +1,182 @@
+\documentclass[11pt,fleqn]{book}
+\usepackage[english]{babel}
+\usepackage{lipsum}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{mathtools,amsfonts,amssymb,amsthm}
+\usepackage[most]{tcolorbox}
+\definecolor{ocre}{RGB}{52,177,201}
+\definecolor{ultramarine}{RGB}{0,45,97}
+\definecolor{mybluei}{RGB}{0,173,239}
+\definecolor{myblueii}{RGB}{63,200,244}
+\definecolor{myblueiii}{RGB}{199,234,253}
+
+\usepackage{fourier}
+\usepackage[explicit,calcwidth]{titlesec}
+
+\renewcommand\thechapter{\arabic{chapter}}
+
+\newcommand\chapnumfont{% 
+  \fontsize{380}{130}\color{myblueii}\selectfont%
+}
+
+\newcommand\chapnamefont{%
+  \normalfont\color{white}\scshape\small\bfseries
+}
+
+\titleformat{\chapter}
+  {\normalfont\huge\filleft}
+  {}
+  {0pt}
+  {\stepcounter{chapshift}%
+  \begin{tikzpicture}[remember picture,overlay]
+  \fill[myblueiii]
+    (current page.north west) rectangle ([yshift=-13cm]current page.north east);
+  \node[
+      fill=mybluei,
+      text width=2\paperwidth,
+      rounded corners=6cm,
+      text depth=18cm,
+      anchor=center,
+      inner sep=0pt] at (current page.north east) (chaptop)
+    {\thechapter};%
+  \node[
+      anchor=south east,
+      inner sep=0pt,
+      outer sep=0pt] (chapnum) at ([xshift=-20pt]chaptop.south)
+    {\chapnumfont\thechapter};
+  \node[
+      anchor=south,
+      inner sep=0pt] (chapname) at ([yshift=2pt]chapnum.south)
+  {};
+  \node[
+      anchor=north east,
+      align=right,
+      inner xsep=0pt] at ([yshift=-0.5cm]chapname.east|-chapnum.south)
+  {\parbox{.7\textwidth}{\raggedleft#1}};
+  \end{tikzpicture}%
+  }
+
+\titleformat{name=\chapter,numberless}
+  {\normalfont\huge\filleft}
+  {}
+  {0pt}
+  {\begin{tikzpicture}[remember picture,overlay]
+  \fill[myblueiii]
+    (current page.north west) rectangle ([yshift=-13cm]current page.north east);
+  \node[
+      fill=mybluei,
+      text width=2\paperwidth,
+      rounded corners=6cm,
+      text depth=18cm,
+      anchor=center,
+      inner sep=0pt] at (current page.north east) (chaptop)
+    {};%
+  \node[
+      anchor=south east,minimum width=2in,
+      inner sep=0pt,
+      outer sep=0pt] (chapnum) at ([xshift=-20pt]chaptop.south)
+    {};
+  \node[
+      anchor=south,
+      inner sep=0pt] (chapname) at ([yshift=2pt]chapnum.south)
+  {};
+  \node[
+      anchor=north east,
+      align=right,
+      inner xsep=0pt] at ([yshift=-0.5cm]chapname.east|-chapnum.south)
+  {\parbox{.7\textwidth}{\raggedleft#1}};
+  \end{tikzpicture}%
+  }
+
+\titlespacing*{\chapter}{0pt}{0pt}{3.5in}
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{3.5in}
+
+\titleformat{\section}
+  {\addtolength{\titlewidth}{2pc}\normalfont\Large\sffamily\bfseries}
+  {\colorbox{myblueii}{\parbox{2cm}{\strut\color{white}\hfill\thesection}}}
+  {1em}{#1}
+  [{\titleline*[l]{\color{myblueii}\titlerule[2pt]}}]
+\titleformat{\subsection}
+  {\addtolength{\titlewidth}{2pc}\normalfont\large\sffamily}
+  {\colorbox{myblueii}{\parbox{2cm}{\strut\color{white}\hfill\thesubsection}}}
+  {1em}{#1}
+  [{\titleline*[l]{\color{myblueii}\titlerule[2pt]}}]
+
+\usetikzlibrary{calc}
+\pagestyle{plain}
+
+\newcounter{chapshift}
+\addtocounter{chapshift}{-1}
+
+\newcommand\BoxColor{myblueii}
+
+\def\subsectiontitle{}
+\renewcommand{\sectionmark}[1]{\markright{\sffamily\normalsize#1}{}}
+\renewcommand{\subsectionmark}[1]{\def\subsectiontitle{#1}}
+
+
+\usepackage{etoolbox,fancyhdr}
+
+\pagestyle{fancy}
+
+\renewcommand{\headrule}{{\color{myblueii}%
+\hrule width\headwidth height\headrulewidth depth\headrulewidth}}
+
+\renewcommand{\chaptermark}[1]{\markboth{\sffamily\normalsize\bfseries \ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\sffamily\normalsize#1}{}}
+\fancyhf{} \fancyhead[LE,RO]{\sffamily\normalsize\colorbox{myblueii}{\color{white}\sffamily\bfseries\strut\quad\thepage\quad}}
+\fancyhead[LO]{\textcolor{mybluei} \rightmark%
+\begin{tikzpicture}[overlay,remember picture]
+  \node[fill=\BoxColor,inner sep=-1pt,rectangle,text width=1cm,
+    text height=28cm,align=center,anchor=north east]
+  at ($ (current page.north east) $)
+  {\rotatebox{90}{\parbox{18cm}{%
+   \centering\textcolor{white}{\bfseries\scshape\thechapter.\leftmark \hspace{2cm}\rightmark\hspace{2cm}\thesubsection~\subsectiontitle}}}};
+  \end{tikzpicture}}
+\fancyhead[RE]{\textcolor{mybluei}\leftmark%
+  \begin{tikzpicture}[overlay,remember picture]
+  \node[fill=\BoxColor,inner sep=0pt,rectangle,text width=1cm,
+    text height=28cm,align=center,anchor=north west]
+  at ($ (current page.north west) $)
+  {\rotatebox{90}{\parbox{18cm}{%
+    \centering\textcolor{white}{\bfseries\scshape\thechapter.\leftmark \hspace{2cm}\rightmark\hspace{2cm}\thesubsection~\subsectiontitle}}}};
+  \end{tikzpicture}}
+\renewcommand{\headrulewidth}{.5pt}
+\addtolength{\headheight}{2.5pt}
+\newcommand{\footrulecolor}[1]{\patchcmd{\footrule}{\hrule}{\color{#1}\hrule}{}{}}
+\renewcommand{\headrulewidth}{.5pt}
+\addtolength{\headheight}{2.5pt}
+\renewcommand{\footrulewidth}{.5pt}
+\fancyfoot[LE,RO]{\footnotesize\bfseries\itshape Foot 1}
+\fancyfoot[C]{\footnotesize\bfseries Foot 2}
+\fancyfoot[RE,LO]{\footnotesize\bfseries\itshape Foot 3}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% 
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\makeatletter
+\renewcommand{\cleardoublepage}{
+\clearpage\ifodd\c@page\else
+\hbox{}
+\vspace*{\fill}
+\thispagestyle{empty}
+\newpage
+\fi}
+\makeatother
+
+\begin{document}
+\chapter{This is how it all began}
+\section{Introduction}
+\lipsum[4]
+\subsection{Sub Introduction}
+\lipsum[1-10]
+
+\chapter{This is how it all ended}
+\section{Time to say "Goodbye"}
+\lipsum
+
+\end{document} 

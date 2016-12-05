@@ -1,0 +1,22 @@
+\documentclass[]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[upright]{fourier}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{fullpage,amsmath,tkz-fct}   
+\definecolor{fondpaille}{cmyk}{0,0,0.1,0}
+\pagecolor{fondpaille}
+\color{Maroon}
+\tkzSetUpColors[background=fondpaille,text=Maroon]   
+\thispagestyle{empty}
+
+\begin{document}
+\begin{tikzpicture}[scale=3,<->=latex]   
+  \tkzInit[xmin=-1,xmax=1,ymin=-2,ymax=2]
+  \tkzDrawY[trig=2] \tkzLabelX
+  \tkzDrawX \tkzLabelY[trig=2]
+  \tkzFct[color=blue,thick,domain =-1:1]{asin(x)}
+   \tkzDefPointByFct[draw](-1)
+  \tkzDefPointByFct[draw](+1)
+  \tkzDrawTangentLine[color=red](0)
+  \end{tikzpicture}
+\end{document}           

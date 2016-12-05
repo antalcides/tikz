@@ -1,0 +1,39 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=.8]
+  \tkzInit[xmin=-4,xmax=4,ymin=-5,ymax=5]
+  \tkzGrid \tkzClip \tkzPoint(0,0){O} \tkzPoint(2,-2){A}
+  \tkzDefPoint(70:4){B} \tkzDrawPoints(A,O,B)
+  \tkzLabelPoints(A,O,B)
+  \tkzDrawLine[add= 2 and 2](O,A)
+  \tkzDefPointBy[translation=from O to A](B)
+  \tkzGetPoint{C}
+  \tkzDrawPoint[color=orange](C)  \tkzLabelPoints(C)
+  \tkzShowTransformation[translation=from O to A,%
+             length=2](B)
+  \tkzDrawVectors[color=orange](O,A B,C)
+  \tkzDefPointBy[reflection=over O--A](B) \tkzGetPoint{E}
+  \tkzDrawSegment[blue](B,E)
+  \tkzDrawPoint[color=blue](E)\tkzLabelPoints(E)
+  \tkzShowTransformation[reflection=over O--A,size=2](B)
+  \tkzDefPointBy[symmetry=center O](B) \tkzGetPoint{F}
+  \tkzDrawSegment[color=green](B,F)
+  \tkzDrawPoint[color=green](F)\tkzLabelPoints(F)
+  \tkzShowTransformation[symmetry=center O,%
+                      length=2](B)
+  \tkzDefPointBy[projection=onto O--A](C)
+  \tkzGetPoint{H}
+  \tkzDrawSegments[color=magenta](C,H)
+  \tkzDrawPoint[color=magenta](H)\tkzLabelPoints(H)
+  \tkzShowTransformation[projection=onto O--A,%
+                         color=red,size=3,gap=-2](C)
+\end{tikzpicture}
+
+\end{document} 

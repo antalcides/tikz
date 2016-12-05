@@ -1,0 +1,40 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+\draw[->,color=black] (-3.08,0.) -- (5.98,0.)node[right]{x};
+% \foreach \x in {-3.,-2.,-1.,1.,2.,3.,4.,5.}
+% \draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\draw[->,color=black] (-1.7,-0.72) -- (-1.7,5.84)node[right]{y};;
+% \foreach \y in {,1.,2.,3.,4.,5.}
+% \draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw[color=blue] (0,-10pt) node[below =-10pt] { $a$};
+\draw[line width=1.2pt,color=blue,smooth,samples=100,domain=-0.5:4.2] plot(\x,{1.26+3.38*(\x)-1.98*(\x)^(2.0)+0.33*(\x)^(3.0)});
+\draw[line width=1.2pt,color=red,smooth,samples=100,domain=-1:4.2] plot(\x,{2.28+0.74*(\x)});
+\draw[line width=1.2pt,color=orange,smooth,samples=100,domain=-1:4.2] plot(\x,{0.25+0.74*(\x)});
+% \draw [line width=1.2pt,domain=-1:4.2,gray] plot(\x,{(--5.04--2.96*\x)/4.});
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[gray, thick] (0,1.26) -- (4,4.22);
+\draw[gray, thick] (0,1.26) -- (4,1.26);
+\draw[gray, thick] (2,2.74) -- (4,2.74);
+\draw[gray, thick] (0,0) -- (0,1.26);
+\draw[gray, thick] (0.845,0) -- (0.845,2.9);
+\draw[gray, thick] (3.154,0) -- (3.154,2.578);
+\draw[gray, thick] (4,0) -- (4,4.22);
+\draw[gray, thick] (2,0) -- (2,2.74);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{scriptsize}
+ \draw[color=blue] (0,1.26)node[left]{$(a,f(a))$};
+\draw[color=blue](4,4.22)node[right]{$(b,f(b))$};
+\draw[color=blue](2,0)node[below]{$c$};
+%\draw[color=blue](0,0)node{$a$};
+\draw[color=blue](4,0)node[below]{$b$};
+\draw[color=blue](.845,0)node[below]{$u$};
+\draw[color=blue](3.154,0)node[below]{$v$};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \draw[color=blue] (-4.14,-0.96) node {$g$};
+% \draw[color=blue] (-3.32,-2.2) node {$h$};
+% \draw [fill=blue] (0.,1.26) circle (2.5pt);
+% \draw [fill=blue] (4.,4.22) circle (2.5pt);
+% node (-4.14,-1.44) node {$j$};
+% \end{scriptsize}
+\end{tikzpicture}
+

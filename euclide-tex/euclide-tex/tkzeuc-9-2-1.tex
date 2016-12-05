@@ -1,0 +1,23 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.25]
+  \tkzInit   \tkzClip
+  \tkzDefPoint(0,1){A}   \tkzDefPoint(6,3){B}   \tkzDefPoint(3,6){C}
+  \tkzDrawLines[add= 0 and .3](A,B A,C)
+  \tkzDefLine[bisector](B,A,C)                     \tkzGetPoint{a}
+  \tkzDrawLine[add=0 and 0,color=magenta!50 ](A,a)
+  \tkzDefPointBy[homothety=center A ratio .5](a)   \tkzGetPoint{a'}
+  \tkzDefPointBy[projection = onto A--B](a')       \tkzGetPoint{k}
+  \tkzDrawSegment[style=dashed](a',k)
+  \tkzShowLine[bisector,size=2,gap=3](B,A,C)
+  \tkzDrawCircle(a',k)
+\end{tikzpicture}
+
+\end{document} 

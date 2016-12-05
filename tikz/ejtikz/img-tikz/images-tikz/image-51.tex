@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+\tkzInit[xmin=-5,xmax= 5,xstep=1,
+ymax=6,ymin=-5,ystep=1]
+\tkzDrawX[label={\textit{x}},below= -18pt]
+\tkzLabelX
+\tkzAxeY[label=$f(x)$]
+\tkzFct[domain = -4:0.99,blue,samples=200, smooth, thick]{1/(\x-1)}
+\tkzFct[domain =1.01:4,blue,samples=200, smooth, thick]{1/(\x-1)}
+\tkzVLine[style=dotted,color=green, ultra thick]{1}
+\tkzSetUpPoint[shape=circle, size = 7, color=blue, fill=blue]
+\tkzDefPointByFct[draw,ref=A](-4)
+\tkzLabelPoint[above right](A){}
+\tkzDefPointByFct[draw,ref=B](4)
+\tkzLabelPoint[above right](B){}
+\tkzDefPoint(1,0){x} \tkzDrawPoint[fill=blue,color=blue,size=7pt](x)
+\tkzText[draw,color= blue!50!black,fill=red!20]%
+(-3,4){$f(x)=\dfrac{1}{x-1}$}
+\end{tikzpicture}

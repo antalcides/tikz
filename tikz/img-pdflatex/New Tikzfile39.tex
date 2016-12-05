@@ -1,0 +1,35 @@
+
+\begin{tikzpicture}
+\pgfplotsset{point legend/.style={},
+    point 1/.style={anchor=south},
+    point 2/.style={anchor=south}
+}
+\begin{axis}[
+    azetinaplot,
+    domain=-0.5:2.5, samples=100,
+    xmin=-1, xmax=3,
+    point legend/.style={ at={(rel axis cs:1.1,0.5)}},
+    point 1/.style={anchor=south east}, point 2/.style={anchor=south east}
+]
+%\begin{scope}
+\draw [blue, thick, x=0.0085cm, y=1cm,
+declare function={f(\x) = sin(\x);
+}]
+plot [domain=0:360, samples=144, smooth] (\x,{f(\x)});
+%     \addplot [thick, red, latex-latex] {f(x)} node [anchor=west] {$f(x)=\sin(x)$};
+%     \addplot [black, mark=*] coordinates {(290,{f(290)}) (340,{f(340)})}
+%         node [pos=0,/pgfplots/point 1] {$P_1$}
+%         node [pos=1,/pgfplots/point 2] {$P_2$};
+%     \pgfplotsextra{
+%         \pgfmathsetmacro\first{f(290)}
+%         \pgfmathsetmacro\second{(f(340)}
+%         \pgfmathsetmacro\xdiff{340-290}
+%         \pgfmathsetmacro\ydiff{f(340)-f(290)}
+%         \draw (axis cs:290,\first) -| (axis cs:340,\second);
+%         \draw [|-|,yshift=-2ex] (axis cs:290,\first) -- node [inner sep=1pt,fill=white] {\pgfmathprintnumber{\xdiff}} (axis cs:340,\first);
+%         \draw [|-|,xshift=2ex] (axis cs:340,\first) -- node [inner sep=1pt, fill=white] {\pgfmathprintnumber{\ydiff}} (axis cs:340,\second);
+%         \matrix at (rel axis cs:1,1) [matrix of nodes,/pgfplots/point legend] {$P_1=(290\,,\,-0.94)$\\$P_2=(340\,,\,-0.34)$\\};
+%     }
+    %\end{scope}
+\end{axis}
+\end{tikzpicture}

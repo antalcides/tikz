@@ -1,0 +1,29 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit[xmax=14,ymin=-2,ymax=6]
+  \tkzDrawX[noticks,label=$(d)$]
+  \tkzPoint[pos=above right](8,2){A};
+  \tkzPoint[color=red,pos=above right](0,0){O};
+  \tkzDrawCircle[R,color=blue,line width=.8pt](A,3 cm)
+  \tkzHLine[color=red,style=dashed]{4}
+  \tkzText[above](12,4){$\delta$}
+  \FPeval\alphaR{arcsin(2/3)}% on a les bonnes valeurs
+  \FPeval\xB{8-3*cos(\alphaR)}
+  \tkzPoint[pos=above left](\xB,4){B};
+  \tkzDrawSegment[line width=1pt](A,B)
+  \tkzDefLine[orthogonal=through B](A,B) \tkzGetPoint{b}
+  \tkzDefPoint(1,0){i}
+  \tkzInterLL(B,b)(O,i) \tkzGetPoint{B'}
+  \tkzDrawPoint(B')
+  \tkzDrawLine(B,B')
+ \end{tikzpicture}
+
+\end{document} 

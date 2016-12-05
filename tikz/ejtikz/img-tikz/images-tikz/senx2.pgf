@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+\begin{axis}[ylabel=$y$,xlabel=$x$,
+axis lines=middle,
+xmin=0,xmax = 8,ymin=-3,ymax=3,
+minor x tick num = 1,
+xtick={0.785,2.356,...,7.069},%some multiples of pi with the last one nudged a bit to the left
+domain=pi/4:9*pi/4,
+xticklabel={$\frac{\ifnum\ticknum>0\relax\number\numexpr2*\ticknum+1\relax\fi\pi}{4}$},
+ytick={-2,-1,1,2}
+]
+\addplot[mark=*,mark options={red},mark repeat=25,samples=101] {2*sin(deg(x)-45)};
+\draw[dotted] ({3*pi/4},0) |- (0,2);
+\end{axis}
+\end{tikzpicture}

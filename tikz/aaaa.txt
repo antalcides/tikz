@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+\begin{axis}[
+    samples=60,
+    domain=0:10, xmax=10.5,
+    restrict y to domain=0:10,
+    axis lines=left,
+    y=0.5cm/3,
+    x=0.5cm,
+    grid=both,
+    xtick={0,...,10},
+    ytick={0,3,...,9},
+    compat=newest,
+    xlabel=$x$, xlabel style={at={(1,0)}, anchor=west},
+    ylabel=$y$, ylabel style={rotate=-90,at={(0,1)}, anchor=south}
+]
+\addplot [red] {x};
+\addplot [black] {x^2};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+\begin{axis}[
+    samples=60,
+    domain=0:10, xmax=10.5,
+    restrict y to domain=0:10,
+    axis lines=left,
+    y=0.5cm/1.5,
+    x=0.5cm,
+    grid=both,
+    xtick={0,...,10},
+    ytick={0,1.5,3,...,9},
+    compat=newest,
+    xlabel=$x$, xlabel style={at={(1,0)}, anchor=west},
+    ylabel=$y$, ylabel style={rotate=-90,at={(0,1)}, anchor=south}
+]
+\addplot [red] {x};
+\addplot [black] {x^2};
+\end{axis}
+\end{tikzpicture}

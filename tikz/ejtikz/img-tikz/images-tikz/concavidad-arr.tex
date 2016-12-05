@@ -1,0 +1,44 @@
+\begin{tikzpicture}[
+    thick,
+    >=stealth',
+    dot/.style = {
+      draw,
+      fill = white,
+      circle,
+      inner sep = 0pt,
+      minimum size = 4pt
+    }
+  ]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \draw [very thin, style=gris!20, step=0.5] (-12.5,0) grid (0,9);
+ %\draw [thin, gray!60] (-12.5,0) grid (0,9);
+\coordinate (O) at (-10.95,0);
+\coordinate (Q) at (-10.95,5.4);
+\coordinate (T) at (-7.6,2.0051);
+\coordinate (X) at (-7.6,0);
+\coordinate (Y) at (-2.65,7) ;
+\coordinate (W) at (-2.65,0) ;
+\coordinate (B) at (5,2.6);
+\coordinate (A) at (-7.6,6.07);
+  \draw[->] (-12.5,0) -- (1,0) coordinate[label = {below:$x$}] (xmax);
+  \draw[->] (-12.5,-0.3) -- (-12.5,9) coordinate[label = {above:$f(x)$}] (ymax);
+  \path[name path=x] (-11,5.4) -- (-2.65,7) ;
+  \path[name path=y] plot[smooth] coordinates {(-11.6,6.5) (-7.38,2) (-2,8)};
+\draw[color=red]  plot[smooth, tension=.7] coordinates {(-11.5,6.5) (-7.5,2) (-2,8)};
+    \draw      (-11,5.4) -- (-2.65,7) node[pos=0.78, above left] {};
+      %  \draw (T) node[color=blue,dot, label = {above:$T$}] (T) {} ;
+\draw[color=blue]           (Q)node[dot,
+                               label = {}] {} -- (O) node[dot,
+                               label = {below:$x_1$}] {};
+
+\draw[color=blue]           (Y)node[dot,
+                               label = {}] {} -- (W) node[dot,
+                               label = {below:$x_2$}] {};
+\draw[color=blue]           (A)node[dot,
+                               label = {above left:$tf(x_1)+(1-t)f(x_2)$}] {} -- (X) node[dot,
+                               label = {}] {};
+\draw[color=blue]           (T)node[dot,
+                               label = {below left: $f(tx_1+(1-t)x_2)$}] {} -- (X) node[dot,
+                               label = {below:$tx_1+(1-t)x_2$}] {};
+
+  \end{tikzpicture}

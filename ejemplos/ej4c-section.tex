@@ -1,0 +1,37 @@
+\documentclass{book}
+\usepackage[x11names]{xcolor}
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}[block]
+  {\normalfont\sffamily}
+  {\colorbox{blue!70}{\parbox[c][15pt][c]{30pt}{%
+      \hfil\color{white}\Large\thesection\hfil}}}
+  {0pt}
+  {\parbox{\linewidth}{%
+      \hspace*{1em}\color{DeepSkyBlue2}\large\sffamily#1\\[-8pt]\color{DeepSkyBlue2}\titlerule}}
+\titlespacing*{\section}
+  {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+%\newcommand\SectionFont{\fontsize{12}{14}\bfseries\selectfont}
+% \definecolor{mybluei}{RGB}{28,138,207}
+%\definecolor{myblueii}{RGB}{131,197,231}
+%\titleformat{\section}
+%  {\normalfont\small\sffamily\SectionFont\color{red}}
+%  {\colorbox{red}{%
+%    \parbox[c][16pt][c]{40pt}{%
+%      \centering\textcolor{red}{\SectionFont\Large\rmfamily\thesection}%
+%      }%
+%    }%
+%  }
+%  {1em}
+%  {#1}
+%  [\vspace{-1.2\baselineskip}%
+%    \color{red}\hspace*{\dimexpr40pt+2\fboxsep\relax}%
+%    \rule{\dimexpr\textwidth-40pt-2\fboxsep\relax}{1pt}%
+%  ]
+
+\begin{document}
+
+\chapter{Test chapter}
+\section{Test section}
+
+\end{document}

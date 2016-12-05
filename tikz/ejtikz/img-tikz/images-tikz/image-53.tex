@@ -1,0 +1,38 @@
+\begin{tikzpicture}[xscale=1,yscale=0.7,    dot/.style = {
+      draw,
+      fill = white,
+      circle,
+      inner sep = 0pt,
+      minimum size = 4pt
+    }]
+\tkzInit[xmin=-4,xmax= 4,xstep=1,
+ymax=8,ymin=-2,ystep=1]
+%\tkzGrid
+ \tkzDrawXY[noticks] 
+%\tkzDrawX[label={\textit{x}},below= -18pt]
+%\tkzLabelX
+%\tkzAxeY[label=$f(x)$]
+\tikzset{tan style/.style={->,>=latex}}
+\tkzFct[line width=2pt,domain = -4:4,blue,samples=200]{(-\x-3)*(\x-2)}
+\tkzSetUpPoint[shape=circle, size = 5, color=blue, fill=blue]
+ \tkzDrawTangentLine[kl=3,kr=3,draw,color=red,ultra thick](-0.5)
+\tkzDefPointByFct[draw,ref=A](1)
+\tkzLabelPoint[above right](A){}
+\tkzDefPointByFct[draw,ref=B](-2)
+\tkzLabelPoint[above right](B){}
+ \foreach \x/\n in {-2/a,1/b,-0.5/c} {%
+                       \tkzDefPointByFct[draw](\x)
+              \draw[dashed] (tkzPointResult)-|(\x,0) node[below right]{$\n$};
+                       %\node[below right] at (tkzPointResult){$\n$};
+}
+\coordinate (X) at (-2,0);
+\coordinate (Y) at (1,0);
+\coordinate (W) at (-3.5,4);
+\coordinate (V) at (2.5,4);
+\draw[color=orange,line width=1.5pt]           (X)node[dot,
+                               label = {}] {} -- (Y) node[dot,
+                               label = {}] {};
+\draw[color=orange,line width=1.5pt,<->]           (W)node[<-,
+                               label = {}] {} -- (V) node[->,
+                               label = {}] {};
+ \end{tikzpicture}

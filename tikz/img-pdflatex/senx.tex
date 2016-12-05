@@ -1,0 +1,61 @@
+    \pgfplotsset{
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        no markers,
+        samples=50,
+        trig format plots=rad,
+        every axis plot/.append style={
+            line width=1.25pt,
+            smooth,
+        },
+    }
+    % define precision of \pi
+    % this is set here to the value of \pgfmathpi
+    \pgfmathsetmacro{\PI}{3.141592654}
+    \begin{tikzpicture}
+        \begin{axis}[
+            domain=-0.5*pi:1.5*pi,
+            ymin=-1.5,
+            ymax=+1.5,
+            %
+            % scale x axis values by \pi and
+            % remove the corresponding label
+            scaled x ticks={real:\PI},
+            xtick scale label code/.code={},
+            % in case you want to set an explicit tick distance
+            xtick distance=\PI/2,
+            % add code here for formatting the `xlabels'
+            % I configured exceptions for \pm\pi where no number in front
+            % of these are shown and for fractional values these should be
+            % shown as fractions
+            xticklabel={%
+                \ifdim \tick pt = 1 pt
+                    \strut$\pi$%
+                \else\ifdim \tick pt = -1 pt
+                    \strut$-\pi$%
+                \else
+                    % to avoid some mess with TeX precision, first
+                    % round the \tick value to one digit after the comma
+                    \pgfmathparse{round(10*\tick)/10}
+                    % depending on whether the resulting number is an integer
+                    % show it as integer only, otherwise use the style given
+                    % in `xticklabel style'
+                    \pgfmathifisint{\pgfmathresult}{%
+                        \strut$\pgfmathprintnumber[int detect]{\pgfmathresult}\pi$%
+                    }{%
+                        \strut$\pgfmathprintnumber{\pgfmathresult}\pi$%
+                    }
+                \fi\fi
+            },
+            % set number plotting to frac style
+            xticklabel style={
+                /pgf/number format/frac,
+                /pgf/number format/frac whole=false,
+            },
+            % add minor thicks
+            minor tick num=1,
+        ]
+            \addplot {sin(2*x)};
+        \end{axis}
+    \end{tikzpicture}

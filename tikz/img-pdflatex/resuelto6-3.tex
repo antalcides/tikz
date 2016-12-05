@@ -1,0 +1,62 @@
+\begin{tikzpicture}[scale=2,
+         dot/.style = {
+     fill = gray,
+      circle,
+      inner sep =2pt,
+      minimum size = 4pt
+    }
+  ]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %\draw [very thin, style=gray!50, step=0.5] (-3,-2) grid (3,2);
+ %\draw [thin, gray!60] (0,0) grid (9,9);
+\coordinate (O) at (0,0);
+\coordinate (Y) at (0,1.5);
+\coordinate (X) at (1.5,0);
+\coordinate (X1) at (-1.5,0);
+\coordinate (Y1) at (0,-1.5);
+\coordinate (D) at (0.6,-0.5);
+\coordinate (E) at (-0.6,-0.8);
+\coordinate (P) at (0.6,0.8);
+\coordinate (C) at (-0.6,0.8);
+\coordinate (E) at (-0.6,-0.5);
+\coordinate (F) at (1,0);
+\coordinate (A) at (0.87,-0.5);
+\coordinate (B) at (-0.87,-0.5);
+\coordinate (G) at (0.87,0);
+\draw[color=gray!40,ultra thick,latex-latex]           (X1)node[
+                               label = {}]{}-- (X) node[
+                               label = {above:$x$}] {};
+\draw[color=gray!40,ultra thick,latex-latex]           (Y1)node[
+                               label = {}]{}-- (Y) node[
+                               label = {above:$y$}] {};
+\draw[blue,ultra thick] (O) circle [radius=1cm];
+\draw[color=blue,ultra thick,dashed]           (A)-- (G) node[ label = {}
+                             ] {};
+\draw[color=red,ultra thick]           (A)node[
+                               label = {}]{}-- (B) node[
+                                label = {}] {};
+\draw[color=red,ultra thick]           (D)node[
+                               label = {}] {} -- (P) node[
+                                 ] {};
+\draw[color=red,ultra thick]           (C)node[
+                               label = {}] {} -- (E) node[
+                               midway,below] {$$};
+\draw[color=red,ultra thick]           (C)node[
+                               ] {} -- (P) node[dot,
+                               label = {above:$$}] {};
+\draw[color=orange!30!black,dashed,ultra thick]           (O)node[
+                               label = {}]{}-- (A) node[dot,
+                           label = {}] {};
+\draw[color=blue,ultra thick,dashed]           (O)-- (P) node[ label = {}
+                             ] {};
+\draw[color=blue,ultra thick,dashed]           (O)-- (G) node[ dot,label = {}
+                             ] {};
+
+ \pic [red,draw, -latex, "$\beta$", angle eccentricity=1.5] {angle =G--O--P};
+  \pic [red,draw, -latex, "$\alpha$", angle eccentricity=1.5] {angle =A--O--G};
+\draw[color=blue] (0.2,0.39) node {$\rho$};
+\draw[color=blue] (1,-0.5) node {$A$};
+\draw[color=blue] (-0.99,-0.5) node {$B$};
+\draw[color=blue] (0.7,0.88) node {$P$};
+\draw[color=blue] (-0.1,0) node {$O$};
+  \end{tikzpicture}

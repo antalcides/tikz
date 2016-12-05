@@ -1,0 +1,17 @@
+% PGF style template to be used in the ktikz program
+\documentclass[]{scrartcl}
+\usepackage[utf8]{inputenc} 
+\usepackage[upright]{fourier}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{amsmath,tkz-fct}
+\usepackage{tikz,xcolor}
+\usetikzlibrary{shapes.emoticon}
+\usepackage[active,pdftex,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}   
+\PreviewEnvironment[]{tikzpicture}
+\PreviewEnvironment[]{pgfpicture}
+ %\pgfplotsset{width=7cm,compat=1.13}
+\begin{document}
+<>
+\end{document}

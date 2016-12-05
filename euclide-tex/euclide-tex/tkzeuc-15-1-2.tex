@@ -1,0 +1,24 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+  \begin{tikzpicture}
+    \tkzInit[xmax=5,ymax=5]\tkzGrid[sub]
+    \tkzClip
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(5,0){B}
+    \tkzInterCC[R](A,4cm)(B,3cm)
+    \tkzGetPoints{C}{D}
+    \tkzDrawPoints(A,B,C)
+    \tkzCompass[color=red,delta=20](A,C)
+    \tkzCompass[color=red,delta=20](B,C)
+    \tkzDrawPolygon(A,B,C)
+    \tkzMarkAngle(A,C,B)
+  \end{tikzpicture}
+
+\end{document} 

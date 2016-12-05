@@ -1,0 +1,34 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.25]
+  \tkzInit[xmin=-5.2,xmax=3.2,ymin=-3.2,ymax=3.3]
+  \tkzClip
+  \tkzDefPoint(0,0){O}
+  \tkzDefPoint(2.5,0){N}
+  \tkzDefPoint(-4.2,0.5){M}
+  \tkzDefPointBy[rotation=center O angle 30](N)
+  \tkzGetPoint{B}
+  \tkzDefPointBy[rotation=center O angle -50](N)
+  \tkzGetPoint{A}
+  \tkzInterLC(M,B)(O,N) \tkzGetFirstPoint{C}
+  \tkzInterLC(M,A)(O,N) \tkzGetSecondPoint{A'}
+  \tkzMarkAngle[fill=blue!25,mkpos=.2, size=0.5](A,C,B)
+  \tkzMarkAngle[fill=green!25,mkpos=.2, size=0.5](A,M,C)
+  \tkzDrawSegments(A,C M,A M,B)
+  \tkzDrawCircle(O,N)
+  \tkzLabelCircle[above left](O,N)(120){$\mathcal{C}$}
+  \tkzMarkAngle[fill=red!25,mkpos=.2, size=0.5cm](C,A,M)
+  \tkzDrawPoints(O, A, B, M, B, C)
+  \tkzLabelPoints[right](O,A,B)
+  \tkzLabelPoints[above left](M,C)
+  \tkzLabelPoint[below left](A'){$A'$}
+\end{tikzpicture}
+
+\end{document} 

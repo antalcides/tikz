@@ -1,0 +1,14 @@
+    \begin{tikzpicture}
+       \begin{axis}[
+           axis y line = middle,
+           axis x line = middle,
+           samples     = 200,
+           domain      = 0.1:10,
+           xmin = -1, xmax = 10,
+           ymin = -10, ymax = 10,
+           unbounded coords=jump
+         ]
+         \addplot[black, thick, mark=none] {2/(x - 0.8)};
+       \end{axis}
+
+    \end{tikzpicture}

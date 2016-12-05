@@ -1,0 +1,29 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.75]
+   \tkzInit[xmin=-3,xmax=4,ymin=-2,ymax=4]
+   \tkzGrid
+   \tkzDefPoint(0,0){O}
+   \tkzDefPoint(1,0){a0}
+   \newcounter{tkzcounter}
+   \setcounter{tkzcounter}{0}
+   \newcounter{density}
+   \setcounter{density}{20}
+   \foreach \i in {0,...,15}{%
+      \pgfmathsetcounter{density}{\thedensity+2}
+      \setcounter{density}{\thedensity}
+      \stepcounter{tkzcounter}
+      \tkzDefPointWith[orthogonal normed](a\i,O)
+      \tkzGetPoint{a\thetkzcounter}
+      \tkzDrawPolySeg[color=Maroon!\thedensity,%
+         fill=Maroon!\thedensity,opacity=.5](a\i,a\thetkzcounter,O)}
+ \end{tikzpicture}
+
+\end{document} 

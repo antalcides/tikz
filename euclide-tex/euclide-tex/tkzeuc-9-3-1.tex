@@ -1,0 +1,26 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.5]
+ \tkzInit[xmin=-3,xmax=5,ymax=4] \tkzClip[space=.5]
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(0,4){B}
+ \tkzDrawTriangle[pythagore](B,A) \tkzGetPoint{C}
+ \tkzDefLine[bisector](B,C,A) \tkzGetPoint{c}
+ \tkzInterLL(C,c)(A,B)        \tkzGetPoint{D}
+ \tkzDrawSegment(C,D)
+ \tkzDrawCircle(D,A)
+ \tkzDefPointBy[projection=onto B--C](D) \tkzGetPoint{G}
+ \tkzInterLC(C,D)(D,A) \tkzGetPoints{E}{F}
+ \tkzDrawPoints(A,C,F) \tkzLabelPoints(A,C,F)
+ \tkzDrawPoints(B,D,E,G)
+ \tkzLabelPoints[above right](B,D,E,G)
+ \end{tikzpicture}
+
+\end{document} 

@@ -1,0 +1,28 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=.8]
+ \tkzInit[xmax=6,ymax=6]
+ \tkzDefPoint(2,1){A}
+ \tkzDefPoint(5,3){B}
+ \tkzDefPoint(0,6){C}
+ \tkzDrawPolygon(A,B,C)
+ \tkzDefBarycentricPoint(A=1,B=1,C=1)
+ \tkzGetPoint{M}
+ \tkzDrawLines[add=0 and 1](A,M B,M C,M)
+ \tkzDrawPoints(A,B,C,M)
+ \tkzLabelPoints(A,B,C,M)
+ \tkzDefMidPoint(A,B)  \tkzGetPoint{C'}
+ \tkzDefMidPoint(A,C)  \tkzGetPoint{B'}
+ \tkzDefMidPoint(C,B)  \tkzGetPoint{A'}
+ \tkzDrawPoints(A',B',C')
+ \tkzLabelPoints(A',B',C')
+\end{tikzpicture}
+
+\end{document} 

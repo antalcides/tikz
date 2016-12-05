@@ -1,0 +1,48 @@
+\documentclass[draft]{article}
+\pagestyle{empty}
+\usepackage[explicit]{titlesec}
+\usepackage{xcolor,lipsum}
+\definecolor{titlebgdark}{RGB}{0,163,243}
+\definecolor{titlebglight}{RGB}{191,233,251}
+%%%%%%%%%%%%%55secci\'on
+\newcommand\ChapterFont{\usefont{T1}{qhv}{b}{n}\selectfont\huge}
+\newcommand\SectionFont{\usefont{T1}{qhv}{b}{n}\selectfont}
+%\titleformat{\section}
+%  {\normalfont\small\sffamily\SectionFont\color{titlebgdark}}
+%  {\colorbox{titlebgdark}{%
+%    \parbox[c][16pt][c]{40pt}{%
+%      \centering\textcolor{white}{\SectionFont\Large\rmfamily\thesection}%
+%      }%
+%    }%
+%  }
+%  {1em}
+%  {#1}
+%  [\vspace{-1.2\baselineskip}%
+%    \color{titlebgdark}\hspace*{\dimexpr40pt+2\fboxsep\relax}%
+%    \rule{\dimexpr\textwidth-40pt-2\fboxsep\relax}{1pt}%
+%  ]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section
+\titleformat{\section}[block]%
+  {\normalfont\small\sffamily\SectionFont\color{titlebgdark}}%
+  {\colorbox{titlebgdark}{\parbox[c][17pt][c]{30pt}{%
+      \hfil\color{white}\Large\thesection\hfil}}}%
+  {0.15cm}%
+  {%
+   \raisebox{-3pt}{\parbox{\dimexpr\linewidth-30pt-1.5mm-2\fboxrule-2\fboxsep}{\raggedright\color{titlebgdark}\SectionFont\sffamily#1\\[-3.5pt]%
+   \color{titlebgdark}\footnotesize\textbf\dotfill}}%
+  }
+\titlespacing*{\section}
+  {0pt}{3.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\section{Ridiculously overly extermely long section title, that definitely spans several lines.}
+
+\lipsum[2]
+\section{Ridiculously overly.}
+
+\lipsum[2]
+
+\end{document}

@@ -1,0 +1,21 @@
+ \begin{tikzpicture}
+     \draw [->] (-1,0) -- (11,0) node [right] {$x$};
+     \draw [->] (0,-1) -- (0,6) node [above] {$y$};
+     \node at (0,0) [below left] {$0$};
+     \draw  plot[smooth, tension=.7] coordinates{(1.5,-0.5) (3,3) (5,1.5)  (7.5,4) (10,-1)};
+     \node at (1.75,-0.25) {$a$};
+     \node at (9.5,-0.25) {$b$};
+     \draw[dashed] (3.2,3.05) -- (3.2,0);
+     \draw[dashed] (4.9,1.5) -- (4.9,0);
+     \draw[dashed] (7.3,4.05) -- (7.3,0);
+     \node at (3.2,-0.25) {$c_{1}$};
+     \node at (4.9,-0.25) {$c_{2}$};
+     \node at (7.3,-0.25) {$c_{3}$};
+     \draw (2.5,3.05) -- (4,3.05);
+     \draw (4,1.5) -- (6,1.5);
+     \draw (6.5,4.05) -- (8.25,4.05);
+     \node at (3.2,3.5) {$f'(c_{1})=0$};
+     \node at (4.9,2.2) {$f'(c_{2})=0$};
+     \node at (7.3,4.5) {$f'(c_{3})=0$};
+     \node at (9.5,2.5) {$y=f(x)$};
+\end{tikzpicture}

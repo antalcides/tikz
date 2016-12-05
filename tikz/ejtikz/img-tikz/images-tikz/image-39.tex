@@ -1,0 +1,30 @@
+\pgfplotsset{
+    azetinaplot/.style={
+        width=7cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        enlarge y limits,
+        clip=false
+    }
+}
+\begin{tikzpicture}
+\pgfplotsset{point legend/.style={},
+    point 1/.style={anchor=south},
+    point 2/.style={anchor=south}
+}
+\begin{axis}[
+    azetinaplot,
+    domain=-0.5:2.5, samples=100,
+    xmin=-1, xmax=3,
+    point legend/.style={ at={(rel axis cs:1.1,0.5)}},
+    point 1/.style={anchor=south east}, point 2/.style={anchor=south east}
+]
+%\begin{scope}
+\draw [blue, thick, x=0.0085cm, y=1cm,
+declare function={f(\x) = sin(\x);
+}]
+plot [domain=0:360, samples=144, smooth] (\x,{f(\x)});
+\end{axis}
+\end{tikzpicture}

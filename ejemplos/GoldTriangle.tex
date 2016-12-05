@@ -1,0 +1,287 @@
+\documentclass[]{scrartcl}
+\usepackage[utf8]{inputenc} 
+\usepackage[upright]{fourier}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{tikz}
+\usepackage{amsmath,tkz-euclide,fullpage}
+\usetkzobj{all}
+\usepackage[frenchb]{babel}
+\definecolor{fondpaille}{cmyk}{0,0,0.1,0}
+\pagecolor{fondpaille}
+\color{Maroon}
+\parindent=0pt   
+
+\begin{document}
+\section{Pentagone régulier}   
+Euclide construit un pentagone régulier (équilatéral et équiangle) inscrit dans un cercle. Son élément de base est le triangle d'or : un triangle isocèle dont les angles avec la base sont double de l'angle au sommet (et ainsi l'angle au sommet est le 5e de l'angle plat). 180/5=36
+
+\subsection{La proportion d'or - l'équerre 1/2 }
+[AB] un segment.
+
+\begin{enumerate}
+ 
+\item Placer I, le milieu, le milieu de [AB]  
+\item Tracer la perpendiculaire en B à (AB)
+\item Tracer l'arc de cercle de centre B de rayon BI = AB / 2, qui coupe [By) en C  
+\item Tracer le segment [AC] 	  
+\item Tracer l'arc de cercle de centre C de rayon CB, qui coupe [AC] en D   
+\item Tracer l'arc de cercle de centre A de rayon AD, qui coupe [AB] en M 
+\end{enumerate}
+
+\[
+   \frac{AM}{MB}=\Phi=\frac{1+\sqrt{5}}{2}
+\]
+\begin{tikzpicture}
+  \tkzClip[space=1]
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(8,0){B} 
+  \tkzDefMidPoint(A,B)\tkzGetPoint{I}
+  \tkzVecKOrth[-.75](B,A){C}
+  \tkzInterLC(B,C)(B,I)\tkzGetSecondPoint{D}
+  \tkzDuplicateLen(B,D)(D,A)\tkzGetPoint{E}
+  \tkzDrawArc[delta=10](D,E)(B)
+  \tkzInterLC(A,B)(A,E)\tkzGetSecondPoint{M}
+  \tkzDrawArc[delta=10](A,M)(E)
+  \tkzDrawLines(A,B B,C A,D)
+  \tkzCompass(B,D)
+  \tkzDrawPoints(I,D,C,M,E)
+  \tkzLabelPoints(A,B,C,D,M,I,E)
+\end{tikzpicture}
+
+
+
+\newpage
+\subsection{La proportion d'or - le rectangle d'or}
+
+\begin{itemize}
+   \item AB=1
+   \item I milieu de [AB]
+   \item CF=EB
+\end{itemize}
+\[
+   \frac{AE}{AB}=\Phi=\frac{1+\sqrt{5}}{2}
+\]
+
+\begin{tikzpicture}
+  \tkzInit[xmax=14,ymax=10]
+  \tkzClip[space=1]
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(8,0){B}
+  \tkzDefMidPoint(A,B)\tkzGetPoint{I}
+  \tkzDefSquare(A,B)\tkzGetPoints{C}{D} 
+  \tkzDrawPolygon(A,B,C,D)
+  \tkzInterLC(A,B)(I,C)\tkzGetSecondPoint{E}
+  \tkzDrawArc[style=dashed,color=gray](I,E)(D)
+  \tkzDefPointWith[colinear= at C](E,B)\tkzGetPoint{F}
+  \tkzDrawPoints(A,B,C,D,E,F,I)
+  \tkzLabelPoints(A,B,C,I,D,E,F)
+  \tkzDrawSegments[style=dashed,color=gray](E,F C,F B,E)
+\end{tikzpicture}
+
+
+\newpage  
+\subsection{Construction du triangle d'or}
+
+Dans la figure jointe, I est le milieu de [AC], AC = AB, IB = ID, AD = AE = BF. Euclide démontre que le triangle ABF est un triangle d'or en utilisant des propriétés assez longues. (wikipedia)
+
+De nos jours, la démonstration est plus simple car si on note AC = 1, on obtient 
+\[
+  IB=\frac{\sqrt{5}}{2}
+\]   
+\[
+  AD=AE=BF=\frac{\sqrt{5}-1}{2}=\frac{1}{\Phi}
+\]
+ grâce au théorème de Pythagore
+ où  est le nombre d'or
+Les dimensions du triangle ABF sont donc 1 ; 1 et $\dfrac{1}{\Phi}$ . C'est bien un triangle d'or.
+
+
+\bigskip
+
+%\begin{tikzpicture}
+%    \tkzPoint(0,0){A} 
+%    \tkzPoint(5,0){C}
+%    \tkzPoint[pos=above](0,5){B} 
+%    \tkzDrawLine[](A,C)
+%    \tkzDrawArc(A,C)(B)
+%    \tkzDefMidPoint(A,C)\tkzGetPoint{I}
+%    \tkzDrawSegment[color=gray,style=dashed](I,B)
+%    \tkzDuplicateLen(I,B)(I,A)\tkzGetPoint{D} 
+%    \tkzDrawArc[color=gray,style=dashed](I,B)(D)
+%    \tkzDuplicateLen(A,D)(A,B)\tkzGetPoint{E}
+%    \tkzDuplicateLen(A,D)(B,A)\tkzGetPoint{G} 
+%    \tkzDrawArc[color=gray,style=dashed](A,D)(B)
+%    \tkzInterCC(A,C)(B,G)\tkzGetPoints{K}{F}
+%    \tkzDrawArc[color=gray,style=dashed](B,G)(F)
+%    \tkzDrawPoint(F)
+%    \tkzCompass(B,F)
+%    \tkzDrawPolygon[color=red](A,B,F) 
+%\end{tikzpicture}
+
+\newpage  
+\subsection{Construction du pentagone }
+
+Euclide prouve qu'il peut construire un triangle d'or dans un cercle.
+À partir du triangle d'or OA'C construire le triangle d'or CDA grâce à l'arc de cercle de centre A' et de rayon A'C
+En prenant les bissectrices des angles C et D en les prolongeant jusqu'au cercle, il obtient les deux sommets B et E manquant.  
+
+
+\begin{tikzpicture}
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(0,5){B}
+  \tkzDefPoint(5,0){C}
+  \tkzDefPoint(54:5){F}
+  \tkzDrawCircle[color=gray](A,C) 
+  \tkzInterCC[with nodes](A,A,C)(C,B,F) \tkzGetPoints{a}{e}
+  \tkzInterCC(A,C)(a,e)                 \tkzGetFirstPoint{b}
+  \tkzInterCC(A,C)(b,a)                 \tkzGetFirstPoint{c}
+  \tkzInterCC(A,C)(c,b)                 \tkzGetFirstPoint{d}
+  \tkzDrawPoints(a,b,c,d,e)  
+  \tkzDrawPolygon[color=red](a,b,c,d,e)
+  \foreach \vertex/\num in {a/36,b/108,c/180,d/252,e/324}{%
+  \tkzDrawPoint(\vertex)
+  \tkzLabelPoint[label=\num:$\vertex$](\vertex){}% astuce   
+  \tkzDrawSegment[color=gray,style=dashed](A,\vertex)
+  }  
+\end{tikzpicture}
+
+\newpage  
+\subsection{Calcul de $\cos\left(\dfrac{\pi}{5} \pi\right)$ }
+
+\begin{tikzpicture}
+   \tkzInit[xmin=-1,xmax=11,ymin=-1,ymax=6] 
+   \tkzClip[space=1]   
+   \tkzDefPoint(0,0){B} 
+   \tkzDefPoint(10,0){C}
+   \tkzDefPointBy[rotation=center B angle 36](C)
+   \tkzGetPoint{A}
+   \tkzDefLine[bisector](B,A,C)            \tkzGetPoint{a}
+   \tkzDrawPoints(A,B,C) 
+   \tkzLabelPoints(A,B,C)    
+   \tkzDrawLine[add = 0 and 7,color=gray](A,a)  
+   \tkzInterLL(B,C)(A,a)                    \tkzGetPoint{I}  
+   \tkzDefPointBy[projection=onto B--A](I) \tkzGetPoint{H} 
+   \tkzDrawPolygon[color=Maroon](A,B,C)
+   \tkzDrawSegment[color=gray](I,H)
+   \tkzMarkRightAngle(B,H,I)
+   \tkzLabelPoints(A,B,C,I,H)
+   \tkzMarkAngles[mark=||](H,A,I I,A,C)    
+\end{tikzpicture}       
+
+
+Soit un triangle d'or ABC ayant pour base [AC]
+ \begin{itemize}
+  \item[*]  BA=BC
+  \item[*] $\widehat{ABC}=\frac{\pi}{5}$  
+  \item[*]  $[AI)$ bissectrice de  $\widehat{BAC}$
+  \item[*] $AC=1   $ 
+\end{itemize}
+
+On montre alors que :
+
+\begin{itemize}    
+  \item[*] $ AC=AI=BI=1   $
+  \item[*] $ BA=2BH=2\cos(\frac{\pi}{5})$
+  \item[*] $ IC=2\cos\left(\frac{\pi}{5}\right) -1$ 
+  \item[*] $ \dfrac{AC}{AB}=\dfrac{IC}{AC}$ donc $IC = \dfrac{1}{2\cos(\frac{\pi}{5})}$ 
+ \end{itemize}
+ 
+Les deux dernières égalités donnent 
+\[\left( 2\cos\left(\frac{\pi}{5}\right)\right)\left(2\cos\left(\frac{\pi}{5}\right) -1\right) =1 \]
+ c'est à dire 
+\[
+  4 \cos^2\left(\frac{\pi}{5}\right) - 2 \cos\left(\frac{\pi}{5}\right) - 1 = 0
+\]
+Si on pose $\cos\left(\dfrac{\pi}{5} \right)=x $, la solution positive de l' équation $4x^2-2x+1=0$ est 
+
+\[\cos\left(\dfrac{\pi}{5} \right)=\dfrac{1 +\sqrt{5}}{4}=\dfrac{\Phi}{2}   .\]       
+
+\newpage   
+\subsection{Pentagone inscrit dans un cercle}
+
+On peut grandement simplifier la construction d'Euclide en conservant le même principe : construire des triangles d'or ou d'argent.
+
+\begin{enumerate}
+  
+  \item Tracer un cercle $\Gamma$ de centre O et de rayon R (unité quelconque)
+  \item Tracer 2 diamètres perpendiculaires 
+ \begin{itemize}
+ \item  les jonctions à $\Gamma$ formant les point A, B, C, D
+ \item A étant diamétralement opposé à C
+ \item B étant diamétralement opposé à D 
+ \item Tracer un cercle $\Gamma'$ de diamètre [OA] (rayon R' = R/2) et de centre I. cercle $\Gamma'$  passe donc en O et A.
+ \item   Tracer une droite (d) passant par B et I, 
+   (d) intercepte cercle $\Gamma'$  en E et F (E est le plus proche de B)
+ \item   Tracer 2 (arc de) cercles $\Gamma$1 et $\Gamma$2 de centre B et de rayons (respectivement) BE et BF
+   $\Gamma$1 et $\Gamma$2 interceptent $\Gamma$ en 4 pts (D1, D2, D3, D4)
+ \item   D, D1, D2, D3, D4 forment un pentagone régulier
+   En effet, on vérifie que BOD2 est un triangle d'or, BOD1 un triangle d'argent (leurs bases valent respectivement  et  alors que leurs côtés valent R).
+ \end{itemize}
+
+\end{enumerate}
+
+\begin{tikzpicture}
+  \tkzInit[xmin=-6,xmax=6,ymin=-6,ymax=6] 
+  \tkzClip
+  \tkzDefPoint(0,0){O} 
+  \tkzDefPoint(5,0){A}
+  \tkzDefPoint(0,5){B}
+  \tkzDefPoint(-5,0){C} 
+  \tkzDefPoint(0,-5){D}
+  
+  \tkzDefMidPoint(A,O)     \tkzGetPoint{I}
+
+  \tkzInterLC(I,B)(I,A)    \tkzGetPoints{F}{E}
+  \tkzDrawArcAngles[color=gray,style=dashed](B,E)(180,360)
+  \tkzDrawArcAngles[color=gray,style=dashed](B,F)(220,340)
+  \tkzInterCC(O,C)(B,E)    \tkzGetPoints{D3}{D2}
+  \tkzInterCC(O,C)(B,F)    \tkzGetPoints{D4}{D1}
+  
+  \tkzDrawLine[color=gray,add=.5 and .5](B,I)
+  \tkzDrawCircle(O,A)
+  \tkzDrawCircle[diameter](O,A)  
+  \tkzDrawSegments[color=gray](B,D C,A) 
+  \tkzDrawPolygon[color=red](D,D1,D2,D3,D4)
+  \tkzDrawPoints(E,F,I,D1,D2,D4,D3)
+  \tkzLabelPoints(A,B,C,D,O,I,E,F,D1,D2,D4,D3)  
+\end{tikzpicture}  
+
+
+\newpage  
+\subsection{Pentagone inscrit dans un cercle inscrit dans un carré.}
+
+
+\begin{tikzpicture}[scale=.8]
+  \tkzInit[xmin=-6,xmax=12,ymin=-6,ymax=6] 
+  \tkzClip
+  \tkzDefPoint(-5,-5){A} 
+  \tkzDefPoint(0,0){O}  
+  \tkzDefPoint(+5,-5){B} 
+  \tkzDefPoint(0,-5){F}    
+  \tkzDefPoint(+5,0){F'}
+  \tkzDefPoint(0,+5){E} 
+  \tkzDefPoint(-5,0){K}
+  \tkzDefSquare(A,B)         \tkzGetPoints{C}{D}
+
+  \tkzInterLC(D,C)(E,B)      \tkzGetPoints{T'}{T}
+
+  \tkzDefMidPoint(D,T)     \tkzGetPoint{I}
+  \tkzInterCC[with nodes](O,D,I)(E,D,I)   \tkzGetPoints{H'}{H}
+  \tkzInterLC(O,H)(O,E)     \tkzGetPoints{M'}{M}
+  \tkzInterCC(O,E)(E,M)     \tkzGetPoints{Q}{M}
+  \tkzInterCC[with nodes](O,O,E)(Q,E,M)    \tkzGetPoints{P}{E}
+  \tkzInterCC[with nodes](O,O,E)(P,E,M)    \tkzGetPoints{N}{Q} 
+
+  \tkzCompass(O,H)
+  \tkzCompass(E,H)
+  \tkzDrawArc[color=gray,style=dashed](E,B)(T)  
+  \tkzDrawPolygon(A,B,C,D)
+  \tkzDrawCircle(O,E)  
+  \tkzDrawSegments[color=gray](O,H E,H E,F F',K)
+  \tkzDrawPoints(T,M,Q,P,N)
+  \tkzDrawPolygon[color=red](M,E,Q,P,N)   
+\end{tikzpicture}    
+
+
+\end{document}
+

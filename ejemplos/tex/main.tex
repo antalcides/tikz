@@ -1,0 +1,112 @@
+% Author: Victor Brena
+% File: Generates a figure using tikz package in a beamer document class.
+% Figure: Sketch of an idealised 3D root hair cell, and its projection onto a 2D rectangular domain. The auxin symplastic pathway is indicated by purple arrows and the longitudinal auxin gradient by a shade in the 2D-domain; influx and efflux permeability arrows, indicating a polarising process, are respectively depicted in orange and light-blue. Switching fluctuation is represented by dark green arrows.
+%
+%\title{TikZ Example: Root Hair Cell}
+%
+\documentclass[final,mathserif,hyperref={pdfpagelabels=false}]{beamer} % use beamer
+\usepackage[orientation=landscape,
+            size=a4,          % poster size
+            scale=0.98         % font scale factor
+           ]{beamerposter}    % beamer in poster size
+%
+%--some needed packages--------------------------------------------------------
+\usepackage[utf8]{inputenc}   % std linux encoding
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,backgrounds}
+\usetikzlibrary{shadows}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+%
+\usefonttheme{serif}
+\setbeamertemplate{navigation symbols}{} %remove navigation symbols
+%--useful command------------------------------------------------------------------
+\newcommand{\vectorr}[1]{\mathbf{#1}}
+%
+\begin{document}
+\begin{frame}
+%
+\begin{center}
+\begin{tikzpicture}[scale=1.4]
+	\begin{scope}[yshift=-180,yslant=0.6,xslant=-1]
+		%cell wall
+		\fill [join=square,green!85!black] (-3.2,-3.2)  rectangle (6.2,2.45);
+		%cell membrane first layer
+		\fill [join=square,green!60] (-2.9,-2.9)  rectangle (5.9,2.15);
+		%cell membrane second layer
+		\fill [join=square,green!30] (-2.8,-2.8)  rectangle (5.8,2.05);
+		%cytoplasm
+		\shade [right color = white, left color = purple!50, join=square] (-2.5,-2.5)  rectangle (5.5,1.75);
+		% active-inactive ROPs
+		\fill[ellipse,red!70,opacity=0.5] (3.5,0) circle[x radius = 0.8 cm, y radius = 0.5 cm]; %V
+		\draw[ellipse,red,opacity=0.7,line width=3pt] (3.5,0) circle[x radius = 0.8 cm, y radius = 0.5 cm];
+		\node at (3.5,0) (V) {\textcolor{red}{\large V}};
+		\fill[ellipse,blue!70,opacity=0.5] (-0.5,0) circle[x radius = 0.8 cm, y radius = 0.5 cm]; %U
+		\draw[ellipse,blue,opacity=0.7,line width=3pt] (-0.5,0) circle[x radius = 0.8 cm, y radius = 0.5 cm];
+		\node at (-0.5,0) (U) {\textcolor{blue}{\large U}};
+		\draw (0.4,0) -- (2.6,0) [>=open triangle 45,thick,bend left=90,<->,thick,line width=2pt,color=green!50!black];
+		\node at (1.5,-1) {\textcolor{purple}{\large $\alpha(x)$}};
+		\path (U) edge [loop below,>=open triangle 45,thick,line width=2pt,color=green!50!black] (U);
+		%normal arrows
+		\draw (5.5,-0.25) -- (7,-0.25) [-triangle 45,thick,line width=1pt]; %right-hand wall
+		\node at (6.6,0.2) {\textcolor{black}{$\hat{\vectorr n}$}};
+		\draw (-4,-0.25) -- (-2.5,-0.25) [triangle 45-,thick,line width=1pt]; %left-hand wall
+		\node at (-3.5,0.2) {\textcolor{black}{$\hat{\vectorr n}$}};
+		\draw (2.2,1.77) -- (2.2,3.27) [-triangle 45,thick,line width=1pt]; %upper wall
+		\node at (1.8,2.8) {\textcolor{black}{$\hat{\vectorr n}$}};
+		\draw (2.2,-2.5) -- (2.2,-4) [-triangle 45,thick,line width=1pt]; %lower wall
+		\node at (1.8,-3.5) {\textcolor{black}{$\hat{\vectorr n}$}};
+		%Influx permeability arrows
+		\fill[ellipse,gray!90,opacity=0.8] (5.8,-1.75) circle[x radius = 0.7 cm, y radius = 0.4 cm]; %big PIN
+		\draw[ellipse,gray!75!black,opacity=0.8,line width=3pt] (5.8,-1.75) circle[x radius = 0.7 cm, y radius = 0.4 cm];
+		\node at (5,-2.7) {\textcolor{gray!75!black}{\large PIN}};
+		\draw (-1,1) -- (-5,1) [stealth'-,thick,color=cyan!60!black,line width=3.5pt]; %left-hand wall
+		\draw (8,1) -- (4,1) [-latex,thick,densely dashed,color=cyan!60!black,line width=3.5pt]; %right-hand wall
+		\node at (6.7,1.65) {\textcolor{cyan!60!black}{\large $P_i$}};
+		\draw (3.4,3.27) -- (3.4,1) [-stealth',thick,color=cyan!60!black,line width=2pt]; %upper wall
+		\draw (1,3.27) -- (1,1) [-stealth',thick,color=cyan!60!black,line width=2pt]; 
+		\draw (0.3,1) -- (0.3,3.27) [-latex,thick,densely dashed,color=red!65!yellow,line width=1.5pt];
+		\draw (3.9,1) -- (3.9,3.27) [-latex,thick,densely dashed,color=red!65!yellow,line width=1.5pt];
+		\draw (3.4,-4.27) -- (3.4,-2) [-stealth',thick,color=cyan!60!black,line width=2pt]; %lower wall
+		\draw (1,-4.27) -- (1,-2) [-stealth',thick,color=cyan!60!black,line width=2pt];
+		\draw (0.3,-2) -- (0.3,-4.27) [-latex,thick,densely dashed,color=red!65!yellow,line width=1.5pt];
+		\draw (3.9,-2) -- (3.9,-4.27) [-latex,thick,densely dashed,color=red!65!yellow,line width=1.5pt];
+		%efflux permeability arrows
+		\draw (-1,-1.75) -- (-5,-1.75) [-latex,densely  dashed,color=red!65!yellow,line width=2pt]; %left-hand wall
+		\node at (-4,-2.3) {\textcolor{red!65!yellow}{\large $P_e$}};
+		\draw (4,-1.75) -- (8,-1.75) [-stealth',thick,color=red!65!yellow,line width=5.5pt]; %right-hand wall
+		%Omega label
+		\node at (-0.8,-5.5) {\large $\Omega\equiv[0,L_x]\times[0,L_y]$};
+	\end{scope}
+	\begin{scope}[yshift=-30,yslant=0.6,yslant=-1]
+		%the 3D cell
+		\def\h{3.5}
+		\draw[thick,color=purple,line width=3pt] (1,0.1,6*\h) -- (1,2.55,6*\h);
+		\draw[-stealth',thick,color=purple,line width=3pt] (1,0.1,6*\h) -- (1,1.7,6*\h);
+		\draw[-stealth',thick,color=purple,line width=3pt] (1,2.5,6*\h) -- (1,2.5,0.64*\h);
+		\foreach \t in {0,10,...,180}% generatrices
+			\draw[green!85!black,densely dashed,line width=2pt] ({1+cos(\t)},{2+0.8*sin(\t)},0)
+		--({1+cos(\t)},{2+0.8*sin(\t)},{6*\h});
+			\draw[green!85!black,very thick] (1,0,0) % lower circle
+		\foreach \t in {0,5,...,180}
+			{--({1+cos(\t)},{2+0.8*sin(\t)},0)}--cycle;
+			\draw[green!85!black,very thick] (1,0,{6*\h}) % upper circle
+		\foreach \t in {0,10,...,180}
+			{--({1+cos(\t)},{2+0.8*sin(\t)},{6*\h})}--cycle;
+			\draw[green!85!black,very thick] (1,0,6*\h) -- (1,0,0); 
+		%some labels
+		\node at (-1.4,2) {\textcolor{black}{Apical end}};
+		\node at (-7.7,-4.3) {\textcolor{black}{Basal end}};
+		\node at (-4.5,-0.4) {\textcolor{purple}{Auxin symplastic}};
+		\node at (-4.5,-1) {\textcolor{purple}{pathway}};
+		\draw[-latex, -triangle 45]
+		(1,2.5) to[out=60,in=90] (3.5,0.2);
+		\node at (5.5,4.2) {\textcolor{black}{Projection onto a}};
+		\node at (5.5,3.6) {\textcolor{black}{2D rectangular domain}};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+%
+\end{frame}
+\end{document}

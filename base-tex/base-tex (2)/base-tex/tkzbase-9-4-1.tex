@@ -1,0 +1,19 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1]
+ \tkzDefPoint(2,3){A}
+ \tkzDefShiftPointCoord[2,3](30:4){B}
+ \tkzDefShiftPointCoord[2,3](-30:4){C}
+ \tkzDrawSegments(A,B B,C C,A)
+ % with \usetkzobj{polygons}
+ % \tkzDrawPolygon
+\end{tikzpicture}
+
+\end{document} 

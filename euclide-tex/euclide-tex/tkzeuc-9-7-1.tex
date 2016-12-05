@@ -1,0 +1,26 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=2]
+  \tkzDefPoint(0,0){O}
+  \tkzDefPoint(1,0){A}
+  \tkzDrawCircle(O,A)
+  \tkzDefPoint(-1.5,-1.5){z1}
+  \tkzDefPoint(0.35,0){z2}
+  \tkzDrawPoints[fill=red,color=black,size=8](O,z1,z2)
+  \tkzDefPointBy[inversion = center O through A](z1)
+  \tkzGetPoint{Z1}
+  \tkzDefPointBy[inversion = center O through A](z2)
+  \tkzGetPoint{Z2}
+  \tkzDrawPoints[fill=red,color=black,size=8](Z1,Z2)
+  \tkzDrawSegments(z1,Z1 z2,Z2)
+  \tkzLabelPoints(O,A,z1,z2,Z1,Z2)
+\end{tikzpicture}
+
+\end{document} 

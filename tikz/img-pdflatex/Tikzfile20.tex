@@ -1,0 +1,52 @@
+\begin{tikzpicture}[
+    thick,
+    >=stealth',
+    dot/.style = {
+      draw,
+      fill = white,
+      circle,
+      inner sep = 0pt,
+      minimum size = 4pt
+    }
+  ]
+\coordinate (A) at (5,4);
+\coordinate (Q) at (3,2.93);
+\coordinate (R) at (5,0);
+\coordinate (T) at (7,2.1);
+\coordinate (X) at (3,0);
+\coordinate (Y) at (7,0);
+\coordinate (U) at (0,2.93);
+\coordinate (W) at (0,2.1);
+\coordinate (V) at (0,4);
+ \draw[->] (0,0) -- (9,0) coordinate[label = {below:$x$}] (xmax);
+  \draw[->] (0,0) -- (0,5) coordinate[label = {above:$f(x)$}] (ymax);
+%\draw [help lines, step=1cm] (0,0) grid (10,5);
+\draw [color=red]  plot[smooth, tension=.7] coordinates {(0,0) (5,4) (8,0)};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \draw[color=orange]           (X)node[dot,
+                               label = {}] {} -- (Y) node[dot,
+                               label = {}] {};
+ \draw[color=orange]           (U)node[dot,
+                               label = {}] {} -- (W) node[dot,
+                               label = {}] {};
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \draw[color=gray]  (A) node[dot, label = {above:$A$}] (A) {} -- node[left]
+       {} (A|-R) node[dot, label = {below:$x_0$}] {};
+ \draw[color=gray]   (Q) node[dot, label = {above:$Q$}] (Q) {} -- node[left]
+       {} (Q|-X) node[dot, label = {below:$x_0-\delta$}] {};
+\draw[color=gray]   (T) node[dot, label = {above:$T$}] (Q) {} -- node[left]
+       {} (Q|-X) node[dot, label = {below:$x_0+\delta$}] {};
+ \draw[color=gray]           (U)node[dot,
+                               label = {left:$f(x_0-\delta)$}] {} -- (3,2.93) node[dot,
+                               label = {}] {};
+
+ \draw[color=gray]           (W)node[dot,
+                               label = {left:$f(x_0+\delta)$}] {} -- (T) node[dot,
+                               label = {}] {};
+ \draw[color=gray]           (V)node[dot,
+                               label = {left:$f(x_0)$}] {} -- (A) node[dot,
+                               label = {}] {};
+
+
+\end{tikzpicture}

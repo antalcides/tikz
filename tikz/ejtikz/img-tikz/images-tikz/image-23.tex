@@ -1,0 +1,62 @@
+\begin{tikzpicture}[
+    thick,
+    >=stealth',
+    dot/.style = {
+      draw,
+      fill = white,
+      circle,
+      inner sep = 0pt,
+      minimum size = 4pt
+    },
+ punt/.style = {
+      draw,
+      fill = blue,
+      circle,
+      inner sep = 0pt,
+      minimum size = 4pt},
+  ]
+\coordinate (A) at (5,4);
+\coordinate (Q) at (4.2,3.67);
+\coordinate (R) at (5,0);
+\coordinate (T) at (5.9,2.74);
+\coordinate (X) at (4.2,0);
+\coordinate (Y) at (5.9,0);
+\coordinate (U) at (0,3.67);
+\coordinate (W) at (0,2.74);
+\coordinate (V) at (0,4);
+\coordinate (M) at (5,3.1);
+\coordinate (N) at (0,3.1);
+ \draw[->] (0,0) -- (9,0) coordinate[label = {below:$x$}] (xmax);
+  \draw[->] (0,0) -- (0,5) coordinate[label = {above:$f(x)$}] (ymax);
+%\draw [help lines, step=1cm] (0,0) grid (10,5);
+\draw [color=red]  plot[smooth, tension=.7] coordinates{(0,0) (3,2.93) (5,4)};
+\draw [color=red]  plot[smooth, tension=.7] coordinates{(5,3.1) (7,2.1) (8,0)};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \draw[color=orange]           (X)node[dot,
+                               label = {}] {} -- (Y) node[dot,
+                               label = {}] {};
+ \draw[color=orange]           (U)node[dot,
+                               label = {}] {} -- (W) node[dot,
+                               label = {}] {};
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \draw[color=gray]  (A) node[dot, label = {above:$A$}] (A) {} -- node[left]
+       {} (A|-R) node[dot, label = {below:$x_0$}] {};
+ \draw[color=gray]   (Q) node[dot, label = {above:$Q$}] (Q) {} -- node[left]
+       {} (Q|-X) node[dot, label = {below:$x_0-\delta$}] {};
+\draw[color=gray]   (T) node[dot, label = {above:$T$}] (Q) {} -- node[left]
+       {} (Q|-X) node[dot, label = {below:$x_0+\delta$}] {};
+ \draw[color=gray]           (U)node[dot,
+                               label = {left:$f(x_0-\delta)$}] {} -- (4.2,3.67) node[punt,
+                               label = {}] {};
+
+ \draw[color=gray]           (W)node[dot,
+                               label = {left:$f(x_0+\delta)$}] {} -- (T) node[punt,
+                               label = {}] {};
+ \draw[color=gray]           (N)node[dot,
+                               label = {left:$f(x_0)$}] {} -- (M) node[dot,
+                               label = {}] {};
+
+\node[blue] (S) at (7,2.49) {$f$};
+\node[color=gray,punt,label = {above left:$\color{gray}M$}] (M) at (M) {};
+\end{tikzpicture}

@@ -1,0 +1,27 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=.8]
+ \tkzDefPoint(0,0){O}  \tkzDefPoint(1.5,0){A}
+ \tkzDrawCircle(O,A)
+ \foreach \i in {0,...,5}{
+  \tkzDefPointBy[rotation  = center O  angle 30+60*\i](A) \tkzGetPoint{a\i}
+  \tkzDefPointBy[homothety = center O  ratio 2](a\i) \tkzGetPoint{b\i}
+  \tkzDefPointBy[homothety = center O  ratio 3](a\i) \tkzGetPoint{c\i}
+  \tkzDefPointBy[homothety = center O  ratio 4](a\i) \tkzGetPoint{d\i}
+  \tkzDrawCircle(b\i,a\i) \tkzDrawCircle(d\i,c\i)
+  }
+\tkzDrawPolygon[color=red!50!Gold,ultra thick](d0,d1,d2,d3,d4,d5)
+\tkzDrawPolygon[color=red!50!Gold,ultra thick](b0,b2,b4)
+\tkzDrawSegments[color=red!50!Gold,ultra thick](b0,d5 b0,d0 b0,d1 %
+                              b2,d1 b2,d2 b2,d3 b4,d3 b4,d4 b4,d5)
+\tkzDrawPoints[color=red!50!Gold,size=20](b0,b2,b4,d0,d1,d2,d3,d4,d5)
+\end{tikzpicture}
+
+\end{document} 

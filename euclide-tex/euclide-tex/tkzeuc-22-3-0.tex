@@ -1,0 +1,26 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+  \begin{tikzpicture}
+    \tkzPoint(0,0){O}
+    \tkzPoint(9,2){P}
+    \tkzDefMidPoint(O,P) \tkzGetPoint{I}
+    \tkzDrawCircle[R](O,4cm)
+    \tkzDrawCircle[diameter](O,P)
+    \tkzCalcLength(I,P)  \tkzGetLength{dIP}
+    \tkzInterCC[R](O,4cm)(I,\dIP pt)\tkzGetPoints{Q1}{Q2}
+    \tkzDrawPoint[color=red](Q1)
+    \tkzDrawPoint[color=red](Q2)
+    \tkzDrawLine(P,Q1)
+    \tkzDrawLine(P,Q2)
+    \tkzDrawSegments(O,Q1 O,Q2)
+    \tkzDrawLine(P,O)
+\end{tikzpicture}
+
+\end{document} 

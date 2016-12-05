@@ -1,0 +1,24 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=0.75]
+  \tkzDefPoint(3,3){c}
+  \tkzDefPoint(6,3){a0}
+  \tkzRadius=1 cm
+  \tkzDrawCircle[R](c,\tkzRadius)
+\foreach \an in {0,10,...,350}{
+    \tkzDefPointBy[rotation=center c angle \an](a0)
+    \tkzGetPoint{a}
+    \tkzTangent[from with R = a](c,\tkzRadius)
+    \tkzGetPoints{e}{f}
+    \tkzDrawLines[color=magenta](a,f a,e)
+   \tkzDrawSegments(c,e c,f)}
+\end{tikzpicture}
+
+\end{document} 

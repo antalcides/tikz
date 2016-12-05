@@ -1,0 +1,153 @@
+\documentclass[a4paper,10pt]{article}
+
+ \usepackage{fontspec}
+\usepackage[frenchb,english]{babel}
+
+%\TFRGB{\selectlanguage{french}}{\selectlanguage{english}}
+
+\usepackage{amsmath,amsfonts,amssymb}
+
+\usepackage{pdfpages}  
+
+
+%\usepackage{pst-all}
+
+\usepackage{graphicx} 
+\usepackage{hyperref}
+
+\usepackage{animate}
+\usepackage{makeidx}
+%\usepackage{wrapfig}
+
+\usepackage{pgfplots} %<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+\usepackage{tikz}
+\usepackage{tkz-tab} 
+%\usepgflibrary{shapes.callouts}
+\usepackage{tikz-qtree}
+\usepackage{tkz-tab}
+\usepackage{csquotes}
+
+  
+\usetikzlibrary{angles}
+\usetikzlibrary{arrows}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadings}
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{decorations.pathmorphing}
+
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.footprints}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{decorations.fractals}
+\usepgflibrary{shapes.geometric}
+\usetikzlibrary{intersections}
+\usetikzlibrary{scopes}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{shapes.arrows}
+\usetikzlibrary{shapes.callouts}
+\usetikzlibrary{shapes.misc}
+\usepgflibrary{shapes.multipart}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{trees}
+\usetikzlibrary{fadings}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{bending}
+\usetikzlibrary{fit}
+%\usetikzlibrary{circuits}
+\usetikzlibrary{circuits.ee.IEC}
+%\usetikzlibrary{circuits.logic}
+
+%\usetikzlibrary{decorations}
+
+
+
+
+
+%\usetikzlibrary{babel}
+\usetikzlibrary{math}
+
+
+\usetikzlibrary{quotes}
+
+
+\pgfplotsset{compat=1.8}
+%\usetikzlibrary{positioning}
+
+\usepackage{geometry}
+\geometry{a4paper,top={3cm}}
+
+
+
+
+
+
+%====================================================================
+
+\makeindex
+
+
+\newcommand{\AC}[1]{\{#1\}}
+
+\newcommand{\BDD}[1]{{\color{blue}  #1}\index{\textbf{4 Variables Tikz}!#1}}
+
+\newcommand{\BS}[1]{$\backslash$#1}
+
+\newcommand{\BSB}[1]{\textbf{\color{blue} {$\backslash$#1}}}
+
+
+\newcommand{\BSR}[1]{\textbf{\color{red}  $\backslash$#1}}
+
+
+
+
+%\newcommand{\RDDX}[2]{{\color{red}#1} \index{\textbf{3 Paramètres et options}!#2=#1}}
+
+
+\newcommand{\RRR}[1]{\tikz[baseline=-1mm]  \draw node[draw,fill=red!20] {{\footnotesize  PGFmanual section :  #1}} ; }
+
+%\newcommand{\RRR}[1]{\tikz[baseline=-1mm]  \draw node[draw,fill=red!20] {{\footnotesize  PGFmanual section :  #1}} ;\index{\textbf{5 PGFmanual }!#1} }
+
+\newcommand{\DFR}{ \tikzpicture[scale=.25]
+\draw [fill=blue](0,0) rectangle (3,1.5);
+\draw [fill=white](1,0) rectangle (2,1.5);
+\draw [fill=red](2,0) rectangle (3,1.5);\endtikzpicture }
+
+\newcommand{\DGB}{ \tikzpicture[scale=.25]
+\draw [fill=blue](0,0) rectangle (3,1.5);
+\draw [white,line width=.1cm](0,0) -- (3,1.5);
+\draw [white,line width=.1cm](0,1.5) -- (3,0);
+\draw [white,line width=.1cm](1.5,0) -- (1.5,1.5);
+\draw [white,line width=.1cm](0,0.75) -- (3,0.75);
+\draw [red,line width=.05cm](0,0) -- (3,1.5);
+\draw [red,line width=.05cm](0,1.5) -- (3,0);
+\draw [red,line width=.05cm](1.5,0) -- (1.5,1.5);
+\draw [red,line width=.05cm](0,0.75) -- (3,0.75);
+\endtikzpicture }
+
+
+
+\TFRGB{
+\newcommand{\ESS}[1]{\textbf{\textbackslash{#1}}\index{\textbf{1 Environnements}!#1 @\textbackslash{}#1}}
+\newcommand{\BSS}[1]{\textbf{\textbackslash{#1}}\index{\textbf{2 Commandes}!#1 @\textbackslash{}#1}}
+\newcommand{\BSI}[2]{ \index{\textbf{4) Par modules }!\textbf{#2}!#1@\textbackslash{}#1 (M)}}
+\newcommand{\DDD}[1]{{\color{red}  #1}\index{\textbf{3 Paramètres et options!Elements}!#1}}
+\newcommand{\FDD}[1]{{\color{red}  #1}\index{\textbf{5 Extrémit\'es}!#1}}
+\newcommand{\RDD}[1]{{\color{red}  #1}\index{\textbf{3 Paramètres et options}!#1}}
+\newcommand{\RDDD}[2]{{\color{red}#1} \index{\textbf{Paramètres et options}!#2!#1}}
+\newcommand{\RDDX}[2]{{\color{red}#1} \index{\textbf{4 Options}!#1 (#2)}}
+}
+{
+\newcommand{\ESS}[1]{\textbf{\textbackslash{#1}}\index{\textbf{1 Environments}!#1 @\textbackslash{}#1}}
+\newcommand{\BSS}[1]{\textbf{\textbackslash{#1}}\index{\textbf{2 Commands}!#1 @\textbackslash{}#1}}
+\newcommand{\BSI}[2]{ \index{\textbf{4) Par modules }!\textbf{#2}!#1@\textbackslash{}#1 (M)}}
+\newcommand{\DDD}[1]{{\color{red}  #1}\index{\textbf{3 Parameters and options!Elements}!#1}}
+\newcommand{\FDD}[1]{{\color{red}  #1}\index{\textbf{5 Extrémities}!#1}}
+\newcommand{\RDD}[1]{{\color{red}  #1}\index{\textbf{3 Parameters and options}!#1}}
+\newcommand{\RDDD}[2]{{\color{red}#1} \index{\textbf{Parameters and options}!#2!#1}}
+\newcommand{\RDDX}[2]{{\color{red}#1} \index{\textbf{4 Options}!#1 (#2)}}
+}
+
+\newcommand{\rouge}[1] {{\color{red}  #1}}
+\newcommand{\blll}[1] {{\color{blue}  #1}}

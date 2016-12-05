@@ -1,0 +1,29 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+  \begin{tikzpicture}
+     \tkzInit[ymin=-1,ymax=5,xmin=-1,xmax=10]
+     \tkzClip[space=.5]
+     \tkzDefPoint(0,0){B}
+     \tkzDefPoint(10,0){C}
+     \tkzDefPoint(5,0){O}
+     \tkzDefPoint(2.5,0){I}
+     \tkzDefPointWith[orthogonal](I,C) \tkzGetPoint{H}
+     \tkzInterLC(I,H)(O,C)             \tkzGetSecondPoint{A}
+     \tkzDrawSegments(B,C C,A A,B O,A)
+     \tkzDrawPoints(O,A,B,C)
+     \tkzDrawArc(O,C)(B)
+     \tkzMarkRightAngle[size=.4](C,A,B)
+     \tkzLabelSegments[below left=3pt](O,A O,B O,C A,B){$r$}
+     \tkzMarkSegments[mark=||](O,A O,B O,C A,B)
+     \tkzLabelPoints(B,O,C)
+     \tkzLabelPoint[above right](A){$A$}
+  \end{tikzpicture}
+
+\end{document} 

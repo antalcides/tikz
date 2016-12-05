@@ -1,0 +1,11 @@
+\begin{tikzpicture}[scale=10]
+\tkzInit[xmin=-3,xmax=6,ymin=-2,ymax=14,ystep=2]
+%\tkzDrawX \tkzDrawY
+\tkzFct[line width=6pt,color = red, domain =1.5:5]{(-\x-1)*(\x-4)}
+\tkzSetUpPoint[size=7,color=orange, fill=orange]
+\foreach \x in {2,2.5,...,4}{%
+\tkzDrawTangentLine[draw,fill=orange,color=blue,line width=1pt,kr=0.5,kl=0.5,line width=2pt](\x)}
+\tkzText[draw,color = red,fill = orange!20](1.5,7)%
+{\Huge $f'(x)\leq 0$}
+
+\end{tikzpicture} 

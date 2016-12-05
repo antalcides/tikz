@@ -1,0 +1,18 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[rotate=-30]
+   \tkzDefPoint(2,1){A}   \tkzDefPoint(6,5){B}
+   \tkzDefPoint(3,6){C}   \tkzDefPoint(5,2){D}
+   \tkzDrawLines(A,B C,D)
+   \tkzInterLL(A,B)(C,D)  \tkzGetPoint{I}
+   \tkzDrawPoints[color=blue](A,B,C,D) \tkzDrawPoint[color=red](I)
+\end{tikzpicture}
+
+\end{document} 

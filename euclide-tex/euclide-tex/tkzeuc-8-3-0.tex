@@ -1,0 +1,20 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit[xmax=5,ymax=5] \tkzGrid
+  \tkzDefPoint(0,0){A}  \tkzDefPoint(2,2){B}
+  \tkzDefPoint(3,3){C}  \tkzDefPoint(5,5){D}
+  \tkzGetRandPointOn[line = A--B]{a}
+  \tkzGetRandPointOn[line = C--D]{d}
+  \tkzDrawPoints(A,B,C,D,a,d)
+  \tkzLabelPoints(A,B,C,D,a,d)
+\end{tikzpicture}
+
+\end{document} 

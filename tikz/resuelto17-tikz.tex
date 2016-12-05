@@ -1,0 +1,21 @@
+%\documentclass[10pt]{article}
+%\usepackage{pgf,tikz}
+%\usepackage{mathrsfs}
+%\usetikzlibrary{arrows}
+%\pagestyle{empty}
+%\begin{document}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=5.0cm,scale=0.5]
+\draw[->,color=black] (-2.024727184143739,0.) -- (2.060677229889226,0.);
+\foreach \x in {-2.,-1.,1.,2.}
+\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\draw[->,color=black] (0.,-2) -- (0.,2);
+\foreach \y in {-24.,24.}
+\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw[color=black] (0pt,-10pt) node[right] {\footnotesize $0$};
+%\clip(-2.024727184143739,-39.09819896868541) rectangle (2.060677229889226,38.50029019202723);
+\draw[line width=1.2pt,color=blue,smooth,samples=100,domain=-1.05:1.05] plot(\x,{3.0*(\x)^(5.0)+5.0*(\x)^(3.0)-30.0*(\x)});
+\begin{scriptsize}
+%\draw[color=blue] (-1.7480264867789566,-57.761126741515035) node {$h$};
+\end{scriptsize}
+\end{tikzpicture}
+%\end{document}

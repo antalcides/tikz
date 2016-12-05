@@ -1,0 +1,370 @@
+Plotting with Gnuplot and/or TikZ
+=================================
+
+In the following, I describe and compare various ways for including
+plots in a LaTeX document, focusing on approaches that incorporate
+Gnuplot_, TikZ_, or both.
+
+In the past, I have plotted data using Gnuplot_ using the postscript
+terminal, usually directly from Python_ (where I created the data)
+with `Gnuplot.py`_.  After discovering TikZ_, I am now interested in
+using TikZ for plots, too; in particular, this helps to ensure that
+all fonts within the document look the same, and that proper line
+widths are used etc.  (For details, see chapter 4 on "Guidelines on
+Graphics" and section 16.1 "When Should One Use TikZ for Generating
+Plots?" in the fine `PGF manual`_.)
+
+Along the way, I hope to fix problems with line spacing in legends,
+too: A common approach to prevent the font size from becoming
+unreadable in plots that are scaled using
+e.g. ``\includegraphics[width=0.25\linewidth]{...}`` in LaTeX is to
+``set size 0.8`` in Gnuplot.  However, this leads to very close (in
+the extreme, overlapping) lines in the legend, which has to be fixed
+manually e.g. using ``set key bottom right spacing 2``.
+
+Gnuplot, Postscript Terminal
+----------------------------
+
+This is very easy to set up; from Python, I am using something like
+this to produce and plot the data, including labels etc.:
+
+.. code-block:: python
+
+  def edgePlotData(edge, title):
+      return Gnuplot.Data([(al, gm.siv[p])
+                           for al, p in arcLengthIter(edge, wsStats)],
+                          title = title, with = "lp ps 0.7")
+
+  g = Gnuplot.Gnuplot()
+  g('set terminal postscript eps color solid')
+  g('set output "valueplot-flowlines.eps"')
+  g('set xlabel "arc length distance $t$ from saddle [pixels]"')
+  g('set ylabel "boundary indicator value $|\vec{b}_g(t)|$"')
+  g('set arrow from 0,0 to 0,15 nohead lt 0')
+  g('set label " saddle pos" at 0,14 left')
+  g.set_range("xrange", (-5, 5))
+
+  g('set size 0.8') # larger fonts, please
+  g.plot(myPlotData(noiseEdge, "undesired, noise-induced edge"),
+         myPlotData(goodEdge, "real, high-contrast image edge"),
+         myPlotData(weakEdge, "real, low-contrast image edge"),
+         myPlotData(streamerEdge, "streamer (converging tangentially to real edges)"))
+
+The result looks like this:
+
+.. image:: valueplot-flowlines_eps.png
+
+Here are the data files and commands to recreate this "at home":
+
+.. download:: tikz/plots/valueplot-flowlines.gnuplot,tikz/plots/valueplot-flowlines_[1234].dat
+
+.. CAUTION::
+
+  One disadvantage of `Gnuplot.py`_ is that if you automate your plots
+  like this, you might find yourself needing a ``time.sleep(1)`` in
+  order to prevent the temporary data files being deleted before the
+  separate ``gnuplot``-process has read them.  I guess one should use
+  something like matplotlib_ nowadays, but I got so used to Gnuplot_..
+
+AFAIK, this process is standard and has been used like this for years.
+As Alain Matthes pointed out, you might run into encoding problems
+nowadays, in the transition phase to UTF-8, which is becoming the new
+standard for many software packages and platforms.
+
+Another problem arises if one tries to change the font; although
+Gnuplot allows to change every small detail, I think one usually
+leaves such things as the font alone, but this results in different
+fonts in the EPS-embedded plots than in the rest of your LaTeX
+document.
+
+Also, when using ``epstopdf`` to convert the figures for use with
+pdflatex (and KOMA-Script), their text became garbled, obviously
+because of a font problem.  I had to use ``epstoeps`` *and*
+``epstopdf`` one after another to fix this.
+
+TODO: Alain mentioned gnuplottex_:
+
+  This package is very useful; you can, like with tikz, execute some
+  commands with gnuplot and insert the result directly in your
+  document.  I use only this method to draw some surfaces z=f(x,y).
+
+Gnuplot, XFig Terminal
+----------------------
+
+The ``fig``-terminal has the advantage of being able to produce
+"special" text, i.e. text that can be converted into LaTeX commands to
+get the same font as in the rest of the document and support formulas
+etc.  In the above code, just change the terminal line and output
+filename (I have also removed the ``set size``, since the LaTeX font
+size is large enough, and added some formulas to showcase the LaTeX
+features):
+
+.. code-block:: python
+
+  #g('set terminal postscript eps color')
+  g('set terminal fig metric color textspecial')
+  g('set output "valueplot-flowlines.fig"')
+  ...
+  g('set xlabel "arc length distance $t$ from saddle [pixels]"')
+  g(r'set ylabel "boundary indicator value $|\\vec{b}_g(t)|$"')
+
+Unfortunately, Gnuplot_ annoyed me here, again (*update:* this was
+version 4.0.0 - the current 4.2.2 release does not have this problem):
+the colors in the resulting document were completely different than in
+the postscript.  (AFAICS, this is not considered as bug, but each
+terminal may freely choose the plot style appearance.)  In particular,
+the first plot uses black instead of red color, and the "saddle pos"
+mark in the center is not dotted anymore:
+
+.. download:: tikz/plots/valueplot-flowlines_fig.gnuplot,tikz/plots/valueplot-flowlines.fig
+.. image:: valueplot-flowlines_fig.png
+
+Thus, I have hacked a small python module `gnuplotfig.py`_, based on
+my `fig.py`_ module, which tries to parse and improve gnuplot's XFig
+output:
+
+* move separate plots and axis ticks on separate layers (the default
+  puts nearly everything on depth 10)
+* heuristically fix colors (in this example you see that the
+  "saddle pos" mark cannot be distinguished from the plot and is also
+  "fixed" to red)
+* try to extract value range and store that as XFig comments in the
+  file (`gnuplotfig.py`_ offers coordinate conversions based on this)
+
+.. download:: tikz/plots/valueplot-flowlines_fixed.fig
+.. image:: valueplot-flowlines_fixed_fig.png
+
+The main benefit from adding the extra indirection via XFig_ is that
+XFig supports "special" text, i.e. a flag that marks text as
+to-be-interpreted by LaTeX.  Then, you can use fig2dev with a special
+target language to produce a PS/PDF with the background and a separate
+chunk of TeX code that overlays the text using LaTeX.  (Details on
+this process can be found on the "`LaTeX and XFig
+<http://www.xfig.org/userman/latex_and_xfig.html>`_" page available on
+the XFig homepage.)  This is made especially convenient in LyX_, which
+allows you to directly insert the XFig file as "external material" and
+does all the necessary intermediate steps for you.
+
+.. image:: valueplot-flowlines_fixed_fig_latex.png
+
+The above figure is the result of a LaTeX run using
+``\input{valueplot-flowlines_fixed.pdftex}`` to include the
+automatically generated TeX code.  The process was facilitated with
+the following Makefile rules::
+
+  %-pdftex.pdf: %.fig
+    fig2dev -L pdftex $< $@
+
+  %.pdftex: %.fig %-pdftex.pdf
+    fig2dev -L pdftex_t -p $*-pdftex.pdf $< $@
+
+  %.pdf: %.tex
+    pdflatex $<
+
+  valueplot-flowlines_fixed_fig_latex.pdf: valueplot-flowlines_fixed.pdftex
+
+Unfortunately, the generated code is cluttered with font-setting commands::
+
+  \begin{picture}(4113,2862)(937,-3710)
+  \put(1363,-3363){\makebox(0,0)[rb]{\smash{{\SetFigFont{10}{12.0}{\familydefault}{\mddefault}{\updefault} 0}}}}
+  \put(1363,-2887){\makebox(0,0)[rb]{\smash{{\SetFigFont{10}{12.0}{\familydefault}{\mddefault}{\updefault} 5}}}}
+  \put(1363,-2411){\makebox(0,0)[rb]{\smash{{\SetFigFont{10}{12.0}{\familydefault}{\mddefault}{\updefault} 10}}}}
+  ...
+  \put(1048,-2114){\rotatebox{90.0}{\makebox(0,0)[b]{\smash{{\SetFigFont{10}{12.0}{\familydefault}{\mddefault}{\updefault}boundary indicator value $|\vec{b}_g(t)|$}}}}}
+  ...
+  \put(4455,-1465){\makebox(0,0)[rb]{\smash{{\SetFigFont{10}{12.0}{\familydefault}{\mddefault}{\updefault}streamer (converging to real edges)}}}}
+  \end{picture}%
+
+Even though the font size can be configured within Gnuplot, it would
+still be better to use LaTeX's default font sizes, or at least
+commands like `\small` or the like.  Also, the line spacing e.g. in
+the legend is unsatisfactory, and this gets much worse if one uses the
+above ``set size ...`` option of Gnuplot.  Resizing using a
+``\resizebox`` in LaTeX is undesirable since it again affects line
+widths and font sizes.
+
+On the plus side, we at least have LaTeX fonts and formulas.  The
+effort for creating such plots is larger than with Gnuplot alone, but
+it can be automated to a fair degree (and is trivial to achieve within
+LyX).
+
+Gnuplot, XFig Terminal + fig2tikz
+---------------------------------
+
+The XFig files generated above can be converted to TikZ code using my
+fig2tikz_ script:
+
+.. download:: tikz/plots/valueplot-flowlines_fixed_fig.tikz
+.. image:: valueplot-flowlines_fixed_fig_tikz.png
+
+This already brings many of TikZ_'s advantages, e.g. you may scale the
+plot without changing the linewidths etc.  Furthermore, the generated
+code is much cleaner than the above, since fig2tikz_ has a
+``--nofonts`` switch that disables the output of font-setting
+commands::
+
+  \path (3.02667,9.33778) node[anchor=base east] { 0};
+  \path (3.02667,8.28) node[anchor=base east] { 5};
+  \path (3.02667,7.22222) node[anchor=base east] { 10};
+  ...
+  \path (2.32667,6.56222) node[anchor=base,rotate=90.0] {boundary indicator value $|\vec{b}_g(t)|$};
+  ...
+  \path (9.89778,5.12) node[anchor=base east] {streamer (converging to real edges)};
+
+However, the code is far from what I would have written by hand.
+Especially, all coordinate transformations have been performed by
+Gnuplot_, which is sad since TikZ_ gives all the necessary features to
+position the original data points on the plot.  (E.g. you could be
+able to change the plot range etc. in the resulting code, but not
+using this method.)  Also, the interline spacing is still bad.
+
+Gnuplot + TikZ Terminal
+-----------------------
+
+Peter Hedwig has written a `lua terminal`_ for Gnuplot that comes with
+a TikZ backend (and only with this) written in lua.  See also the
+`example on Kjell's useful site
+<http://www.fauskes.net/pgftikzexamples/gnuplot-tikz-terminal/>`_.
+
+Unfortunately, this requires a recompilation of Gnuplot (if you don't
+download one of the provided binaries, which might on the other hand
+be missing other features).  Even then, the resulting TeX code seems
+to rely on newer LaTeX packages than I have (still using TeTeX), and
+did not compile.
+
+Also, this still does not use TikZ's ``plot`` command, but simply
+draws all coordinates using a normal ``\path`` with the *transformed*
+coordinates (see above), which is unsatisfactory.  In the best case,
+the output is expected to be similar to the above, fig2tikz-generated
+code.
+
+TikZ 'plot' command
+-------------------
+
+As mentioned above, TikZ_ itself provides a ``plot`` command that can
+be used within paths to plot data that is provided inline, via
+external files, or as a mathematical function.  (See section 16 in the
+`PGF manual`_.)  One big advantage of this approach is that one can
+use TikZ's coordinate transformations for mapping the raw data into
+the figure, which makes it possible to change the plot scale / domain
+etc. at any time, and allows one to add additional graphical elements
+(e.g. arrows, text nodes, ...) at the correct positions using the
+convenient TikZ API.  Furthermore, the above-mentioned advantages of
+using TikZ for the correct line widths and text sizes of course apply
+to this method, too.
+
+The main disadvantage is the same: you *have* to use TikZ's coordinate
+transformations in order to map the data into the desired figure
+range.  Also, there are no axes and ticks drawn automatically, so you
+have to do everything yourself.
+
+Another major problem is that if your data to be plotted contains too
+large or too small numbers, you easily exceed the valid range for TeX
+dimensions (even if only for intermediate states before the
+transformations are applied).  This is stated in the PGF manual and is
+a known limitation which the user is expected to work around himself,
+e.g. by scaling the data to be plotted before feeding it to LaTeX.
+
+For example, the data to be plotted can be written to simple ASCII
+files (suitable for Gnuplot, too) and plotted using the following
+code:
+
+.. code-block:: latex
+   :source-file: tikz/plots/valueplot-flowlines_plots.tikz
+
+.. download:: tikz/plots/valueplot-flowlines_plots.tikz
+
+.. image:: valueplot-flowlines_plots_tikz.png
+
+pgfplots
+--------
+
+The pgfplots_ package by Christian Feuersänger is available via CTAN.
+It is based on PGF/TikZ and provides some very useful features for
+plotting:
+
+* The plot area size can be specified and defaults to a sane default;
+  the range of the data to be plotted is auto-detected and the scaling
+  is set up appropriately.  It also supports setting the x/yrange to
+  be plotted, and the plot will be *scaled and clipped* accordingly.
+* AFAICS, pgfplots_ contains special code for *handling numbers beyond
+  what TeX/PGF support* natively.
+* Furthermore, it is possible to have *logarithmic scaling* along one or
+  both axis.
+* Similar to Gnuplot, you can specify multiple data to be plotted, and
+  pgfplots will choose from a *set of predefined styles* in order to
+  discriminate different plots within the same axis.  Even better - it
+  also supports a *convenient automatic legend* of these styles/plots.
+
+Thus, it fills in many of the gaps left by PGF/TikZ alone, and allows
+to benefit from all of TikZ's beauty... nearly.  I have found many
+small limitations that stem from the fact that it is not well
+integrated into TikZ, e.g. I would have expected to be able to easily
+reference all parts of the plot by using named nodes and anchors,
+which is not currently possible (the nodes are part of scopes, which
+prevent access to their content).  Christian Feuersänger is working
+actively on improving this, and he has patiently listened to my
+requests/comments, but the currently released version is quite limited
+in this respect.
+
+Similarly, one may specify the TikZ styles for many relevant parts of
+pgfplots' output, but one has to modify e.g. ``every axis legend`` and
+cannot easily add style options for just a single object.
+
+Another important limitation is that with the release I tested
+(0.92.3, the current at time of writing), only inline data can be
+plotted.  Christian Feuersänger has since implemented plotting data
+from files AFAIK, but you cannot simply use all of TikZ's plot sources
+(e.g. Gnuplot function specifications).
+
+Here is the running example, styled beautifully with pgfplots and
+TikZ:
+
+.. code-block:: latex
+   :source-file: tikz/plots/valueplot-flowlines_pgfplots.tikz
+
+.. download:: tikz/plots/valueplot-flowlines_pgfplots.tikz
+
+.. image:: valueplot-flowlines_pgfplots_tikz.png
+
+Some other small things to be improved were the automatic tick marks,
+which are not as good as in Gnuplot (heh - that's OK, I find it
+impressive that it *has* automatic tick marks at all, but one should
+be aware of this respect), and if you specify the xrange, the yrange
+is not computed from just the respective part of the data, but still
+from the whole set, i.e. you often find yourself having to specify
+both, when you would just specify one in Gnuplot.
+
+tkz-fct
+-------
+
+Alain Matthes' `TKZ stuff on AlterMundus
+<http://www.altermundus.fr/pages/download.html>`_ contains a
+tkz-fct_ package.  Again, check the `example on Kjell's site
+<http://www.fauskes.net/pgftikzexamples/tkz-plot2d/>`_.  I have not
+yet checked this out due to time constraints, but I hope I will
+eventually be able to do so.
+
+pgfgraph
+--------
+
+Similar to tkz-fct_, I have not yet had a closer look at the pgfgraph_
+package by Pascal Wolkotte, which is another promising extension for
+plotting with PGF/TikZ.
+
+.. _Gnuplot: http://www.gnuplot.info/
+.. _gnuplottex: http://www.ctan.org/tex-archive/help/Catalogue/entries/gnuplottex.html
+.. _TikZ: http://sourceforge.net/projects/pgf/
+.. _Gnuplot.py: http://gnuplot-py.sourceforge.net/
+.. _Python: http://www.python.org/
+.. _PGF manual: http://www.google.com/search?q=pgf+manual
+.. _matplotlib: http://matplotlib.sourceforge.net/
+.. _fig.py: http://kogs-www.informatik.uni-hamburg.de/~meine/software/figpy/
+.. _gnuplotfig.py: http://kogs-www.informatik.uni-hamburg.de/~meine/software/figpy/gnuplotfig.py
+.. _lua terminal: http://peter.affenbande.org/gnuplot/
+.. _fig2tikz: http://kogs-www.informatik.uni-hamburg.de/~meine/software/figpy/#fig2tikz
+.. _pgfplots: http://www.ctan.org/tex-archive/help/Catalogue/entries/pgfplots.html
+.. _tkz-fct: http://www.altermundus.fr/pages/download.html
+.. _LyX: http://www.lyx.org/
+.. _XFig: http://www.xfig.org/
+.. _pgfgraph: http://wwwhome.cs.utwente.nl/~wolkottept/files/pgfgraph/

@@ -1,0 +1,94 @@
+  \pgfplotsset{
+        axis lines=middle,
+        %xlabel=$x$,
+%         ylabel=$y$,
+        no markers,
+        samples=50,
+        trig format plots=rad,
+        every axis plot/.append style={
+            line width=2.5pt,
+            smooth,
+        },
+    }
+  \pgfmathsetmacro{\PI}{3.141592654}
+\begin{tikzpicture}[scale=3,cap=round]
+  % Local definitions
+  \def\costhirty{0.8660256}
+
+  % Colors
+  \colorlet{anglecolor}{green!50!black}
+  \colorlet{sincolor}{red}
+  \colorlet{tancolor}{orange!80!black}
+  \colorlet{coscolor}{blue}
+
+  % Styles
+\draw[style=help lines,step=0.5cm] (0,0) grid (6.4,6.4);  
+   \tikzstyle{important line}=[very thick]
+   \tikzstyle{information text}=[rounded corners,fill=red!10,inner sep=1ex]
+ %\filldraw[fill=green!20,draw=anglecolor] (3.24,2,9) -- (3.8,3.1) arc(0:45:1);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{axis}[
+            domain=-pi:pi,
+            ymin=-3.5,
+            ymax=+3.5,
+            %
+            % scale x axis values by \pi and
+            % remove the corresponding label
+            scaled x ticks={real:\PI},
+            xtick scale label code/.code={},
+            % in case you want to set an explicit tick distance
+            xtick distance=\PI/2,
+            % add code here for formatting the `xlabels'
+            % I configured exceptions for \pm\pi where no number in front
+            % of these are shown and for fractional values these should be
+            % shown as fractions
+            xticklabel={%
+                \ifdim \tick pt = 1 pt
+                    \strut$\pi$%
+                \else\ifdim \tick pt = -1 pt
+                    \strut$-\pi$%
+                \else
+                    % to avoid some mess with TeX precision, first
+                    % round the \tick value to one digit after the comma
+                    \pgfmathparse{round(10*\tick)/10}
+                    % depending on whether the resulting number is an integer
+                    % show it as integer only, otherwise use the style given
+                    % in `xticklabel style'
+                    \pgfmathifisint{\pgfmathresult}{%
+                        \strut$\pgfmathprintnumber[int detect]{\pgfmathresult}\pi$%
+                    }{%
+                        \strut$\pgfmathprintnumber{\pgfmathresult}\pi$%
+                    }
+                \fi\fi
+            },
+            % set number plotting to frac style
+            xticklabel style={
+                /pgf/number format/frac,
+                /pgf/number format/frac whole=false,
+            },
+            % add minor thicks
+            minor tick num=1,
+        ]
+%  \tikzstyle{axes}=[]
+ 
+  % The graphic
+ % 
+            \addplot[domain=-1.0989*pi:-0.5*pi,thick] {cosec(x)};
+ \addplot[domain=-0.1*pi:0.5*pi,thick] {cosec(x)};
+            \end{axis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \draw [tancolor, important line](4.75,2.85) circle (0.81 cm);
+ \filldraw[fill=green!20,draw=anglecolor,opacity=0.7] (4.71,2.85) -- (5.1,2.85) arc(0:15:1);
+\draw[style=important line,anglecolor]
+    (5.73,2.85) -- node[right=-3pt] {$\csc \alpha$} (5.73
+,4.06);
+
+ \draw[style=important line,coscolor]
+   (4.75,2.85) -- node[left=2pt,fill=white] {$1$} (4.75,3.66);
+ \draw[style=important line,anglecolor]
+ (4.75,2.85) -- node[above left=-1pt,dashed] {$\csc \alpha$} (5.65,3.66);
+\draw[style=important line,red]
+    (4.75,3.66) -- node[left=-5pt,fill=white] {$\cot \alpha$} (5.65,3.66);
+\draw (5.73,2.74)  node[anglecolor] {$\alpha$};
+\draw (5,2.94)  node[anglecolor] {$\alpha$};
+\end{tikzpicture}

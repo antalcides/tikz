@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+    \begin{axis}[
+            axis x line=middle,
+            axis y line=middle,
+            domain=-4:7,
+            xmax=7,
+        ]
+        \addplot[no marks,blue,thick, name path global=My Graph] {x*x-4*x-7};
+        \addplot[no marks,draw=none, name path global=x Axis] {0};
+        \fill[red,name intersections={of=My Graph and x Axis,total=\t}]
+            \foreach \s in {1,...,\t}{
+                (intersection-\s) circle (2pt) 
+            };
+    \end{axis}
+\end{tikzpicture}

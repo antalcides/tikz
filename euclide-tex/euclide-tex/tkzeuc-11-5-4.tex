@@ -1,0 +1,22 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+ \tkzInit[xmax=6,ymax=7]
+ \tkzGrid
+ \tkzDefPoint(2,2){A}
+ \tkzDefPoint(5,4){B}
+ \tkzDrawPoints(A,B)
+ \tkzShowLine[mediator,color=orange,length=1](A,B)
+ \tkzGetPoints{i}{j}
+ \tkzLabelPoints[below =3pt](A,B)
+ \tkzDrawLines[](A,B i,j)
+\end{tikzpicture}
+
+\end{document} 

@@ -1,0 +1,13 @@
+% Preamble: \pgfplotsset{width=7cm,compat=1.13}
+\begin{tikzpicture}
+\begin{axis}[
+minor tick num=3,
+axis y line=left,
+axis x line=middle,
+xlabel=$x$,ylabel=$\sin x$
+]
+\addplot[smooth,blue,mark=none,
+domain=-5:5,samples=40]
+{sin(deg(x))};
+\end{axis}
+\end{tikzpicture}

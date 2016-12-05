@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage[active,pdftex,tightpage]{preview}
+\usetikzlibrary{positioning}
+\PreviewEnvironment[]{tikzpicture}
+\def\f(#1){#1^2}%
+\newcommand{\derivative}[4]{
+\begin{scope}
+    \addplot [thick, red, latex-latex] {#1} node [anchor=west] {#2};
+    \addplot [black, mark=*] coordinates {(#3,{\f(#3)}) (#4,{\f(#4)})}
+        node [pos=0,/pgfplots/point 1] {\small $P_1$}
+        node [pos=1,/pgfplots/point 2] {\small $P_2$};
+    \pgfplotsextra{
+        \pgfmathsetmacro\first{\f(#3)}
+        \pgfmathsetmacro\second{(\f(#4)}
+        \pgfmathsetmacro\xdiff{#4-#3}
+        \pgfmathsetmacro\ydiff{\f(#4)-\f(#3)}
+        \draw (axis cs:#3,\first) -| (axis cs:#4,\second);
+        \draw [|-|,yshift=-5ex] (axis cs:#3,\first) -- node [inner sep=1pt,fill=white] {\pgfmathprintnumber{\xdiff}} (axis cs:#4,\first);
+        \draw [|-|,xshift=2ex] (axis cs:#4,\first) -- node [inner sep=1pt, fill=white] {\pgfmathprintnumber{\ydiff}} (axis cs:#4,\second);
+        \matrix at (rel axis cs:0.5,1) [matrix of nodes,/pgfplots/point legend] {\tiny $P_1=(#3\,,\,\first)$\\ \tiny$P_2=(#4\,,\,\second)$\\};
+        }
+       
+         \end{scope}
+    }
+
+
+\begin{document}
+
+\pgfplotsset{point legend/.style={},
+    point 1/.style={anchor=south},
+    point 2/.style={anchor=north}
+}
+
+\pgfplotsset{
+    azetinaplot/.style={
+        width=7cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        enlarge y limits,
+        clip=false
+    }
+}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        azetinaplot,
+        domain=-2:14, samples=100,
+        xmin=-2, xmax=14,
+        point 1/.append style={anchor=south east},
+        point 2/.append style={anchor=south east}]
+    \derivative{\f(x)}
+        {$f(x)=x^2$}
+        {2}{8}
+         \addplot [thick, blue, latex-latex] {10*x-16} node [anchor=west] {Recta secante};
+         \addplot [thick, orange, latex-latex] {16*x-64} node [anchor=west] {Recta tangente};
+           \end{axis}
+\end{tikzpicture}
+
+
+\end{document}
+

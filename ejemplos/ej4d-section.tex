@@ -1,0 +1,30 @@
+\documentclass{book}
+\usepackage{microtype}
+\usepackage[utf8]{inputenc}
+\usepackage[explicit]{titlesec}
+\usepackage{xcolor}
+\usepackage{times}
+\usepackage{tikz}
+\usepackage{lipsum}
+
+\titleformat{\chapter}[hang]
+  {\color{red}\large\sffamily\bfseries}
+  {}
+  {0em}
+  {\tikz{\node[fill=black!10,rounded corners=10pt]at(0pt,0pt){\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\arabic{chapter}. #1}};}}
+  []
+
+\titleformat{\section}[hang]
+  {\sffamily\bfseries}
+  {}
+  {0em}
+  {\tikz{\node[fill=red!10,rounded corners=10pt]at(0pt,0pt){\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\arabic{section}. #1}};}}
+  []
+
+\begin{document}
+\chapter{Logique mathématique}
+\section{Logique mathématique} 
+\lipsum[1-2]
+\section{Logique mathématique} 
+\lipsum[1-2]
+\end{document}

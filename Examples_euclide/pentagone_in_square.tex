@@ -1,0 +1,43 @@
+ \documentclass[a4paper]{scrartcl}
+ \usepackage[utf8]{inputenc} 
+ \usepackage[upright]{fourier} 
+ \usepackage[usenames,dvipsnames,svgnames]{xcolor}
+ \usepackage{tkz-euclide,fullpage}
+ \usepackage[frenchb]{babel}
+ \definecolor{fondpaille}{cmyk}{0,0,0.1,0}
+ \pagecolor{fondpaille}
+ \color{Maroon} 
+
+ \begin{document}
+    
+    \begin{tikzpicture}[scale=.8]
+  \tkzInit[xmin=-6,xmax=12,ymin=-6,ymax=6] 
+  \tkzClip
+  \tkzDefPoint(-5,-5){A} 
+  \tkzDefPoint(0,0){O}  
+  \tkzDefPoint(+5,-5){B} 
+  \tkzDefPoint(0,-5){F}    
+  \tkzDefPoint(+5,0){F'}
+  \tkzDefPoint(0,+5){E} 
+  \tkzDefPoint(-5,0){K}
+  \tkzDefSquare(A,B)         \tkzGetPoints{C}{D}
+
+  \tkzInterLC(D,C)(E,B)      \tkzGetPoints{T'}{T}
+
+  \tkzDefMidPoint(D,T)     \tkzGetPoint{I}
+  \tkzInterCC[with nodes](O,D,I)(E,D,I)   \tkzGetPoints{H'}{H}
+  \tkzInterLC(O,H)(O,E)     \tkzGetPoints{M'}{M}
+  \tkzInterCC(O,E)(E,M)     \tkzGetPoints{Q}{M}
+  \tkzInterCC[with nodes](O,O,E)(Q,E,M)    \tkzGetPoints{P}{E}
+  \tkzInterCC[with nodes](O,O,E)(P,E,M)    \tkzGetPoints{N}{Q} 
+
+  \tkzCompass(O,H)
+  \tkzCompass(E,H)
+  \tkzDrawArc[color=gray,style=dashed](E,B)(T)  
+  \tkzDrawPolygon(A,B,C,D)
+  \tkzDrawCircle(O,E)  
+  \tkzDrawSegments[color=gray](O,H E,H E,F F',K)
+  \tkzDrawPoints(T,M,Q,P,N)
+  \tkzDrawPolygon[color=red](M,E,Q,P,N)   
+\end{tikzpicture}    
+\end{document}

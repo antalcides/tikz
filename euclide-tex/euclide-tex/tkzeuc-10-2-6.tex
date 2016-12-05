@@ -1,0 +1,23 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+  \begin{tikzpicture}
+  \tkzDefPoint(2,2){A}
+  \tkzDefPoint(5,4){B}
+  \tkzDefPoint(4,4){O}
+  \FPeval{\tkzLen}{0.0002/0.0001}
+  \tkzDrawCircle[R](O,\tkzLen cm)
+  \tkzInterLC[R](A,B)(O, \tkzLen cm)
+  \tkzGetPoints{I}{J}
+  \tkzDrawPoints[color=blue](A,B)
+  \tkzDrawPoints[color=red](I,J)
+  \tkzDrawLine(I,J)
+\end{tikzpicture}
+
+\end{document} 

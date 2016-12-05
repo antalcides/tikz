@@ -1,0 +1,19 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+ \begin{tikzpicture}
+  \tkzDefPoint(0,1){A} \tkzDefPoint(3,2){B}
+  \tkzDefPoint(1,4){C}
+  \tkzDrawPolygon[color=Maroon](A,B,C)
+  \tkzCircumCenter(A,B,C)\tkzGetPoint{G}
+  \tkzDrawPoint(G)
+  \tkzDrawCircle(G,A)
+ \end{tikzpicture}
+
+\end{document} 

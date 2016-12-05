@@ -1,0 +1,25 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+   \tkzDefPoint(0,4){A}
+   \tkzDefPoint(3,2){B}
+   \tkzDefCircle[radius](A,B)
+   \tkzGetLength{rABpt}
+   \tkzpttocm(\rABpt){rABcm}
+   \tkzDrawCircle(A,B)
+   \tkzDrawPoints(A,B)
+   \tkzLabelPoints(A,B)
+   \tkzLabelCircle[draw,fill=Gold,%
+    text width=3cm,text centered](A,B)(-90)%
+  {La mesure du rayon est :
+  \rABpt pt soit \rABcm cm}
+\end{tikzpicture}
+
+\end{document} 

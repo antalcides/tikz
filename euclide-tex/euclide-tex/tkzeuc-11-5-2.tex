@@ -1,0 +1,26 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit[xmin=0,xmax=6,ymin=0,ymax=6]
+  \tkzClip
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(3,4){B}
+  \tkzDefPoint(2,4){C}
+  \tkzDefLine[perpendicular=through C,%
+              K=-.5](A,B)
+  \tkzGetPoint{c}
+  \tkzDefPointBy[projection=onto A--B](c)
+  \tkzGetPoint{h}
+  \tkzMarkRightAngle[fill=lightgray](A,h,C)
+  \tkzDrawLines[](A,B C,c)
+  \tkzDrawPoints(A,B,C,h,c)
+\end{tikzpicture}
+
+\end{document} 

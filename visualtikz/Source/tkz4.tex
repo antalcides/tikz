@@ -1,0 +1,95 @@
+
+%\subsubsection{Transformations}
+
+\begin{center}
+\RRR{25-3}
+\end{center}
+
+
+\begin{tabular}{|c|c|c|c|} \hline 
+\multicolumn{4}{|c|}{  \BS{draw}[\RDD{rotate},blue] (0,0)  rectangle  (2,2) ;   }\\ 
+\hline  
+\begin{tikzpicture}
+\draw[dashed,red] (0,0) rectangle  (2,2) ; 
+\draw[rotate=40,blue] (0,0) rectangle  (2,2) ;
+\end{tikzpicture}
+&  
+\begin{tikzpicture}
+\draw[dashed,red] (0,0) rectangle  (2,2) ; 
+\draw[x=1cm,y=.5cm,blue] (0,0) rectangle  (2,2); 
+\end{tikzpicture}
+&  
+\begin{tikzpicture}
+\draw[dashed,red] (0,0) rectangle  (2,2) ; 
+\draw[xslant=.75,blue] (0,0) rectangle  (2,2);  
+\end{tikzpicture}
+&
+\begin{tikzpicture}
+\draw[dashed,red] (0,0) rectangle  (2,2) ; 
+\draw[yslant=.75,blue] (0,0) rectangle  (2,2);  
+\end{tikzpicture}
+\\ \hline  
+\RDD{rotate}=40 & \RDD{x}=1cm,\RDD{y}=0.5cm & \RDD{xslant}=0.75 & \RDD{yslant}=0.75\\ 
+\hline 
+  
+\begin{tikzpicture}
+\draw[dashed,red] (0,0) rectangle  (2,2) ; 
+\draw[scale=1.5,blue] (0,0) rectangle  (2,2) ; 
+\end{tikzpicture}
+&  
+\begin{tikzpicture}
+\draw[dashed,red] (0,0) rectangle  (2,2) ; 
+\draw[scale=-1,y=.5cm,blue] (0,0) rectangle  (2,2); 
+\end{tikzpicture}
+&  
+\begin{tikzpicture}
+\draw[dashed,red] (0,0) rectangle  (2,2) ; 
+\draw[xshift=.5cm,blue] (0,0) rectangle  (2,2); 
+\end{tikzpicture}
+&
+\begin{tikzpicture}
+\draw[dashed,red] (0,0) rectangle  (2,2) ; 
+\draw[yshift=.5cm,blue] (0,0) rectangle  (2,2);  
+\end{tikzpicture}
+\\ \hline  
+\RDD{scale}=1.5 & \RDD{scale}=-1 & \RDD{xshift}=0.5cm & \RDD{yshift}=0.5cm
+\\ \hline 
+\end{tabular} 
+
+\bigskip
+
+%==============================================
+%\begin{tikzpicture}
+%\draw[help lines] (0,0) grid (3,2);
+%\draw (0,0) - - (1,1) - - (1,0);
+%\draw[rotate=40,blue] (0,0) - - (1,1) - - (1,0); % rotation 40°
+%\draw[rotate=-20,red] (0,0) - - (1,1) - - (1,0); % rotation -20°
+%\end{tikzpicture}
+
+%\tikz \draw[x=1cm,y=.5cm] (0,0) rectangle(2,2);
+
+%\tikz \draw (0,0) rectangle (1,0.5) [xshift=2cm] (0,0) rectangle (1,0.5);
+
+%\begin{tikzpicture}
+%\draw[help lines] (0,0) grid (3,2);
+%\draw (0,0) - - (1,1) - - (1,0);
+%\draw[scale=2,blue] (0,0) - - (1,1) - - (1,0); % échelle 2
+%\draw[scale=-1,red] (0,0) - - (1,1) - - (1,0); % échelle -1
+%\end{tikzpicture}
+
+%\begin{tikzpicture}
+%\draw[help lines] (0,0) grid (3,2);
+%\draw (0,0) - - (1,1) - - (1,0);
+%\draw[xslant=2,blue] (0,0) - - (1,1) - - (1,0);
+%\draw[xslant=-1,red] (0,0) - - (1,1) - - (1,0);
+%\end{tikzpicture}
+
+%\begin{tikzpicture}
+%\draw[help lines] (0,0) grid (3,2);
+%\draw (0,0) rectangle (1,0.5);
+%\beginscope[xshift=2cm] % Décalage en X de 2cm
+%\draw [red] (0,0) rectangle (1,0.5);
+%\draw[yshift=1cm,blue] (0,0) rectangle (1,0.5);
+%\draw[rotate=30,orange] (0,0) rectangle (1,0.5);
+%\endscope
+%\end{tikzpicture}

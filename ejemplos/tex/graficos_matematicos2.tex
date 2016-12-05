@@ -1,0 +1,264 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{maximaplot}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{color}
+\usepackage{pstricks}
+
+
+\author{José Manuel Mira}
+\title{Gráficos  en \LaTeX\ con Maxima\\ II. Formatos abiertos}
+\date{Julio 2006}
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+Este fichero tiene genera gráficos en formato abiertos, en el sentido de genera un fichero sólo texto sobre el que si se desea es posible actuar a posteriori para modificarlo adaptándolo a las necesidades.
+
+Hay varios formatos posibles: pictures, pspictures, eepic. Los únicos universalmente compatibles son los pictures, que son también los más pobres en posibilidades. En el documento, separados en secciones, aparecen gráficos comentados con \verb|%| que pueden ser descomentados selectivamente según el compilador a usar.
+\end{abstract}
+
+
+
+\section{Universalmente válidos:}
+
+ El \texttt{set terminal latex} genera un entorno \texttt{picture} estándar de \LaTeX. El fichero resultante habrá de ser incorporado con un comando \verb|\input|. 
+
+La ventaja que puede proporcionar este tipo de salida es que editando el fichero generado con un editor de texto pueden introducirse a posteriori modificaciones o comandos \LaTeX\ para modificar las características del texto o posicionar otros objetos \LaTeX\ utilizando el entorno \texttt{picture}. Las figuras~\ref{uno}, \ref{dos} y \ref{tres} son de este tipo.
+ 
+ \begin{maximacmd}
+  plot2d(sin(x),[x,-2*%pi,2*%pi],
+  [plot_format, gnuplot],
+  [gnuplot_preamble, 
+  "set terminal latex; 
+   set output 'mgrafico1.pic'"]);
+ \end{maximacmd}
+
+
+\begin{figure}
+\begin{center}
+\IfFileExists{mgrafico1.pic}{\input{mgrafico1.pic}}{}
+\end{center}
+\footnotesize
+Usando este código
+\begin{verbatim}
+\begin{maximacmd}
+plot2d(sin(x),[x,-2*%pi,2*%pi],
+  [plot_format, gnuplot],
+  [gnuplot_preamble, 
+  "set terminal latex; 
+   set output 'mgrafico1.pic'"]);
+\end{maximacmd}
+
+\begin{center}
+  \IfFileExists{mgrafico1.pic}{\input{mgrafico1.pic}}{}
+\end{center}
+\end{verbatim}
+\caption{Gráfico en formato picture de nombre mgrafico1.pic}\label{uno}
+\end{figure}
+
+
+
+
+
+\begin{maximacmd}
+plot3d(atan(-x^2+y^3/4),[x,-4,4],[y,-4,4],
+  [plot_format, gnuplot],
+  [gnuplot_preamble, 
+  "set terminal latex; 
+   set output 'mgrafico2.pic'; set nokey;"]);
+\end{maximacmd}
+
+
+\begin{figure}
+\begin{center}\color{red}
+\IfFileExists{mgrafico2.pic}{\input{mgrafico2.pic}}{}
+\end{center}
+\footnotesize
+Usando este código
+\begin{verbatim}
+\begin{maximacmd}
+plot3d(atan(-x^2+y^3/4),[x,-4,4],[y,-4,4],
+  [plot_format, gnuplot],
+  [gnuplot_preamble, 
+  "set terminal latex; 
+   set output 'mgrafico2.pic'; set nokey;"]);
+\end{maximacmd}
+
+\begin{center}
+  \color{red}
+  \IfFileExists{mgrafico2.pic}{\input{mgrafico2.pic}}{}
+\end{center}
+\end{verbatim}
+\caption{Gráfico en formato picture de nombre mgrafico2.pic}\label{dos}
+\end{figure}
+
+En el gráfico de la figura~\ref{dos} se ha eliminado la leyenda (\verb|set nokey|). Si no se hubiera hecho (compruébelo) se habría producido un error al compilar debido a que cuando latex está leyendo \texttt{mgrafico2.pic} se encuentra con \verb|atan(-x^2+y^3/4)| sin un entorno matemático. ¿Qué puede hacerse? Hay dos posibilidades
+\begin{enumerate}
+\item Buscar a posteriori este texto en el fichero \texttt{mgrafico2.pic}  y sustituirlo por \verb|\arctan (-x^2+y^3/4)| y  continuación poner \verb|%| al correspondiente entorno \texttt{maximacmd} para que no vuelva a generar el gráfico \texttt{mgrafico2.pic} 
+\par
+Este ejemplo trivial ilustra lo que queremos decir con gráficos abiertos. Obsérvese que debido a su carácter ha podido cambiarse el color fuera del gráfico, lo cual es imposible en los de formato cerrado.
+
+\item Otra posibilidad es controlar a priori lo que aparecerá escrito en ese punto en el fichero \texttt{mgrafico2.pic}. Eso es lo que se hace en el la figura~\ref{tres}
+\end{enumerate}
+
+
+
+\begin{maximacmd}
+plot2d([sin(x),x],[x,-2,2],
+  [plot_format, gnuplot],
+  [gnuplot_curve_titles, ["title '$\\sen x$'","title '$\ x$'"]], 
+  [gnuplot_preamble, 
+   "set terminal latex; 
+    set output 'mgrafico3.pic';
+    set key left top;"]);
+\end{maximacmd}
+
+
+\begin{figure}
+\begin{center}
+\IfFileExists{mgrafico3.pic}{\input{mgrafico3.pic}}{}
+\end{center}
+\footnotesize
+Usando este código
+\begin{verbatim}
+\begin{maximacmd}
+plot3d(atan(-x^2+y^3/4),[x,-4,4],[y,-4,4],
+  [plot_format, gnuplot],
+  [gnuplot_preamble, 
+  "set terminal latex; 
+   set output 'mgrafico2.pic'; set nokey;"]);
+\end{maximacmd}
+
+\begin{center}
+  \color{red}
+  \IfFileExists{mgrafico3.pic}{\input{mgrafico3.pic}}{}
+\end{center}
+\end{verbatim}
+\caption{Gráfico en formato picture de nombre mgrafico3.pic}\label{tres}
+\end{figure}
+
+
+\section{Válidos para latex+dvips}
+El \texttt{set terminal pstricks} genera un entorno \texttt{pspicture} que requiere compilar con latex+dvips o bien con ps4pdf. La compatibilidad por tanto es menor que la generada por \texttt{set terminal latex}. El fichero gráfico generado puede ser editado a posteriori como ocurre con los del entorno \texttt{picture} 
+
+  
+  
+  
+\begin{maximacmd}
+plot2d([cos(x), 1-x^2/2, 1-x^2/2+x^4/24 ],[x,-2,2],
+   [plot_format, gnuplot], 
+   [gnuplot_curve_titles, ["title '$\\cos $'","title '$T_2 $'","title '$ T_4$'"]],
+   [gnuplot_curve_styles, ["with lines 3", "with lines 4", "with lines 2"]], 
+   [gnuplot_preamble, "set terminal pstricks; set output 'mgrafico4.pst';"]);
+ \end{maximacmd}
+
+\begin{figure}[p]
+\begin{center}
+\IfFileExists{mgrafico4.pst}{\input{mgrafico4.pst}}{}
+\footnotesize
+Usando este código
+\begin{verbatim}
+\begin{maximacmd}
+plot2d([cos(x), 1-x^2/2, 1-x^2/2+x^4/24 ],[x,-2,2],
+ [plot_format, gnuplot], 
+ [gnuplot_curve_titles, ["title '$\\cos $'","title '$T_2$'","title '$ T_4$'"]],
+ [gnuplot_curve_styles, ["with lines 3", "with lines 4", "with lines 2"]], 
+ [gnuplot_preamble, "set terminal pstricks; set output 'mgrafico4.pst';"]);
+\end{maximacmd}
+
+\begin{center}
+  \IfFileExists{mgrafico4.pst}{\input{mgrafico4.pst}}{}
+\end{center}
+\end{verbatim}
+\caption{Gráfico en formato pstricks de nombre mgrafico4.pst}\label{cuatro}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[p]
+\begin{center}
+\IfFileExists{mgrafico4.pst}{\input{mgrafico4b.pst}}{}
+\footnotesize
+Usando este código
+\begin{verbatim}
+\begin{center}
+  \IfFileExists{mgrafico4b.pst}{\input{mgrafico4b.pst}}{}
+\end{center}
+\end{verbatim}
+\caption{Gráfico en formato pstricks de nombre mgrafico4b.pst modificado a partir del anterior}\label{cinco}
+\end{center}
+\end{figure}
+
+
+
+
+% \footnotesize
+% Usando este código que es diferente del utilizado anteriormente
+% \begin{verbatim}
+% plot3d(-x^2+y^2,[x,-2,2],[y,-2,2],
+%   [plot_format, gnuplot],
+%   [run_viewer,true],
+%   [gnuplot_preamble,
+%     "set terminal postscript eps solid color; set output 'mgrafico2b.eps' "],
+%   [gnuplot_pm3d, true]);
+% \begin{center}
+%   \IfFileExists{mgrafico2b.ps}{\includegraphics[scale=0.60]{mgrafico2b.eps}}{}
+% \end{center}
+% \end{verbatim}
+% \caption{Gráfico generado por Maxima de nombre mgrafico2b.ps}\label{tres}
+% \end{figure}
+% 
+
+
+% Existe también un formato de salida \texttt{latex} que genera un entorno \texttt{picture} estándar susceptible de ser empleado tanto en salidas ps como pdf (figura~\ref{seis}).
+
+
+% \begin{figure}[p]
+% \begin{center}
+% \IfFileExists{mgrafico5.psp}{\scalebox{0.5}{\input{mgrafico5.psp}}}{}
+% \end{center}
+% \footnotesize
+% Usando este código
+% \begin{verbatim}
+% plot2d(sin(x),[x,-2*%pi,2*%pi],
+%    [plot_format, gnuplot],
+%    [run_viewer,true],
+%    [gnuplot_preamble, 
+%     "set terminal pslatex solid color; 
+%      set output 'mgrafico5.psp' "]);
+% \begin{center}
+% \IfFileExists{mgrafico5.psp}{\scalebox{0.5}{\input{mgrafico5.psp}}}{}
+% \end{center}
+% \end{verbatim}
+% \caption{Gráfico ps+picture de nombre mgrafico5.psp}\label{seis}
+% \end{figure}
+
+ 
+
+
+
+% # set terminal png transparent nocrop enhanced font arial 8 size 420,320 
+% # set output 'surface2.9.png'
+% set dummy u,v
+% set key right below Right noreverse noinvert enhanced box linetype -2 linewidth 1.000 samplen 4 spacing 1 width 0 height 0 autotitles
+% set parametric
+% set view 50, 30, 1, 1
+% set isosamples 50, 20
+% set hidden3d offset 1 trianglepattern 3 undefined 1 altdiagonal bentover
+% set ticslevel 0
+% set title "Interlocking Tori" 0.000000,0.000000  font ""
+% set urange [ -3.14159 : 3.14159 ] noreverse nowriteback
+% set vrange [ -3.14159 : 3.14159 ] noreverse nowriteback
+% set zrange [ * : * ] noreverse nowriteback 
+% splot cos(u)+.5*cos(u)*cos(v),sin(u)+.5*sin(u)*cos(v),.5*sin(v) with lines,       1+cos(u)+.5*cos(u)*cos(v),.5*sin(v),sin(u)+.5*sin(u)*cos(v) with lines
+% 
+% 
+
+
+ 
+\end{document}

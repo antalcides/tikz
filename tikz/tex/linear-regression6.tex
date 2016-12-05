@@ -1,0 +1,19 @@
+\documentclass[border=3mm]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{width=8cm,compat=newest}
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            xtick = \empty,    ytick = \empty,
+            xlabel = {$t$},
+            x label style = {at={(1,0)},anchor=west},
+            ylabel = {$q$},
+            y label style = {at={(0,1)},rotate=-90,anchor=south},
+            axis lines=left,
+            enlargelimits=0.2,
+        ]
+        \addplot[color=red,smooth,thick,-] {(x)^2};
+        \addplot[mark=none, blue] coordinates {(-6,20) (0,-4)};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

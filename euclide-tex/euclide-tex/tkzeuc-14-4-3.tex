@@ -1,0 +1,25 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=.5]
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(8,0){B}
+ \tkzDefSquare(A,B)\tkzGetPoints{C}{D}
+ \tkzDrawPolygon(A,B,C,D)
+ \tkzClipPolygon(A,B,C,D)
+ \begin{scope}
+  \tkzClipCircle(D,C)
+  \tkzFillCircle[color=gray!50,%
+                opacity=.5](B,A)
+ \end{scope}
+ \tkzDrawCircle(B,C)
+ \tkzDrawCircle(D,C)
+\end{tikzpicture}
+
+\end{document} 

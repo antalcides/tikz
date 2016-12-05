@@ -1,0 +1,21 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit\tkzGrid[sub]
+  \tkzPoint[pos=left](1,5){A}
+  \tkzPoint(5,2){B}
+  \tkzDrawSegment(A,B)
+  \tkzDefPointBy[rotation in rad= center A angle pi/3](B)
+  \tkzGetPoint{C}
+  \tkzCompass[color=red](A,C)
+  \tkzCompass[color=red](B,C)
+\end{tikzpicture}
+
+\end{document} 

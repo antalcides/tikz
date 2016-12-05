@@ -1,0 +1,29 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+ \tkzInit
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(5,0){B}
+ \tkzDefPointBy[rotation= center A angle 60](B) \tkzGetPoint{C}
+ \tkzSetUpLine[color=gray]
+ \tkzDefPointBy[symmetry= center C](A)
+    \tkzGetPoint{D}
+ \tkzDrawSegments(A,B A,D)
+ \tkzDrawLine(B,D)
+ \tkzSetUpCompass[color=orange]
+ \tkzDrawArc[delta=10](A,B)(C)
+ \tkzDrawArc[delta=10](B,C)(A)
+ \tkzDrawArc[delta=10](C,D)(D)
+ \tkzDrawPoints(A,B,C,D)
+ \tkzLabelPoints(A,B,C,D)
+ \tkzMarkRightAngle(D,B,A)
+\end{tikzpicture}
+
+\end{document} 

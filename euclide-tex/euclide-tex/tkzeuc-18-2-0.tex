@@ -1,0 +1,20 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit[xmin=-4,xmax=9,ymin=-3,ymax=9]
+  \tkzClip
+  \tkzDefPoint(2,3){A}
+  \tkzDefPoint[shift={(2,3)}](31:8){B}
+  \tkzDefPoint[shift={(2,3)}](158:8){C}
+  \tkzDrawSegments[color=red,line width=1pt](A,B A,C)
+  \tkzProtractor[scale=1.25,with=full,return](A,C)
+\end{tikzpicture}
+
+\end{document} 

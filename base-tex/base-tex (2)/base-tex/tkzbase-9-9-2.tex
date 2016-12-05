@@ -1,0 +1,23 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit[ymin=-0.5,ymax=3,xmin=-0.5,xmax=7]
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(02.25,04.25){B}
+  \tkzDefPoint(4,0){C}
+  \tkzDefPoint(3,2){D}
+  \tkzDrawSegments(A,B A,C A,D)
+{\tkzSetUpPoint[fill= blue,size=10,color=red]
+  \tkzDrawPoints(A,B)}
+    \tkzDrawPoints(C,D)
+  \tkzLabelPoints(A,B,C,D)
+\end{tikzpicture}
+
+\end{document} 

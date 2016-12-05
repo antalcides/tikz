@@ -1,0 +1,12 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+\draw[->,color=black] (-0.1,0.) -- (6.5,0.);
+\foreach \x in {1.,2.,3.,4.,5.,6.}
+\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\draw[->,color=black] (0.,-4.453902809917354) -- (0.,7.205657190082648);
+\foreach \y in {-4.,-2.,2.,4.,6.}
+\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw[color=black] (0pt,-10pt) node[right] {\footnotesize $0$};
+\draw[line width=1.2pt,color=red,smooth,samples=100,domain=0:6] plot(\x,{0.5*(\x)*cos(((\x))*180/pi)*sin(((\x))*180/pi)});
+\draw[line width=1.2pt,color=blue,smooth,samples=100,domain=0:6] plot(\x,{1.0/2.0*((\x)*cos(((\x))*180/pi)^(2.0)-(\x)*sin(((\x))*180/pi)^(2.0)+cos(((\x))*180/pi)*sin(((\x))*180/pi))});
+\draw[line width=1.2pt,color=orange!30!black,smooth,samples=100,domain=-0:6] plot(\x,{cos(((\x))*180/pi)^(2.0)-sin(((\x))*180/pi)^(2.0)-2.0*(\x)*cos(((\x))*180/pi)*sin(((\x))*180/pi)});
+\end{tikzpicture}

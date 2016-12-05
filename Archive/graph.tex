@@ -1,0 +1,28 @@
+\documentclass[]{article} 
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{amsmath,fullpage}
+\usetikzlibrary{trees,%
+                shapes,%
+                arrows,%
+                petri,%
+                topaths}%
+\usepackage{tkz-graphe}
+\begin{document}
+	
+\thispagestyle{empty}
+
+  \begin{center}
+  \begin{tikzpicture}
+   \graphpb[in,distance=6cm,size=10mm]{A}{B}{\scriptsize\dfrac{2}{3}}%
+                   {\scriptsize\dfrac{3}{4}}%
+                   {\scriptsize\dfrac{1}{3}}%
+                   {\scriptsize\dfrac{1}{4}}
+  \end{tikzpicture}
+  \end{center}
+  
+  \begin{tikzpicture}
+  \graphpb[]{Paris}{Lyon}{0,8}{0,6}{0,2}{0,4}
+  \end{tikzpicture}
+
+\end{document}

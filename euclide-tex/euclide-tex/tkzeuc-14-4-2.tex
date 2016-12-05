@@ -1,0 +1,28 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+  \begin{tikzpicture}
+  \tkzInit[xmax=6,ymax=6]
+  \tkzGrid \tkzClip
+   \tkzDefPoint(0,0){A}
+   \tkzDefPoint(2,2){O}
+   \tkzDefPoint(4,4){B}
+   \tkzDefPoint(6,6){C}
+   \tkzDrawPoints(O,A,B,C)
+   \tkzLabelPoints(O,A,B,C)
+   \tkzDrawCircle(O,A)
+   \begin{scope}
+    \tkzClipCircle(O,A)
+    \tkzDrawLine(A,C)
+   \end{scope}
+   \tkzClipCircle[R](B,1cm)
+  \tkzDrawCircle[fill=red!20,opacity=.5](C,B)
+\end{tikzpicture}
+
+\end{document} 

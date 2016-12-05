@@ -1,0 +1,67 @@
+\tikzset{fontscale/.style = {font=\relsize{#1}}
+    }
+\begin{tikzpicture}[scale=1,
+fontscale=0.5,
+         dot/.style = {
+     fill = blue,
+      circle,
+      inner sep =2pt,
+      minimum size = 4pt
+    }
+  ]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \draw [very thin, style=gray!50, step=0.5] (-0.5,-1.5) grid (3.5,1.5);
+ %\draw [thin, gray!60] (0,0) grid (9,9);
+\coordinate (O) at (0,0);
+\coordinate (O1) at (0,-1.5);
+\coordinate (Y) at (0,6.5);
+\coordinate (X) at (5.5,0);
+\coordinate (X1) at (-1,0);
+\coordinate (Y1) at (0,-0.6);
+ \coordinate (A) at(5,1.3);
+ \coordinate (B) at  (5,3.227) ;
+\coordinate (C) at(2.5,0);
+\coordinate (D) at (2.5,2.65);
+\coordinate (H) at(0,2.65);
+\coordinate (E) at (1.5,0);
+\coordinate (F) at (1.5,0.97);
+\coordinate (G) at (0,0.97);
+%%%%%%%%%%%%%%ejes
+\draw[color=red,ultra thick,latex-latex]           (X)node[label={above left:$x$}
+                               ] {} -- (X1) node[
+                               label = {above:$$}] {};
+\draw[color=red,ultra thick,latex-latex]           (Y)node[,label={below right:$y$}
+                               ] {} -- (Y1) node[
+                               label = {above:$$}] {};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[color=red,ultra thick]           (O)node[
+                               label = {below :$$}]{}-- (A) node[
+                                label = {below:$$}] {};
+\draw[color=red,ultra thick]           (O)node[
+                               label = {below :$$}]{}-- (B) node[
+                                label = {below:$$}] {};
+\draw[color=red,ultra thick,dashed]           (E)node[
+                               label = {below :\small$g(x_0)$}]{}-- (F)node[
+                                label = {below:$$}] {}--(G)node[
+                                label = {left:\small$f(x_0)$}] {};
+\draw[color=red,ultra thick,dashed]           (C)node[
+                               label = {below :\small$g(x)$}]{}-- (D) node[
+                                label = {below:$$}] {}-- (H) node[
+                                label = {left:\small$f(x)$}] {};
+
+   \draw[color=blue] (3.55,.85)node[below] {\small$y=Lx$};
+% %%%%%%
+  \draw[color=blue] (6.3,2.25)node[above left=-1pt] {\small$y=\dfrac{f(x_0)}{g(x_0)}x$};
+  \draw[color=blue] (3.85,4.94)node[below  right=-2.5pt] {\small$\Gamma$};
+ \draw[color=blue](3.85,3.54)node[above right=-1.5pt] {\small$y=f(x_0)+\dfrac{f(x_0)}{g(x_0)}(x-g(x_0))$};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw [blue, thick, x=1cm, y=1cm,
+declare function={f(\x) =1.1*(\x)-0.7*sin((1.2*(\x))*180/pi);}]
+plot [ultra thick,domain=0:5, samples=144, smooth] (\x,{f(\x)});
+\draw [blue, thick, x=1cm, y=1cm,
+declare function={g(\x) =-0.968+1.295*\x;}]
+plot [ultra thick,domain=0:5, samples=144, smooth] (\x,{g(\x)});
+\end{tikzpicture}
+
+% \uput[r]$$}
+% \uput[r]{\scalefont{.7}$$}

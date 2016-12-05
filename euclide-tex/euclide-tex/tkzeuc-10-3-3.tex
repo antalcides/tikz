@@ -1,0 +1,27 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[rotate=30]
+ \tkzDefPoint(1,1){A}
+ \tkzDefPoint(5,1){B}
+ \tkzInterCC(A,B)(B,A)\tkzGetPoints{C}{D}
+ \tkzDrawPoint[color=black](C)
+ \tkzDrawCircle[dashed](A,B)
+ \tkzDrawCircle[dashed](B,A)
+ \tkzCompass[color=red](A,C)
+ \tkzCompass[color=red](B,C)
+ \tkzDrawPolygon(A,B,C)
+ \tkzLabelSegment[above left](A,C){$4$ cm}
+ \tkzLabelSegment[above right](B,C){$4$ cm}
+ \tkzLabelSegment[below](A,B){$4$ cm}
+ \tkzLabelPoints[](A,B)
+ \tkzLabelPoint[above](C){$C$}
+\end{tikzpicture}
+
+\end{document} 

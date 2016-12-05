@@ -1,0 +1,69 @@
+\documentclass[
+  11pt,
+  ]{book}
+\usepackage[top=2cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry}
+\usepackage[english]{babel}
+\usepackage[babel=true]{csquotes}
+\usepackage[T1]{fontenc}
+\usepackage[explicit]{titlesec}
+\usepackage{xcolor}
+\usepackage{charter}
+\usepackage{graphicx}
+
+\definecolor{mybluei}{RGB}{28,138,207}
+\definecolor{myblueii}{RGB}{131,197,231}
+
+\newcommand\ChapterFont{\usefont{T1}{qhv}{b}{n}\selectfont\huge}
+\newcommand\SectionFont{\usefont{T1}{qhv}{b}{n}\selectfont}
+
+\titleformat{\chapter}[display]
+  {\normalfont\ChapterFont\huge\color{myblueii}}
+  {}
+  {0pt}
+  {\raisebox{-3pt}{\parbox[b]{65pt}{\makebox[65pt]{\includegraphics[width=165pt]{blueshade}}}}%
+    \parbox[b]{70pt}{\colorbox{mybluei}{%
+        \parbox[b][60pt][t]{44pt}{\centering%
+          \color{white}%
+          {\itshape\rmfamily\small\chaptertitlename}%
+          \vfill{\fontsize{50}{120}\selectfont\thechapter}%
+        }%
+      }%
+    }\hspace{15pt}%
+    \parbox[b]{\dimexpr\textwidth-150pt}{%
+      \raggedright\scshape#1\vskip6pt%
+    }%
+  }
+
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\ChapterFont\huge\color{myblueii}}
+  {}
+  {0pt}
+  {\parbox[b]{70pt}{\mbox{}}%
+    \hspace{15pt}%
+    \parbox[b]{\dimexpr\textwidth-150pt}{%
+      \raggedright\scshape#1\vskip6pt%
+    }%
+  }
+
+\titleformat{\section}
+  {\normalfont\small\sffamily\SectionFont\color{myblueii}}
+  {\colorbox{mybluei}{%
+    \parbox[c][16pt][c]{40pt}{%
+      \centering\textcolor{white}{\SectionFont\Large\rmfamily\thesection}%
+      }%
+    }%
+  }
+  {1em}
+  {#1}
+  [\vspace{-1.2\baselineskip}%
+    \color{myblueii}\hspace*{\dimexpr40pt+2\fboxsep\relax}%
+    \rule{\dimexpr\textwidth-40pt-2\fboxsep\relax}{1pt}%
+  ]
+
+\begin{document}
+
+\chapter{Preliminaries}
+\section{Problem}
+\section{Solution}
+
+\end{document}

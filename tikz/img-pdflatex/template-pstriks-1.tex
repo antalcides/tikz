@@ -1,0 +1,40 @@
+
+
+% flowdiagram.tex
+\documentclass{article}
+\usepackage{pstricks}
+\usepackage{pst-sigsys}
+
+\usepackage[tightpage,active]{preview}
+\PreviewEnvironment{pspicture}
+\PreviewBorder=0pt
+
+\begin{document}
+\begin{pspicture}[showgrid=false](-8,-2.5)(8,.5)
+      \psset{style=RoundCorners,style=Arrow,gratioWh=1.35}
+      \pssignal(-7.5,-1){f}{$f(n)$}
+      \pssignal(7.5,-1){ff}{$\hat{f}(n)$}
+      \dotnode(-6,-1){dot1}
+      \pscircleop(6, -1){oplus}
+      \newcount\cnt
+
+    %--- First and second channels ---
+    \cnt=-1
+    \psforeach{\ry}{0,-2}{\advance\cnt by 1\relax
+    \psfblock(-4.5,\ry){h\the\cnt}{$h_{\the\cnt}(n)$}
+    \psdsampler(-2,\ry){ds\the\cnt}{2}
+    \ldotsnode(0,\ry){dots\the\cnt}
+    \psusampler(2,\ry){us\the\cnt}{2}
+    \psfblock(4.5,\ry){g\the\cnt}{$g_{\the\cnt}(n)$}}
+
+    %--- Connecting blocks ---
+      \nclist{ncline}{f, dot1}
+      \nclist{ncline}{oplus, ff}
+      \nclist{ncline}{h0, ds0, dots0, us0, g0}
+      \nclist{ncline}{h1, ds1, dots1, us1, g1}
+      \ncangle[angleA=90, angleB=180]{dot1}{h0}
+      \ncangle[angleA=-90, angleB=180]{dot1}{h1}
+      \ncangle[angleB=90]{g0}{oplus}
+      \ncangle[angleB=-90]{g1}{oplus}
+\end{pspicture}
+\end{document}

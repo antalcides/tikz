@@ -1,0 +1,26 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+ \tkzInit
+ \tkzDefPoint(0,0){A}        \tkzDefPoint(3,2){B}
+ \tkzDefLine[mediator](A,B)  \tkzGetPoints{I}{J}
+ \tkzCalcLength[cm](A,B)     \tkzGetLength{dAB}
+ \tkzFindSlopeAngle(A,B)     \tkzGetAngle{tkzangle}
+ \begin{scope}[rotate=\tkzangle]
+   \tikzset{arc/.style={color=gray,delta=10}}
+   \tkzDrawArc[R,arc](B,3/4*\dAB)(120,240)
+   \tkzDrawArc[R,arc](A,3/4*\dAB)(-45,60)
+   \tkzDrawLine(I,J)         \tkzDrawSegment(A,B)
+  \end{scope}
+  \tkzDrawPoints(A,B,I,J)    \tkzLabelPoints(A,B)
+   \tkzLabelPoints[right](I,J)
+\end{tikzpicture}
+
+\end{document} 

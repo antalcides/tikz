@@ -1,0 +1,20 @@
+Template MintedSource
+    GuiName "Minted Source Code"
+    HelpText
+        Run \inputminted{}
+    HelpTextEnd
+    InputFormat text
+    FileFilter "*"
+    AutomaticProduction true
+    Preview InstantPreview
+    Format PDFLaTeX
+        Product "\\inputminted[linenos,fontsize=\\footnotesize,baselinestretch=1]{python}{$$AbsPath$$Basename$$Extension}"
+
+        Requirement "underscore"
+        Requirement "minted"
+
+        UpdateFormat text
+        UpdateResult "$$AbsPath$$Basename$$Extension"
+        ReferencedFile text "$$AbsPath$$Basename$$Extension"
+    FormatEnd
+TemplateEnd

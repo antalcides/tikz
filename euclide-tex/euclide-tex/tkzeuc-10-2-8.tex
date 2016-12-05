@@ -1,0 +1,33 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.5]
+ \tkzInit[xmax=8,ymax=5]\tkzClip[space=.25]
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(8,0){B}
+ \tkzDefPoint(4,0){I}
+ \tkzDefSquare(A,B)
+   \tkzGetPoints{C}{D}
+ \tkzInterLC(I,C)(I,B)
+   \tkzGetPoints{E'}{E}
+ \tkzInterLC(I,D)(I,B)
+   \tkzGetPoints{F'}{F}
+ \tkzDefPointsBy[projection = onto A--B](E,F){H,G}
+ \tkzDefPointsBy[symmetry   = center H](I){J}
+ \tkzDefSquare(H,J)
+   \tkzGetPoints{K}{L}
+ \tkzDrawSector[fill=Maroon!30](I,B)(A)
+ \tkzFillPolygon[color=red!40](H,E,F,G)
+ \tkzFillPolygon[color=blue!40](H,J,K,L)
+ \tkzDrawPolySeg[color=red](H,E,F,G)
+ \tkzDrawPolySeg[color=red](J,K,L)
+ \tkzDrawPoints(E,G,H,F,J,K,L)
+\end{tikzpicture}
+
+\end{document} 

@@ -1,0 +1,26 @@
+% draw an angle arc on tikz plots
+%
+% #1: A point of ∠ABC
+% #2: B point of ∠ABC
+% #3: C point of ∠ABC
+% #4: arc radius (length units)
+% #5: arc style (e.g. fill=red!50!white or draw)
+% #6: label
+%
+% Issues:
+%   * avoid polluting coordinates' namespace (name clashes)
+%   * make it more tikz-ish
+\newcommand{\anglearc}[6]{%
+%
+    \begin{scope}
+      \coordinate (AngleArcA) at (#1);
+      \coordinate (AngleArcB) at (#2);
+      \coordinate (AngleArcC) at (#3);
+      \path [clip] (AngleArcA) -- (AngleArcB) -- (AngleArcC) -- cycle;
+      \node (AngleArcCircle) [#5,circle,minimum size=#4] at (#2) {};
+    \end{scope}
+    \coordinate (AngleArcA1) at (intersection of AngleArcB--AngleArcA and AngleArcCircle);
+    \coordinate (AngleArcC1) at (intersection of AngleArcB--AngleArcC and AngleArcCircle);
+    \draw ($ (AngleArcA1)!0.5!(AngleArcC1) !-1.1! (AngleArcB) $) node {#6};
+%
+}

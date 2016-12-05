@@ -1,0 +1,20 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[yscale=1.5]
+ \tkzInit[xmax=6.5,ymin=-1,ymax=1.25]
+ \tkzDrawY[gradsize=\scriptstyle]
+ \tkzDrawX[trig=2]
+ \draw[color=blue,samples at={0,0.04,...,6.28}]%
+      plot (\x,{sin(\x r)}) node[above]{$f(x) = \sin x$};
+ \draw[color=red,samples at={0,0.04,...,6.28}]%
+      plot (\x,{cos(\x r)}) node[above]{$g(x) = \cos x$};
+\end{tikzpicture}
+
+\end{document} 

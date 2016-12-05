@@ -1,0 +1,39 @@
+\foreach \angle in {-90,10,...,90}
+{
+  \begin{tikzpicture}[scale=2.0]
+    % fill circle and plot
+    %\fill[blue!50,line width=1.5pt] (-1,0) arc (0:\angle:1) -- (-2,0) -- cycle;
+    %\fill[blue!50] plot[smooth,domain=0:\angle] (pi/180*\x,{sin(\x)}) |- (0,0);
+    % draw connection
+  % \draw (-2,0) +(\angle:1) circle (2pt) -- (pi/180*\angle,{sin(\angle)}) circle (2pt);
+    % draw axes an ticks
+    \draw (-4.0,0) -- (7,0);
+    \foreach \deg in {-90, 0, 90}
+     \draw (pi/180*\deg,2pt) -- (pi/180*\deg,-2pt) node[below] {$\deg^\circ$};
+    \draw (0,-1.2) -- (0,1.2);
+    \foreach \y in {-1,-0.5,0.5,1}
+      \draw (2pt,\y) -- (-2pt,\y) node[left] {$\y$};
+    % draw plot and circle outline
+    \draw plot[smooth,domain=-90:90] (pi/180*\x,{sin(\x)});
+    \draw (-3,0) circle (1);
+   \draw (-3,-1)--(-3,1);
+% \draw (-2.7,0) arc [start angle=0, end angle=30, radius=3mm];
+% \draw[red,very thick] (30:1) -- +(0,-0.5);
+% \draw[blue,very thick] (30:1) ++(0,-0.5) -- (0,0);
+% \draw [name intersections={of=upward line and sloped line, by=x}]
+% [very thick,orange] (1,0) -- (x);
+\draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+    \draw[->] (-1.5,0) -- (1.5,0);
+    \draw[->] (0,-1.5) -- (0,1.5);
+    \draw (0,0) circle [radius=1cm];
+    \filldraw[fill=green!20,draw=green!50!black] (0,0) -- (3mm,0mm)
+    arc [start angle=0, end angle=30, radius=3mm] -- cycle;
+    \draw[red,very thick] (30:1cm) -- +(0,-0.5);
+    \draw[blue,very thick] (30:1cm) ++(0,-0.5) -- (0,0);
+    \path [name path=upward line] (1,0) -- (1,1);
+    \path [name path=sloped line] (0,0) -- (30:1.5cm);
+    \draw [name intersections={of=upward line and sloped line, by=x}]   % <-- Here
+    [very thick,orange] (1,0) -- (x);
+  \end{tikzpicture}
+}
+%convert -density 300 -delay 8 -loop 0 -background white -alpha remove test.pdf test.gif

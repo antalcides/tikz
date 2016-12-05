@@ -1,0 +1,60 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc} 
+\usepackage[upright]{fourier}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{tkz-euclide}
+\usepackage[frenchb]{babel}
+
+\definecolor{fondpaille}{cmyk}{0,0,0.1,0}
+\pagecolor{fondpaille}   
+\color{Maroon} 
+
+\begin{document}
+\parindent=0pt
+
+Étant donné l’angle $\widehat{ABC}$, construire un angle qui lui soit égal ; c’est- à-dire, même ouverture, lors même que les côtés ne seraient plus égaux.
+
+
+\bigskip
+
+\begin{tikzpicture}
+
+\begin{scope}[rotate=28]
+  \tkzDefPoint(4,0){A}
+  \tkzDefPoint(0,0){B}
+  \tkzDefPoint(1.5,4){C}
+  \tkzDrawLine(B,A)
+  \tkzDrawLine(B,C)
+  \tkzFillAngle[fill=blue!30,size=1cm](A,B,C)
+  \tkzDefPointWith[linear normed,K=2](B,A) \tkzGetPoint{I}
+  \tkzDefPointWith[linear normed,K=2](B,C) \tkzGetPoint{J}
+  \tkzSetUpCompass[color=gray,style=dashed]
+  \tkzDrawArc[color=gray,style=dashed,delta=10](B,I)(J)
+  \tkzDrawPoints(I,J)
+  \tkzCompass(I,J)
+  \tkzDrawPoints(A,B,C,I,J) 
+   \tkzLabelPoints(A,B,C,I,J)
+\end{scope}
+
+\begin{scope}
+  \tkzDefPoint(5,0){B'}
+  \tkzDefPoint(9,0){A'}
+  \tkzDrawLine(B',A')
+  \tkzDuplicateLen(B,I)(B',A')  \tkzGetPoint{I'} 
+  % setup style for arc ?? compass ??
+  \tikzset{arc/.style={color=gray,style=dashed,delta=10}}
+  \tkzDrawArc[angles](B',I')(0,80)
+  \tkzCalcLength[cm](I,J)  \tkzGetLength{dIJ}
+  \tkzCalcLength[cm](B,I)  \tkzGetLength{dBI} 
+  \tkzDrawArc[arc,R](I',\dIJ)(100,120)
+  \tkzInterCC[R](B',\dBI cm)(I',\dIJ cm)\tkzGetPoints{J'}{K}  
+  \tkzDrawLine[add = 0 and 1](B',J')
+  \tkzFillAngle[fill=blue!30,size=1cm](A',B',J')
+  \tkzDrawPoints(A',B',I',J')
+  \tkzLabelPoints(A',B',I',J')
+\end{scope}
+\end{tikzpicture}
+
+
+
+\end{document}

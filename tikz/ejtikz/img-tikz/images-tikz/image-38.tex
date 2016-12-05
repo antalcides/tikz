@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+\draw [help lines] (0,0) grid (3,2);
+\draw [blue, thick, x=0.0085cm, y=1cm,
+declare function={
+sines(\t,\a,\b)=1 + 0.5*(sin(\t)+sin(\t*\a)+sin(\t*\b));
+}]
+plot [domain=0:360, samples=144, smooth] (\x,{sines(\x,3,5)});
+\end{tikzpicture}

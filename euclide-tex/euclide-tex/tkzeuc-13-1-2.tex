@@ -1,0 +1,19 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.2]
+   \tkzInit[ymin=1,xmax=5,ymax=5] \tkzGrid
+   \tkzDefPoint(2,3){A}   \tkzDefPoint(4,2){B}
+   \tkzDefPointWith[orthogonal normed](A,B)
+   \tkzGetPoint{C}
+   \tkzDrawPoints[color=red](A,B,C)
+   \tkzLabelPoints[above right=3pt](A,B,C)
+\end{tikzpicture}
+
+\end{document} 

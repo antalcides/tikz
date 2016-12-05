@@ -1,0 +1,27 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit
+  \tkzClip
+  \tkzPoint[pos=left](2,1){A}
+  \tkzPoint(6,4){B}
+  \tkzDrawSegment(A,B)
+  \tkzDrawPoint[color=red](A)
+  \tkzDrawPoint[color=red](B)
+  \tkzDefPointWith[orthogonal,K=-1](B,A)
+  \tkzDrawLine[add = .5 and .5](B,tkzPointResult)
+  \tkzInterLC[R](B,tkzPointResult)(A,8 cm) \tkzGetPoints{C}{J}
+  \tkzDrawPoint[color=red](C)
+  \tkzCompass(A,C)
+  \tkzMarkRightAngle(A,B,C)
+  \tkzDrawLine[color=gray,style=dashed](A,C)
+\end{tikzpicture}
+
+\end{document} 

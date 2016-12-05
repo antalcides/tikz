@@ -1,0 +1,9 @@
+\begin{tikzpicture}[font = \sansmath,scale=2]
+  \coordinate (O) at (0,0);
+% \draw[densely dashed] (O)--(-1.33,1.33);
+  \draw[densely dashed] (O) -- (1.33,1.43);
+ \draw[densely dashed] (O) -- (0,1.43);
+\draw[red,line width=1pt] (0,1.43) --(1.33,1.43)node at (1.4,1.43) {$A$};
+\draw[line width=1pt,blue,-latex](O)-- (0,0.725)node at (0,-0.1) {$B$};
+\draw[red,line width=1pt,latex-] (0.7,1.43) -- (1.33,1.43)node at (-0.1,1.43) {$O$};
+\end{tikzpicture}

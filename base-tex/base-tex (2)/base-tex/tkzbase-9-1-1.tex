@@ -1,0 +1,21 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+ \tkzDefPoint[label=-60:$A_n$](2,3){A}
+ \tkzDefPoint[shift={(2,3)},%
+     label=above left:$B_n$](31:3){B}
+ \tkzDefPoint[shift={(2,3)},%
+     label=above right:$C_n$](158:3){C}
+ \tkzDrawSegments[color=red,%
+          line width=1pt](A,B A,C)
+ \tkzDrawPoints[color=red](A,B,C)
+\end{tikzpicture}
+
+\end{document} 

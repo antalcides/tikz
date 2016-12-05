@@ -1,0 +1,15 @@
+% Preamble:  \pgfplotsset{width }=7cm,compat=1.13
+\begin{tikzpicture}
+\begin{axis}[
+minor tick num=1,
+axis x line=middle,
+axis y line=middle,
+every inner x axis line/.append style=
+{|->>},
+every inner y axis line/.append style=
+{|->>},
+xlabel=$x$,ylabel=$y^3$
+]
+\addplot[blue,domain=-3:5] {x^3};
+\end{axis}
+\end{tikzpicture}

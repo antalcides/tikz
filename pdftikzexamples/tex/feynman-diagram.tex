@@ -1,0 +1,113 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{trees,snakes}
+\usepackage{verbatim}
+
+\begin{comment}
+:Title: Feynman diagram
+:Tags: Snakes, Trees, Physics & chemistry
+
+I saw this `Feynman diagram`_ in `Edward Tufte's`_ book `Beautiful evidence` (you can also
+find it in this thread_). It was
+relatively easy to recreate using trees and snakes. The only complication was
+that PGF/TikZ does not have a syntax for placing arrowheads in the middle of a path.
+However, I found a `workaround`_ in the archives of the PGF-users mailing list.
+
+.. _Feynman diagram: http://scienceworld.wolfram.com/physics/FeynmanDiagram.html
+.. _Edward Tufte's: http://www.edwardtufte.com/tufte/index
+.. _thread: http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001TV&topic_id=1
+.. _workaround: http://sourceforge.net/mailarchive/message.php?msg_id=15276319
+
+
+\end{comment}
+
+
+\begin{document}
+\pagestyle{empty}
+
+
+% Command for placing an arrowhead on a path
+% Input:
+%    #1 positions (value from 0 to 1)
+% Note. This command was found on the PGF-users mailing list
+\newcommand\arrowonline[1]{%
+    node
+    [pos=#1,sloped,anchor=center,draw=none,fill=none,shape=rectangle,inner
+    sep=0pt,outer sep=0pt] {\tikz\draw[->,blue, dash pattern=on 0pt off 2pt]
+    (-1pt,0pt) -- (0pt,0pt);}
+}
+
+
+% Define shortcuts for the different kind of edges in a Feynman diagram
+\def\electronedge{edge from parent [electron] \arrowonline{0.55}}
+\tikzstyle{photon} = [snake=snake, draw=red]
+\tikzstyle{gluon} = [segment amplitude=4pt, segment length=5pt,
+                     snake=coil, draw=magenta]
+\tikzstyle{electron} = [draw=blue]
+
+% Set the overall layout of the tree
+\tikzstyle{level 1}=[level distance=1.5cm]
+\tikzstyle{level 2}=[level distance=1.5cm, sibling distance=2.6cm]
+\tikzstyle{level 3}=[level distance=1.5cm,sibling distance=2cm]
+
+\begin{tikzpicture}[thick]
+\coordinate
+    child[grow=left]{
+        child {
+            node {$g$}
+            edge from parent [gluon]
+        }
+        child {
+            node {$g$}
+            edge from parent [gluon]
+        }
+        edge from parent [gluon] node [above=3pt] {$g$}
+    }
+    % I have to insert a dummy child to get the tree to grow
+    % correctly to the right.
+    child[grow=right, level distance=0pt] {
+    child  {
+        child {
+            child {
+                node {$\bar{d}$}
+                \electronedge
+            }
+            child {
+                node {$u$}
+                \electronedge
+            }
+            edge from parent [photon]
+        }
+        child {
+            node {$b$}
+            \electronedge
+        }
+        \electronedge
+        node [below] {$t$}
+    }
+    child {
+        child {
+            node {$\bar{b}$}
+            \electronedge
+        }
+        child {
+            child {
+                node {$\bar{v}$}
+                \electronedge
+            }
+            child {
+                node {$e^{-}$}
+                \electronedge
+            }
+            edge from parent [photon]
+        }
+        \electronedge
+        node [above] {$\bar{t}$}
+    }
+};
+\end{tikzpicture}
+
+
+\end{document}

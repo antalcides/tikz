@@ -1,0 +1,133 @@
+ \pgfplotsset{
+        %axis lines=middle,
+                        samples=100,
+        trig format plots=rad,
+        every axis plot/.append style={
+            line width=1.25pt,
+            smooth,
+        },
+    }
+    % define precision of \pi
+    % this is set here to the value of \pgfmathpi
+    \pgfmathsetmacro{\PI}{3.141592654}   
+\begin{tikzpicture}
+     \begin{axis}[
+       axis x line=bottom,
+    axis y line=none,
+ylabel={$y=\cos (x)$},
+xlabel={$\cos (x)$},
+         legend style={at={(0.63,0.97)},anchor=north west},
+       legend cell align=left,
+       axis on top, 
+            domain=-0.5*pi:0.5*pi,
+            ymin=-1.0,
+            ymax=+1.0,
+            %
+            % scale x axis values by \pi and
+            % remove the corresponding label
+            scaled x ticks={real:\PI},
+            xtick scale label code/.code={},
+            % in case you want to set an explicit tick distance
+            xtick distance=\PI/2,
+            % add code here for formatting the `xlabels'
+            % I configured exceptions for \pm\pi where no number in front
+            % of these are shown and for fractional values these should be
+            % shown as fractions
+            xticklabel={%
+                \ifdim \tick pt = 1 pt
+                    \strut$\pi$%
+                \else\ifdim \tick pt = -1 pt
+                    \strut$-\pi$%
+                \else
+                    % to avoid some mess with TeX precision, first
+                    % round the \tick value to one digit after the comma
+                    \pgfmathparse{round(10*\tick)/10}
+                    % depending on whether the resulting number is an integer
+                    % show it as integer only, otherwise use the style given
+                    % in `xticklabel style'
+                    \pgfmathifisint{\pgfmathresult}{%
+                        \strut$\pgfmathprintnumber[int detect]{\pgfmathresult}\pi$%
+                    }{%
+                        \strut$\pgfmathprintnumber{\pgfmathresult}\pi$%
+                    }
+                \fi\fi
+            },
+            % set number plotting to frac style
+            xticklabel style={
+                /pgf/number format/frac,
+                /pgf/number format/frac whole=false,
+            },
+            % add minor thicks
+            minor tick num=1,
+        ]
+
+       \addplot[domain=0:pi,draw=blue,samples=500]{cos(x)} ;
+      \legend{$\cos x$}     
+          
+     \end{axis}
+     \begin{axis}[%
+  legend style={at={(0.63,0.85)},anchor=north west},
+       legend cell align=left,
+       axis x line=top,
+       axis y line=left,
+ylabel={$y=\arccos (x)$},
+xlabel={$\arccos (x)$},
+       xmin=-1,xmax=1,ymin=-0,ymax=pi,
+ domain=-1:1,
+      % ytick={-0.5*pi,0.1*pi,...,0.5*pi},
+ %
+            % scale x axis values by \pi and
+            % remove the corresponding label
+            scaled y ticks={real:\PI},
+            ytick scale label code/.code={},
+            % in case you want to set an explicit tick distance
+            ytick distance=\PI/2,
+            % add code here for formatting the `xlabels'
+            % I configured exceptions for \pm\pi where no number in front
+            % of these are shown and for fractional values these should be
+            % shown as fractions
+            yticklabel={%
+                \ifdim \tick pt = 1 pt
+                    \strut$\pi$%
+                \else\ifdim \tick pt = -1 pt
+                    \strut$-\pi$%
+                \else
+                    % to avoid some mess with TeX precision, first
+                    % round the \tick value to one digit after the comma
+                    \pgfmathparse{round(10*\tick)/10}
+                    % depending on whether the resulting number is an integer
+                    % show it as integer only, otherwise use the style given
+                    % in `xticklabel style'
+                    \pgfmathifisint{\pgfmathresult}{%
+                        \strut$\pgfmathprintnumber[int detect]{\pgfmathresult}\pi$%
+                    }{%
+                        \strut$\pgfmathprintnumber{\pgfmathresult}\pi$%
+                    }
+                \fi\fi
+            },
+            % set number plotting to frac style
+            yticklabel style={
+                /pgf/number format/frac,
+                /pgf/number format/frac whole=false,
+            },
+            % add minor thicks
+            minor tick num=1,
+                   ]
+ \addplot[domain=-1:1,draw=orange]{acos(x)} ;
+\legend{$\arccos x$}
+     \end{axis}
+     \begin{axis}[%
+legend style={at={(0.63,0.72)},anchor=north west},
+       legend cell align=left,
+        xmin=-1,xmax=1,ymin=-1,ymax=1,
+      % ytick={0,0.1,...,1},
+       axis x line=none,
+       axis y line*=right,
+             ylabel near ticks,
+       ylabel={$y=\cos(x)$},
+     ]
+  \addplot[dashed,domain=-0.5*pi:0.5*pi,red,line legend] coordinates {(-1,1) (1,-1)};
+ \legend{$-x$},
+     \end{axis}
+   \end{tikzpicture}
+\end{document}

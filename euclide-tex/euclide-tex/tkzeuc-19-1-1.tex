@@ -1,0 +1,29 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[rotate=-90]
+ \tkzInit[xmax=10,ymax=10]
+ \tkzClip[space=1]
+ \tkzDefPoint(0,0){A}
+ \tkzDefPoint(10,0){B}
+ \tkzDefMidPoint(A,B)       \tkzGetPoint{I}
+ \tkzDefPointWith[orthogonal,K=-.75](B,A)
+    \tkzGetPoint{C}
+ \tkzInterLC(B,C)(B,I)      \tkzGetSecondPoint{D}
+ \tkzDuplicateLen(B,D)(D,A) \tkzGetPoint{E}
+ \tkzInterLC(A,B)(A,E)      \tkzGetPoints{N}{M}
+ \tkzDrawArc[delta=10](D,E)(B)
+ \tkzDrawArc[delta=10](A,M)(E)
+ \tkzDrawLines(A,B B,C A,D)
+ \tkzDrawArc[delta=10](B,D)(I)
+ \tkzDrawPoints(A,B,D,C,M,I,N)
+ \tkzLabelPoints(A,B,D,C,M,I,N)
+\end{tikzpicture}
+
+\end{document} 

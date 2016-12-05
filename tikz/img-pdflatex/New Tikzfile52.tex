@@ -1,0 +1,19 @@
+\begin{tikzpicture}[xscale=1,yscale=0.7]
+\tkzInit[xmin=0,xmax= 5,xstep=1,
+ymax=6,ymin=-2,ystep=1]
+\tkzGrid
+\tkzDrawX[label={\textit{x}},below= -18pt]
+\tkzLabelX
+\tkzAxeY[label=$f(x)$]
+\tkzFct[domain = 1:3,blue,samples=200, smooth, thick]{x**3-12*x+15}
+
+\tkzSetUpPoint[shape=circle, size = 7, color=blue, fill=blue]
+\tkzDefPointByFct[draw,ref=A](1)
+\tkzLabelPoint[above right](A){}
+\tkzDefPointByFct[draw,ref=B](3)
+\tkzLabelPoint[above right](B){}
+\tkzDefPointByFct[draw,ref=C](2)
+\tkzLabelPoint[above right](C){}
+\tkzText[draw,color= blue!50!black,fill=red!20]%
+(2,-2){$f(x)=x^3-12x+15$}
+\end{tikzpicture}

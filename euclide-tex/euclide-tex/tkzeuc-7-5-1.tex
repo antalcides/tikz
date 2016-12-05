@@ -1,0 +1,22 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzInit[xmax=6,ymax=6]
+  \tkzClip
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(5,1){B}
+  \tkzDefPoint(1,4){C}
+  \tkzDrawPolygon[color=Maroon](A,B,C)
+  \tkzInCenter(A,B,C)\tkzGetPoint{G}
+  \tkzDrawPoint(G)
+  \tkzDrawLines[add = 0 and 2/3](A,G B,G C,G)
+\end{tikzpicture}
+
+\end{document} 

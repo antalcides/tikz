@@ -1,0 +1,23 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+   \tkzDefPoints{-1.5/-0.25/A,1/-0.75/B,-0.7/1/C}
+   \tkzDrawLine[end   = $(d_1)$](A,B)
+   \tkzDrawPoints(A,B,C)
+   \tkzDefLine[orthogonal=through C](B,A) \tkzGetPoint{c}
+   \tkzDrawLine[end   = $(\delta)$](C,c)
+   \tkzInterLL(A,B)(C,c) \tkzGetPoint{I}
+   \tkzMarkRightAngle(C,I,B)
+   \tkzDefLine[parallel=through C](A,B) \tkzGetPoint{c'}
+   \tkzDrawLine[end   = $(d_2)$](C,c')
+   \tkzMarkRightAngle(I,C,c')
+\end{tikzpicture}
+
+\end{document} 

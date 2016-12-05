@@ -1,0 +1,24 @@
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots}%
+\usepackage[active,pdftex,tightpage]{preview}
+\usetikzlibrary{positioning}
+\PreviewEnvironment[]{tikzpicture}
+\def\myFuncA(#1){(#1)^3}%
+\def\myFuncB(#1){20*exp(-1*#1)}%
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}
+  \addplot[domain=0:2] {\myFuncA(x)};
+  \addplot[-] coordinates { (2,{\myFuncA(2)}) (2,{\myFuncB(2)}) };% coordinates method 1
+  \addplot[mark=*, blue] coordinates {(2,{\myFuncA(2)}) };
+    \addplot[domain=2:4] {\myFuncB(x)};
+    \addplot[mark=*, blue] coordinates {(2,{\myFuncB(2)}) };
+  \pgfmathsetmacro{\Xa}{4};% coordinates method 2
+  \pgfmathsetmacro{\Ya}{ \myFuncB(\Xa) };
+  \pgfmathsetmacro{\Xb}{5};
+  \pgfmathsetmacro{\Yb}{ 3*\Xb-10 };
+  \addplot[mark=*, blue] coordinates { (\Xa,\Ya) (\Xb,\Yb) };
+\end{axis}
+\end{tikzpicture}
+\end{document}

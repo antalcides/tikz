@@ -1,0 +1,48 @@
+\documentclass[]{article} 
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz,fullpage}
+\usetikzlibrary{trees,%
+                shapes,%
+                plotmarks,%
+                arrows,%
+                er,%
+                automata,%
+                petri,%
+                topaths}%
+\usepackage{tkz-graphe}
+
+\begin{document}
+
+\begin{tikzpicture}
+\tikzstyle{NormalVertexStyle}=[shape       = circle,
+                               shading      = ball,
+                               ball color   = green!40,%
+                               minimum size = 16pt,%
+                               draw]
+ \SetUpEdge[style={very thick}]
+ \tikzstyle{EdgeStyle}= [draw=green!20!black,very thick]
+ \grMCLadder[color=red,rayon=3]{8}%
+\end{tikzpicture}
+
+\vspace{2cm}
+\begin{tikzpicture}
+\setVertexSimple
+\setVertexNoLabel
+  \grSerpin[color=black,rayon=1.5]{4}%
+\end{tikzpicture}
+
+\vspace{2cm}
+\begin{tikzpicture}
+\tikzstyle{NormalVertexStyle}= [shape        = circle,
+                                shading      = ball,
+                                ball color   = orange,%
+                                minimum size = 16pt,%
+                                draw]
+\SetUpEdge[style={very thick,%
+                  double          = orange,%
+                  double distance = 2pt}]
+  \grSerpin[color=black,rayon=1.5]{4}%
+\end{tikzpicture}
+
+\end{document}
+

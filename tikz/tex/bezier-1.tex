@@ -1,0 +1,62 @@
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{decorations.pathreplacing,backgrounds}
+
+\tikzset{
+  show curve controls/.style={
+    decoration={
+      show path construction,
+      curveto code={
+        \draw[#1!50]
+        (\tikzinputsegmentfirst)
+        -- (\tikzinputsegmentsupporta)
+        -- (\tikzinputsegmentsupportb)
+        -- (\tikzinputsegmentlast)
+        ;
+        \fill[#1!50] (\tikzinputsegmentsupporta) circle(1pt);
+        \fill[#1!50] (\tikzinputsegmentsupportb) circle(1pt);
+        \draw[#1,line width=1pt]
+        (\tikzinputsegmentfirst)
+        .. controls (\tikzinputsegmentsupporta)
+                and (\tikzinputsegmentsupportb) ..
+        (\tikzinputsegmentlast);
+      }
+    },decorate
+  }
+}
+
+\begin{document}
+\foreach \p in {0,10,...,360} {
+  \begin{tikzpicture}
+    \begin{scope}
+      \path (-4,-2) rectangle (4,2.1);
+      \coordinate (a) at (-2,0);
+      \coordinate (b) at (2,0);
+      \path (a) ++(1,0) ++(\p:0 and 2) coordinate (a1);
+      \path (b) ++(-1,0) ++({180-\p}:0 and 2) coordinate (b1);
+      \draw[show curve controls={red}] (a) .. controls (a1) and (b1) .. (b);
+    \end{scope}
+    \begin{scope}[yshift=-4.5cm]
+      \path (-4,-1) rectangle (4,4);
+      \coordinate (a) at (-2,0);
+      \coordinate (b) at (2,0);
+      \path (a) ++(45:3) ++(\p:3 and 0) coordinate (a1);
+      \path (b) ++(90+45:3) ++(180-\p:3 and 0) coordinate (b1);
+      \draw[show curve controls={blue}] (a) .. controls (a1) and (b1) .. (b);
+    \end{scope}
+    \begin{scope}[yshift=-6cm]
+      \path (-4,-3) rectangle (4,4);
+      \coordinate (a) at (-2,0);
+      \coordinate (b) at (2,0);
+      \path (a) ++(1,0) [rotate=45] ++(\p:0 and 2) coordinate (a1);
+      \path (b) ++(-1,0) [rotate=45] ++({180+\p}:0 and 2) coordinate (b1);
+      \draw[show curve controls={green!50!black}]
+        (a) .. controls (a1) and (b1) .. (b);
+    \end{scope}
+    \begin{pgfonlayer}{background}
+      \fill[white] (current bounding box.south west)
+         rectangle (current bounding box.north east);
+    \end{pgfonlayer}
+  \end{tikzpicture}
+}
+\end{document}

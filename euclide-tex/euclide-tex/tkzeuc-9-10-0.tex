@@ -1,0 +1,37 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=.6]
+ \tkzSetUpLine[line width=2pt,color=orange!80!black]
+ \tkzSetUpCompass[line width=2pt,color=orange!80!black]
+ \tkzDefPoint(0,0){O} \tkzDefPoint(2.25,0){A}
+ \tkzDrawCircle(O,A)
+ \foreach \i in {0,...,5}{
+  \tkzDefPointBy[rotation= center O angle 30+60*\i](A)   \tkzGetPoint{a\i}
+  \tkzDefPointBy[rotation= center {a\i} angle  120](O)   \tkzGetPoint{b\i}
+  \tkzDefPointBy[rotation= center {a\i} angle  180](O)   \tkzGetPoint{c\i}
+  \tkzDefPointBy[rotation= center {c\i} angle  120](a\i) \tkzGetPoint{d\i}
+  \tkzDefPointBy[rotation= center {c\i} angle   60](d\i) \tkzGetPoint{f\i}
+  \tkzDefPointBy[rotation= center {d\i} angle   60](b\i) \tkzGetPoint{e\i}
+  \tkzDefPointBy[rotation= center {f\i} angle   60](d\i) \tkzGetPoint{g\i}
+  \tkzDefPointBy[rotation= center {d\i} angle   60](e\i) \tkzGetPoint{h\i}
+  \tkzDefPointBy[rotation= center {e\i} angle  180](b\i) \tkzGetPoint{k\i}
+
+  \tkzDrawCircle(a\i,O) \tkzDrawCircle(b\i,a\i)
+  \tkzDrawCircle(c\i,a\i)
+  \tkzDrawArc[rotate](f\i,d\i)(-120)
+  \tkzDrawArc[rotate](e\i,d\i)(180)
+  \tkzDrawArc[rotate](d\i,f\i)(180)
+  \tkzDrawArc[rotate](g\i,f\i)(60)
+  \tkzDrawArc[rotate](h\i,d\i)(60)
+  \tkzDrawArc[rotate](k\i,e\i)(60) }
+ \tkzClipCircle(O,f0)
+\end{tikzpicture}
+
+\end{document} 

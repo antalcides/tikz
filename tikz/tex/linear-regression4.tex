@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc}
+
+\begin{document}
+
+\begin{tikzpicture}
+    % axes
+    \coordinate (origin) at (0,0);
+    \draw (origin) -- (0,6.5) node[left]{$x_{2}$};
+    \draw (origin) -- (9.5,0) node[below]{$x_{1}$};
+    % u_0
+    \node (e) at (2.2,4.9) {};
+    \node (f) at (3,3) {};
+    \node (g) at (5,2.3) {};
+    \draw[thick] plot[smooth,tension=0.9] coordinates {(e) (f) (g)} node[right]{$u_{0}$};
+    % u_1
+    \node (h) at (1.5,4.2) {};
+    \node (b) at (2.4,2.3) {};
+    \node (j) at (4.4,1.6) {};
+    \draw[thick] plot[smooth,tension=0.9] coordinates {(h) (b) (j)} node[right]{$u_{1}$};
+    % first budget line (I_0 to p_0)
+    \coordinate[label=left:{\scriptsize$I_{0}$}] (i0) at (0,4.65);
+    \draw (i0) -- (8.1,0); 
+    % second budget line (I_0 to p_1)
+    \coordinate (d) at (4.67,0) {};
+    \draw (i0) -- (d);
+    % dashed line
+    \draw[densely dashed,style={shorten >=2.8cm,shorten <=-4.64cm}] (2.68,3.3)   -- +($(i0)-(d)$);
+\end{tikzpicture}
+\end{document}

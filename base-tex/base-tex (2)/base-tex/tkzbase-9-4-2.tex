@@ -1,0 +1,20 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[rotate=15]
+ \tkzDefPoint(2,3){A}
+ \tkzDefShiftPointCoord[2,3](15:5){B}
+ \tkzDefShiftPointCoord[2,3](-15:5){C}
+ \tkzDrawSegments(A,B B,C C,A)
+ \tkzDrawPoints(A,B,C)
+ \tkzLabelPoints(B,C)
+ \tkzLabelPoint[left](A){$A$}
+\end{tikzpicture}
+
+\end{document} 

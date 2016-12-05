@@ -1,0 +1,22 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+ \tkzDefPoint(0,0){A}  \tkzDefPoint(5,2){A'}
+ \tkzDefPoint(3,0){B}  \tkzDefPoint(1,2){C}
+ \tkzDefPointsBy[translation= from A to A'](B,C){}
+ \tkzDrawPolygon[color=blue](A,B,C)
+ \tkzDrawPolygon[color=red](A',B',C')
+ \tkzDrawPoints[color=blue](A,B,C)
+ \tkzDrawPoints[color=red](A',B',C')
+ \tkzLabelPoints(A,B,A',B')  \tkzLabelPoints[above](C,C')
+ \tkzDrawSegments[color = gray,->,style=dashed](A,A' B,B' C,C')
+\end{tikzpicture}
+
+\end{document} 

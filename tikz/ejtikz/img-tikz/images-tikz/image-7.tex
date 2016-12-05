@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+\foreach \x in { 1,...,4} \draw [very thick] (\x,-2pt)--(\x,2pt) node [below ] {$\small\x$};
+\foreach \y in { 1,...,4} \draw [very thick] (-2pt,\y)--(2pt,\y) node [left ] {$\small\y$};
+\draw [very thin, style=gray!20, step=0.1] (0,0) grid (4,4);
+\draw [thin, gray!60] (0,0) grid (4,4);
+\draw [thick, ->] (-.2,0)--(4.2,0) node [above] {$x$ };
+\draw [thick, ->] (0,-.2)--(0,4.2) node [left] {$y$};
+\end{tikzpicture}

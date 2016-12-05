@@ -1,0 +1,128 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[francais]{babel} 
+%\usepackage[babel=true,kerning=true]{microtype}
+\usepackage[margin=1cm, includefoot]{geometry} 
+
+\usepackage{pgf,tikz}
+\usepackage{tkz-tab}
+\usetikzlibrary{arrows}
+\usetikzlibrary{patterns}
+
+\usepackage{wrapfig} 
+
+\DeclareMathOperator{\e}{e} %pour un e droit dans les formules
+\title{Tableaux de variation avec Tikz et tkz-tab}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+
+Tableau 1 (ln) :
+
+\begin{tikzpicture}
+\tkzTabInit[espcl=6]{$x$/1,$\ln'(x)$/1,$\ln(x)$/2}{$0$,$+\infty$}
+\tkzTabLine{d,+,}
+\tkzTabVar{D-/$-\infty$,+/$+\infty$,}
+\tkzTabVal{1}{2}{0.4}{1}{0}
+\tkzTabVal{1}{2}{0.67}{$\e$}{1}
+\end{tikzpicture}
+
+\bigskip
+
+Tableau 2 (racine) :
+
+\begin{tikzpicture}
+\tkzTabInit[lgt=3,espcl=6]{$x$/1,$f'(x)$/1,$f(x)=\sqrt{x}$/2}{$0$,$+\infty$}
+\tkzTabLine{d,+,}
+\tkzTabVar{-/0,+/$+\infty$,}
+\end{tikzpicture}
+
+ou :
+
+\begin{tikzpicture}
+\tkzTab[lgt=3,espcl=6]{$x$/1,$f'(x)$/1,$f(x)=\sqrt{x}$/2}{$0$,$+\infty$}
+{d,+,}
+{-/0,+/$+\infty$,}
+\end{tikzpicture}
+
+\bigskip
+
+Tableau 3 (inverse) :
+
+\begin{tikzpicture}
+\tkzTabInit[lgt=3,espcl=6]{$x$/1,$f'(x)=-\dfrac{1}{\ x^2}$/1,$f(x)=\dfrac{1}{x}$/2}{$-\infty$,$0$,$+\infty$}
+\tkzTabLine{,-,d,-,}
+\tkzTabVar{+/0,-D+/$-\infty$/$+\infty$,-/0}
+\end{tikzpicture}
+
+ou :
+
+\begin{tikzpicture}
+\tkzTab[lgt=3,espcl=6]{$x$/1,$f'(x)=-\dfrac{1}{\ x^2}$/1,$f(x)=\dfrac{1}{x}$/2}{$-\infty$,$0$,$+\infty$}
+{,-,d,-,}
+{+/0,-D+/$-\infty$/$+\infty$,-/0}
+\end{tikzpicture}
+
+\bigskip
+
+Tableau 4 (\(f(x)=\dfrac{x^2+4}{x}\)):
+		
+\begin{tikzpicture}
+\tkzTabInit[]{\(x$/1,$f'(x)\)/1,\(f(x)\)/2}{\(-\infty\),\(-2\),\(0\),2,\(+\infty\)}
+\tkzTabLine{,+,z,-,d,-,z,+,}
+\tkzTabVar{-/\(-\infty\),+/-4,-D+/$-\infty$/$+\infty$,-/4,+/\(+\infty\)}
+\end{tikzpicture}
+
+ou :
+
+\begin{tikzpicture}
+\tkzTab[]{\(x$/1,$f'(x)\)/1,\(f(x)\)/2}{\(-\infty\),\(-2\),\(0\),2,\(+\infty\)}
+{,+,z,-,d,-,z,+,}
+{-/\(-\infty\),+/-4,-D+/$-\infty$/$+\infty$,-/4,+/\(+\infty\)}
+\end{tikzpicture}
+
+\bigskip
+
+
+Tableau 5 (cos):
+
+\begin{tikzpicture}
+\tkzTabInit{$x$/1,$-\sin(x)$/1,$\cos(x)$/2}{$0$,$\pi$,$2\pi$}
+\tkzTabLine{z,-,z,+,z}
+\tkzTabVar{+/$1$,-/$-1$,+/$1$}
+\tkzTabVal{1}{2}{0.5}{$\dfrac{\pi}{2}$}{0}
+\tkzTabVal{2}{3}{0.5}{$\dfrac{3\pi}{2}$}{0}
+\end{tikzpicture}
+
+\bigskip
+
+Tableau 6 (sin) :
+
+\begin{tikzpicture}
+\tkzTabInit{$x$/1,$\cos(x)$/1,$\sin(x)$/2}{$0$,$\dfrac{\pi}{2}$,$\dfrac{3\pi}{2}$,$2\pi$}
+\tkzTabLine{,+,z,-,z,+,}
+\tkzTabVar{-/$0$,+/$1$,-/$-1$,+/$0$}
+\tkzTabVal{2}{3}{0.5}{$\pi$}{0}
+\end{tikzpicture}
+
+\bigskip
+
+Tableau 7 :
+
+\begin{center}
+\begin{tikzpicture}
+\tkzTabInit{\(x\)/1,\(f(x)\)/1}{5,\(\alpha\),60}
+\tkzTabLine{,-,z,+,}
+\end{tikzpicture}
+\end{center}
+
+
+
+\end{document}

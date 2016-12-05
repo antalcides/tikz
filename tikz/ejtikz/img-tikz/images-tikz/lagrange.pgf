@@ -1,0 +1,62 @@
+\tikzset{fontscale/.style = {font=\relsize{#1}}
+    }
+\begin{tikzpicture}[scale=2,
+fontscale=0.5,
+         dot/.style = {
+     fill = blue,
+      circle,
+      inner sep =2pt,
+      minimum size = 4pt
+    }
+  ]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \draw [very thin, style=gray!50, step=0.5] (-0.5,-1.5) grid (3.5,1.5);
+ %\draw [thin, gray!60] (0,0) grid (9,9);
+\coordinate (O) at (0,0);
+\coordinate (O1) at (0,-1.5);
+\coordinate (Y) at (0,2);
+\coordinate (X) at (3.5,0);
+\coordinate (X1) at (-1,0);
+\coordinate (Y1) at (0,-0.6);
+ \coordinate (A) at(3,0.88);
+ \coordinate (B) at  (1,0.88) ;
+\coordinate (C) at (3,1.28);
+\coordinate (D) at (3.73,0);
+%%%%%%%%%%%%%%ejes
+\draw[color=red,ultra thick,latex-latex]           (X)node[label={above left:$x$}
+                               ] {} -- (X1) node[
+                               label = {above:$$}] {};
+\draw[color=red,ultra thick,latex-latex]           (Y)node[,label={below right:$y$}
+                               ] {} -- (Y1) node[
+                               label = {above:$$}] {};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[color=red,ultra thick,dashed]           (1,0)node[
+                               label = {below :$a$}]{}-- (1,.88) node[
+                                label = {below:$$}] {};
+\draw[color=red,ultra thick,dashed]           (2,0)node[
+                               label = {below :$c$}]{}-- (2,1.68) node[
+                                label = {below:$$}] {};
+\draw[color=red,ultra thick,dashed]           (3,0)node[
+                               label = {below :$b$}]{}-- (3,1.28)node[
+                                label = {below:$$}] {};
+\draw[color=red,ultra thick]           (1,.88)node[
+                               label = {below right:$$}]{}-- (3,1.28) node[
+                                label = {below:$$}] {};
+\draw[color=red,ultra thick]           (3,.88)node[
+                               label = {below right:$$}]{}-- (1,.88) node[
+                                label = {below:$$}] {};
+ \pic [red,draw, -latex, "\small $\alpha$", angle eccentricity=1.2,angle radius=1.5cm] {angle = A--B--C};
+\draw[color=blue] (1,.88)node[above left =-3.5pt] {\small$(a,f(a))$};
+ \draw[color=blue] (3,1.28) node[above right=-3.5pt] {\small$(b,f(b))$};
+%%%%%%
+ \draw[color=blue] (2.1,1.68)node[above left=-1pt] {\small$(c,f(c))$};
+ \draw[color=blue] (1,-0.3)node[below  right=-2.5pt] {\small$(\tan(\alpha)=\dfrac{f(b)-f(a)}{b-a}=f(c)$};
+ \draw[color=blue](2.59,1.55)node[above right=-1.5pt] {\small$y=f(c)+f(c)(x-c)$};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw [blue, thick, x=1cm, y=1cm,
+declare function={f(\x) = -1.12+2.6*\x - 0.6*\x^2;}]
+plot [ultra thick,domain=0.25:3.25, samples=144, smooth] (\x,{f(\x)});
+\draw [blue, thick, x=1cm, y=1cm,
+declare function={g(\x) =1.28+.2*\x;}]
+plot [ultra thick,domain=0.25:3.25, samples=144, smooth] (\x,{g(\x)});
+\end{tikzpicture}

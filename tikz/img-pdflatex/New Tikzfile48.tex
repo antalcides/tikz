@@ -1,0 +1,25 @@
+\begin{tikzpicture}[scale=1.5,line width=0.6pt,>=latex]
+%    \tkzInit[xmin=-2,xmax=2,ymin=-2,ymax=2]
+%     \tkzAxeXY
+%    \tkzFct[red,domain = -2.2:2.2]{x**3}
+%      \tkzDefPointByFct[draw,ref=A](-1)
+%    \tkzLabelPoint[above right](A){$a$}
+%    \tkzDefPointByFct[draw,ref=B](1)
+%    \tkzLabelPoint[above right](B){$b$}   
+   \tkzInit[xmin = -2, xmax =2,ymin = -2, ymax = 2]
+     \tkzDrawXY[noticks] 
+     \tkzFct[{<->},domain = -2:2,red,thick]{abs(x)}  
+         \tkzfctset{tan style/.style={->=latex,blue,ultra thick}}  
+\tikzstyle{StyleTan}=[<->] 
+\foreach \x/\n in {0/0} {%
+                    \tkzDrawTangentLine[kr=.5,kl=.5,color=blue](\x) 
+                                        \node[below left=2pt] at (tkzPointResult){$f(\n)$};
+                    \tkzDrawPoint(tkzPointResult)}  
+      \foreach \x/\n in {-1/a,1/b} {%
+                       \tkzDefPointByFct[draw](\x)
+              \draw[dashed] (tkzPointResult)-|(\x,0) node[below right]{$\n$};
+                       %\node[below right] at (tkzPointResult){$\n$};
+}
+\tkzFct[{<->},domain = -0.5:0.5,blue,ultra thick]{0}   
+
+\end{tikzpicture}

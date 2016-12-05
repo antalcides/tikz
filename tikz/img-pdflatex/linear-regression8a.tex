@@ -1,0 +1,37 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,intersections}
+
+\begin{document}
+
+\tikzpicture[
+thick,
+>=stealth',
+dot/.style = {
+draw,
+fill=white,
+circle,
+inner sep=1pt,
+minimum size=7pt
+}
+]
+\coordinate (O) at (0,0);
+\draw[->] (-0.3,0) -- (8,0) coordinate[label={below:$t$}] (xmax);
+\draw[->] (0,-0.3) -- (0,7) coordinate[label={right:$y$}] (ymax);
+\path[name path=x] (0,0) -- (7,7);
+\path[name path=y] plot [smooth] coordinates {(-0.3,2) (2,1.5) (4,2.8) (4.5,7)};
+\scope[name intersections={of=x and y,name=i}]
+\draw (0,0) -- (5,5) node[pos=1,below right] {f(t)=t};
+\draw (i-1) node[dot](i-1) {} -- node[left] {} (i-1 |- O) node[dot,label={below:$(r-1)!$}] {};
+\draw (i-2) node[dot,label={above:$Q$}] {} -- (i-2) -- (i-2 |- i-1) node[dot,label={}] (i-12) {};
+\draw (i-2) -- (i-2 |- O) node[dot,label={below:$x_0 + \varepsilon$}] {};
+\draw[blue,<->] (i-2) -- (i-12) node[right] {$f(x_0 + \varepsilon) - f(x_0)$};
+\draw[blue,<->] (i-1) -- (i-12) node[below] {$\varepsilon$};
+\path (i-1 |- O) -- node[below] {$\varepsilon$} (i-2 |- O);
+\draw[gray] (i-2) -- (i-2 -| xmax);
+\draw[gray,<->] ([xshift=-0.5cm]i-2 -| xmax) -- node[fill=white] {$f(x_0 + \varepsilon)$} ([xshift=-0.5cm]xmax);
+\endscope
+\endtikzpicture
+
+\end{document}

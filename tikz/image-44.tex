@@ -1,0 +1,50 @@
+\pgfplotsset{point legend/.style={},
+    point 1/.style={anchor=south},
+    point 2/.style={anchor=south}
+}
+
+\pgfplotsset{
+    azetinaplot/.style={
+        width=7cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        enlarge y limits,
+        clip=false
+    }
+}
+
+\begin{tikzpicture}
+\begin{axis}[
+%      axis x line=middle, axis y line=middle,
+%      xlabel=$x$,
+%      ylabel=$y$,
+%      grid,
+        azetinaplot,
+        domain=-20:14, samples=100,
+        xmin=-2, xmax=14,
+        point 1/.append style={anchor=south east},
+        point 2/.append style={anchor=east}
+     ]
+     \addplot[red,domain=0:12] {\f(x)};
+  \coordinate (G) at (8,{\f(8)}) ;
+\coordinate (R) at (2,{\f(2)}) ;
+  \begin{scope}[declare function={f(\x)=#1;}]
+    \addplot [thick, red, latex-latex,domain=0:12] {\f(x)} node [anchor=west] {$f(x)=x^2$};
+    \addplot [black, mark=*] coordinates {(2,{\f(2)}) (8,{\f(8)})}
+        node [pos=0,/pgfplots/point 1] {$P_1$}
+        node [pos=1,/pgfplots/point 2] {$P_2$};
+    \pgfplotsextra{
+        \pgfmathsetmacro\first{\f(2)}
+        \pgfmathsetmacro\second{(\f(8)}
+        \pgfmathsetmacro\xdiff{2-8}
+        \pgfmathsetmacro\ydiff{\f(8)-\f(2)}
+        \draw (axis cs:2,\first) -| (axis cs:8,\second);
+        \draw [|-|,yshift=-5ex] (axis cs:2,\first) -- node [inner sep=1pt,fill=white] {\pgfmathprintnumber{\xdiff}} (axis cs:8,\first);
+        \draw [|-|,xshift=5ex] (axis cs:8,\first) -- node [inner sep=1pt, fill=white] {\pgfmathprintnumber{\ydiff}} (axis cs:8,\second);
+%         \matrix at (rel axis cs:0.1,1) [matrix of nodes,/pgfplots/point legend] {aaaa\\};
+}
+        \end{scope}
+\end{axis}
+\end{tikzpicture}

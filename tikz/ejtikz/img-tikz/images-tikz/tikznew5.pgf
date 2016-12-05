@@ -1,0 +1,14 @@
+\begin{tikzpicture}[scale=.5]
+\tkzInit[xmax=10,ystep=3,ymax=10]
+\tkzAxeXY
+\tkzGrid
+\tkzFct[color=red, thick,domain=0:10]{\x}
+\tkzFct[domain=0:10]{\x**2}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=.5]
+\tkzInit[xmax=10,ystep=1.5,ymax=10]
+\tkzAxeXY
+\tkzGrid
+\tkzFct[color=red, thick,domain=0:10]{\x}
+\tkzFct[domain=0:10]{\x**2}
+\end{tikzpicture}  

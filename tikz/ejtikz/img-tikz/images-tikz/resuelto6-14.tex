@@ -1,0 +1,45 @@
+\begin{tikzpicture}[scale=2,
+         dot/.style = {
+     fill = blue,
+      circle,
+      inner sep =2pt,
+      minimum size = 4pt
+    }
+  ]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %\draw [very thin, style=gray!50, step=0.5] (-3,-2) grid (3,2);
+ %\draw [thin, gray!60] (0,0) grid (9,9);
+\coordinate (O) at (0,0);
+\coordinate (Y) at (0,2.5);
+\coordinate (X) at (2,0);
+\coordinate (X1) at (-2,0);
+\coordinate (Y1) at (0,-1.5);
+ \coordinate (N) at (0.9,0.5);
+ \coordinate (M) at (0,-1);
+ \coordinate (C) at (0,2);
+ \coordinate (A) at (-1.76,-1);
+ \coordinate (B) at (1.76,-1);
+
+\draw[blue,ultra thick] (O) circle [radius=1cm];
+\draw[color=red,ultra thick]           (A)-- (C) node[ label = {above:$C$}
+                             ] {};
+\draw[color=red,ultra thick]           (A)node[
+                               label = {left:$A$}]{}-- (B) node[
+                                label = {right:$B$}] {};
+\draw[color=red,ultra thick]           (B)node[
+                               label = {}] {} -- (C) node[
+                                 ] {};
+\draw[color=red,ultra thick]           (N)node[
+                               label = {right:$N$}] {} -- (O) node[
+                               midway,below] {$r$};
+\draw[color=red,ultra thick]           (O)node[dot,label={above left:$O$}
+                               ] {} -- (B) node[
+                               label = {above:$$}] {};
+\draw[color=blue,dashed,ultra thick]           (M)node[
+                               label = {below:$N$}]{}-- (C) node[
+                           label = {}] {};
+ \draw[color=blue,ultra thick,dashed]           (-1,0)-- (1,0) node[ label = {}
+                              ] {};
+  \pic [red,draw, -latex, "$\alpha$", angle eccentricity=1.5] {angle =B--A--C};
+
+   \end{tikzpicture}

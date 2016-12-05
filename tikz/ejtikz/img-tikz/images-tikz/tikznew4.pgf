@@ -1,0 +1,27 @@
+\begin{tikzpicture}[inner sep=0pt,minimum size=0mm, scale = 0.7]
+
+\node at (-4.6,3.1415) {$\pi$};
+\node at (-4.6,3/2*3.1415) {$\frac{3\pi}{2}$};
+\node at (-4.6,2*3.1415) {$2\pi$};
+\node at (-4.6,1/2*3.1415) {$\frac{\pi}{2}$};
+\node at (-4.6,0) {$0$};
+\node at (-4.6,1/2*-3.1415) {-$\frac{\pi}{2}$};
+\node at (-4.6,-3.1415) {$-\pi$};
+\node at (-4.6,3/2*-3.1415) {-$\frac{3\pi}{2}$};
+\node at (-4.6,2*-3.1415) {$-2\pi$};
+
+\node[left] at (4, -7) {$4$};
+\node[left] at (3, -7) {$3$};
+\node[left] at (2, -7) {$2$};
+\node[left] at (1, -7) {$1$};
+\node[left] at (0, -7) {$0$};
+\node[left] at (-1, -7) {$-1$};
+\node[left] at (-2, -7) {$-2$};
+\node[left] at (-3, -7) {$-3$};
+\node[left] at (-4, -7) {$-4$};
+
+\draw[ystep=3.1415/2, densely dashed] (-4,-2*3.1415) grid (4,2*3.1415);
+%\AXES{0}{0}{4}{2*3.1415}
+\draw[thick, variable = \t, domain=2*-3.1415:2*3.1415,samples=250] plot ({sin(180*\t/3.1415)},{\t});
+
+\end{tikzpicture}

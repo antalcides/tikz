@@ -1,0 +1,32 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=.75]
+\tkzInit[xmax=5,ymax=5]
+\tkzDefPoint(0,0){C}
+\tkzDefPoint(4,0){A}
+\tkzDefPoint(0,3){B}
+\tkzDefSquare(B,A)\tkzGetPoints{E}{F}
+\tkzDefSquare(A,C)\tkzGetPoints{G}{H}
+\tkzDefSquare(C,B)\tkzGetPoints{I}{J}
+\tkzFillPolygon[draw,
+                fill = red!50 ](A,C,G,H)
+\tkzFillPolygon[draw,
+                fill = blue!50 ](C,B,I,J)
+\tkzFillPolygon[draw,
+                fill = purple!50](B,A,E,F)
+\tkzFillPolygon[draw,opacity=.5,
+                fill = orange](A,B,C)
+\tkzDrawPolygon[line width = 1pt](A,B,C)
+\tkzLabelSegment[above](C,A){$a$}
+\tkzLabelSegment[right](B,C){$b$}
+\tkzLabelSegment[below left](B,A){$c$}
+\end{tikzpicture}
+
+\end{document} 

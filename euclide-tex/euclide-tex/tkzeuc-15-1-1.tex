@@ -1,0 +1,22 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+  \begin{tikzpicture}
+      \tkzInit[xmax=7,ymax=6]
+      \tkzDefPoint[pos=left](1,1){A}
+      \tkzDefPoint(6,1){B}
+      \tkzInterCC[R](A,4cm)(B,3cm)
+      \tkzGetPoints{C}{D}
+      \tkzDrawPoint(C)
+      \tkzCompass[color=red,length=1.5](A,C)
+      \tkzCompass[color=red](B,C)
+      \tkzDrawSegments(A,B A,C B,C)
+  \end{tikzpicture}
+
+\end{document} 

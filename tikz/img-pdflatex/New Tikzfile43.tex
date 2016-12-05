@@ -1,0 +1,41 @@
+\pgfplotsset{point legend/.style={},
+    point 1/.style={anchor=south},
+    point 2/.style={anchor=south}
+}
+
+\pgfplotsset{
+    azetinaplot/.style={
+        width=7cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        enlarge y limits,
+        clip=false
+    }
+}
+
+\begin{tikzpicture}
+\begin{axis}[
+%      axis x line=middle, axis y line=middle,
+%      xlabel=$x$,
+%      ylabel=$y$,
+%      grid,
+        azetinaplot,
+        domain=-20:100, samples=100,
+        xmin=-2, xmax=10,
+        point 1/.append style={anchor=south east},
+        point 2/.append style={anchor=east}
+     ]
+  \addplot[domain=0:10] {\myFuncA(x)};
+\coordinate (G) at (8,{\myFuncA(8)}) ;
+\coordinate (R) at (0.5,{\myFuncA(0.5)}) ;
+  %\addplot[-] coordinates { (2,{\myFuncA(2)}) };% coordinates method 1
+  \addplot[mark=*, blue] coordinates {(8,{\myFuncA(8)}) };
+  \addplot[mark=*, blue] coordinates {(0.5,{\myFuncA(0.5)}) };
+\addplot[color=blue] coordinates {
+(8,{\myFuncA(8)}) 
+(0.5,{\myFuncA(0.5)}) 
+};
+\end{axis}
+\end{tikzpicture}

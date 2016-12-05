@@ -1,0 +1,37 @@
+\documentclass[]{article} 
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{fullpage}
+\usetikzlibrary{trees,%
+                shapes,%
+                arrows,%
+                petri,%
+                topaths}%
+\usepackage{tkz-graphe}
+\begin{document}
+\thispagestyle{empty}
+\begin{tikzpicture}
+    \tikzstyle{every node}= [node distance= 3cm]%
+    \tikzstyle{sommet}    = [shape        = circle,%
+                             draw         = black,%
+                             fill         = orange,%
+                             inner sep    = 2pt,%
+                             minimum size = 6mm,
+                             line width   = 2pt]%
+    \tikzstyle{every to}  = [line width   = 3pt,
+                             color        = orange]% 
+    \tikzstyle{etiqstyle} = []%
+    \sommet (A)%
+    \sommet [position={right of=A}](B)%
+    \sommet [position={above of=B}](C)% 
+    \sommet [position={below of=B}](D)%
+    \sommet [position={right of=B}](E)%
+    \arete  (A--B)%
+    \arete  (A--C)%
+    \arete  (A--D)%
+    \arete  (B--C)%
+    \arete  (B--D)%
+    \arete  (E--D)%
+  \end{tikzpicture}
+
+\end{document}

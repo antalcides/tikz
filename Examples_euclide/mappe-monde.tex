@@ -1,0 +1,56 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc} 
+%\usepackage[T1]{fontenc}
+\usepackage[upright]{fourier} 
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{tkz-euclide}
+\usepackage[frenchb]{babel} 
+
+\definecolor{fondpaille}{cmyk}{0,0,0.1,0}
+\pagecolor{fondpaille} 
+\color{Maroon}
+
+\begin{document} 
+ Ceci est une mappe-monde :
+ 
+  
+  \begin{tikzpicture}[scale=.8]
+    \tkzInit[xmin=-10,xmax=10,ymin=-10,ymax=10]
+    \tkzDefPoint(0 , 0){O}
+    \tkzDefPoint(9 , 0){A}
+    \tkzDefPoint(-9, 0){C} 
+    \tkzDefPoint(0 , 9){B}
+    \tkzDefPoint(0 ,-9){D}
+    \tkzClipCircle(O,A) 
+    \foreach \pti in {1,2,...,8}{
+    \tkzDefPoint(10*\pti:9){P\pti}
+    \tkzDefPoint(90:\pti){MP\pti}
+    \tkzDefPoint(0: \pti){NP\pti}
+    \tkzDefLine[mediator](MP\pti,P\pti) 
+    \tkzInterLL(B,D)(tkzFirstPointResult,tkzSecondPointResult) 
+    \tkzDrawCircle[color=Maroon](tkzPointResult,P\pti)
+    } 
+    \foreach \pti in {-1,-2,...,-8}{
+    \tkzDefPoint(10*\pti:9){P\pti}
+    \tkzDefPoint(-90:-\pti){MP\pti}
+    \tkzDefPoint(0: -\pti){NP\pti}
+    \tkzDefLine[mediator](MP\pti,P\pti)  
+    \tkzInterLL(B,D)(tkzFirstPointResult,tkzSecondPointResult)
+    \tkzDrawCircle[color=Maroon](tkzPointResult,P\pti)
+    } 
+    \foreach \pti in {1,2,...,8}{
+    \tkzDefLine[mediator](B,NP\pti)  
+    \tkzInterLL(A,C)(tkzFirstPointResult,tkzSecondPointResult)  
+    \tkzDrawCircle[color=Maroon](tkzPointResult,NP\pti)
+    }
+    \foreach \pti in {1,2,...,8}{
+    \tkzDefPoint(0: -\pti){NP\pti}
+    \tkzDefLine[mediator](B,NP\pti) 
+    \tkzInterLL(A,C)(tkzFirstPointResult,tkzSecondPointResult)    
+    \tkzDrawCircle[color=Maroon](tkzPointResult,NP\pti)
+    }  
+    \tkzDrawCircle[R,color=Maroon](O,9 cm)
+    \tkzDrawSegments[color=Maroon](A,C B,D)  
+  \end{tikzpicture}     
+  
+  \end{document}

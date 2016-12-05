@@ -1,0 +1,22 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1]
+\tkzInit[xmax=12,ymin=1000,ymax=11000,ystep=1000]
+\tkzGrid[color=orange!30]
+\tkzAxeX[label=Mois,below=13pt]
+\tkzAxeY[label=Recette]
+\tkzDefSetOfPoints[prefix=P]{%
+   1/2000,2/3000,3/2000,4/2500,5/4200,6/4800,7/4600,8/5200,9/6200,
+   10/7000,11/7400,12/10000}
+\tkzDrawPolySeg[color=Maroon!50,
+                line width=2pt](P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12)
+\end{tikzpicture}
+
+\end{document} 

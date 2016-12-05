@@ -1,0 +1,29 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+ \tkzInit[xmin=0,xmax=7,ymin=0,ymax=7]
+ \tkzClip
+ \tkzDefPoints{0/0/A, 6/2/B, 1/6/C}
+ \tkzDrawPolygon(A,B,C)
+ \tkzSetUpCompass[color=brown,line width=.1 pt]
+ \tkzDefLine[bisector](B,A,C)  \tkzGetPoint{a}
+ \tkzDefLine[bisector](C,B,A)  \tkzGetPoint{b}
+ \tkzShowLine[bisector,size=2,gap=3](B,A,C)
+ \tkzShowLine[bisector,size=1,gap=3](C,B,A)
+ \tkzInterLL(A,a)(B,b) \tkzGetPoint{I}
+ \tkzDefPointBy[projection = onto A--B](I)
+ \tkzDrawCircle[radius,color=red,%
+ line width=.2pt](I,tkzPointResult)
+ \tkzDrawSegments[color=Maroon!50](I,tkzPointResult)
+ \tkzDrawLines[add=0 and 5,color=Maroon!50](A,a B,b)
+\end{tikzpicture}
+
+
+\end{document} 

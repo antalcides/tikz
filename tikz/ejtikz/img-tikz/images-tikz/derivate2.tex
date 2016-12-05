@@ -1,0 +1,36 @@
+%\documentclass{article} 
+%\usepackage{tkz-euclide}
+%\usetkzobj{all}
+%\usepackage{tkz-fct}  
+%\usetikzlibrary{calc}
+%
+%\usepackage[active,tightpage]{preview} 
+%\PreviewEnvironment{tikzpicture} 
+%\setlength\PreviewBorder{5pt}% 
+
+%\begin{document} 
+
+\tkzfctset{tan style/.style={-,>=latex,blue}}   
+
+\foreach \alpha in {4,3.8,...,1}{ 
+\begin{tikzpicture}[scale=2]     
+  \tkzInit[xmin=-2,xmax=6,ymin=-1,ymax=3.5]
+  \tkzClip[space=1]
+    \tkzDrawX[noticks,label={}]
+    \tkzDrawY[noticks,label={}]
+    \tkzFct[domain=.1:5,samples=200,id=ln,line width=0.5pt,color=red]{log(x)+1} 
+    \tkzDrawTangentLine[kl=1,kr=5](1)   
+    \tkzDefPointByFct[draw](1) \tkzGetPoint{A}
+    \tkzLabelPoint[above left](A){$A$}
+    \tkzPointShowCoord[xlabel=$a$,ylabel=$f(a)$](A)  
+    \tkzDefPointByFct[draw](\alpha)\tkzGetPoint{M}   
+    \tkzLabelPoint(M){$M$}
+    \tkzPointShowCoord[xlabel=$a+h$,noxdraw,ylabel=$f(a+h)$](M)  
+    \tkzDefPoint(\alpha,\alpha){M'}
+    \tkzDrawPoint(M')
+    \tkzLabelPoint[above left](M'){$M'$}
+    \tkzPointShowCoord[ylabel=$f'(a)\times h+f(a)$](M')  
+    \tkzDrawLines[add=0 and 2,line width=.4pt](A,M)  
+\end{tikzpicture} 
+ }
+%\end{document} 

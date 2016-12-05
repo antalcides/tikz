@@ -1,0 +1,22 @@
+\documentclass[11pt]{scrartcl}
+\usepackage{tikz}
+\usetikzlibrary{shapes.emoticon}
+\begin{document}
+
+\vspace{1cm}
+\tikz \node [shape=emoticon happy,draw,fill=yellow]  {};    
+\tikz \node [shape=emoticon sad,draw,fill=yellow]  {};
+
+\begin{tikzpicture}[ultra thick]
+  \node [shape=emoticon happy,draw,scale=8,fill=orange]  {};
+\end{tikzpicture}
+\begin{tikzpicture}[ultra thick]
+  \node [shape=emoticon sad,draw,scale=8,fill=orange]  {};
+\end{tikzpicture} 
+\begin{tikzpicture}[ultra thick]
+  \node [shape=emoticon straight face,draw,scale=8,fill=orange]  {};
+\end{tikzpicture}    
+ \begin{tikzpicture}[ultra thick]
+  \node [shape=emoticon wink,draw,scale=8,fill=orange]  {};
+\end{tikzpicture}     
+\end{document}          

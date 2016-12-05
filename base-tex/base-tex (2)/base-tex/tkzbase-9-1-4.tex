@@ -1,0 +1,26 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1]
+  \tkzSetUpLine[color=blue!60]
+ \begin{scope}[rotate=30]
+  \tkzDefPoint(2,3){A}
+  \begin{scope}[shift=(A)]
+     \tkzDefPoint(90:5){B}
+     \tkzDefPoint(30:5){C}
+  \end{scope}
+ \end{scope}
+\tkzDrawSegments(A,B B,C C,A)
+% with \usetkzobj{polygons}
+% \tkzDrawPolygon
+\tkzLabelPoints[above](B,C)
+\tkzLabelPoints[below](A)
+\end{tikzpicture}
+
+\end{document} 

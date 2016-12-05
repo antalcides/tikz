@@ -1,0 +1,28 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+\usetikzlibrary{backgrounds}
+\begin{document}
+\tikzset{background rectangle/.style={fill=black}}  
+\begin{tikzpicture}[show background rectangle]
+   \tkzInit[ymin=-1.5,ymax=7,xmin=-1,xmax=+11]
+   \tkzClip
+   \tkzDefPoint(0,0){O}
+   \tkzDefPoint(1,0){I}
+   \tkzDefPoint(10,0){A}
+   \tkzDefPointWith[orthogonal](I,A) \tkzGetPoint{H}
+   \tkzDefMidPoint(O,A) \tkzGetPoint{M}
+   \tkzInterLC(I,H)(M,A)\tkzGetPoints{C}{B}
+   \tkzDrawSegments[color=white,line width=1pt](I,H O,A)
+   \tkzDrawPoints[color=white](O,I,A,B,M)
+   \tkzMarkRightAngle[color=white,line width=1pt](A,I,B)
+   \tkzDrawArc[color=white,line width=1pt,style=dashed](M,A)(O)
+  \tkzLabelSegment[white,right=1ex,pos=.5](I,B){$\sqrt{a}$}
+  \tkzLabelSegment[white,below=1ex,pos=.5](O,I){$1$}
+  \tkzLabelSegment[pos=.6,white,below=1ex](I,A){$a$}
+\end{tikzpicture}
+
+\end{document} 

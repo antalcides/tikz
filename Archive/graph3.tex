@@ -1,0 +1,47 @@
+\documentclass[]{article} 
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz,fullpage}
+\usetikzlibrary{trees,%
+                shapes,%
+                plotmarks,%
+                arrows,%
+                er,%
+                automata,%
+                petri,%
+                topaths}%
+\usepackage{tkz-graphe}
+\usepackage[frenchb]{babel}
+\begin{document}
+
+\begin{tikzpicture}[>=latex]
+
+\SetUpVertex[Distance=4cm,LineWidth=1pt]
+\Vertex(P)% 
+\NOEA{P}(B)%
+\SOEA{P}(M)% 
+\NOEA{B}(D)%
+\SOEA{B}(C)%
+\SOEA{C}(L)% 
+
+\tikzstyle{every to}=[>         = latex,%
+                     color      = red,
+                     line width = 1pt]
+\tikzstyle{EdgeStyle}=[<->]
+\tikzstyle{LabelStyle}=[draw = black,%
+                        fill = lightgray,midway]
+\Edge[label=$4$](P)--(M)
+\Edge[label=$9$](C)--(M)
+\Edge[label=$4$](C)--(L)
+\Edge[label=$5$](C)--(D)
+\Edge[label=$10$](B)--(M)
+\tikzstyle{EdgeStyle}=[<->,bend right]
+\Edge[label=$11$](L)--(D)
+
+\tikzstyle{EdgeStyle}=[->]
+\Edge[label=$3$](C)--(B)
+\Edge[label=$10$](L)--(M)
+\Edge[label=$10$](B)--(P)
+\tikzstyle{EdgeStyle}=[<-]
+\Edge[label=$10$](B)--(D)
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,23 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(4,0){B}
+  \tkzDefPoint(0,3){C}
+  \tkzDrawSegments(A,B B,C C,A)
+  % \tkzDrawPolygon with
+  % \usetkzobj{polygons}
+  \tkzDrawPoints(A,B,C)
+  \tkzLabelPoint[left,red](A){$A$}
+  \tkzLabelPoint[right,blue](B){$B$}
+  \tkzLabelPoint[above,purple](C){$C$}
+\end{tikzpicture}
+
+\end{document} 

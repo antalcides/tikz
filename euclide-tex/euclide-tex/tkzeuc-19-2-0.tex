@@ -1,0 +1,22 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.5]
+  \tkzInit[xmax=5,ymax=5]\tkzGrid[sub]
+  \tkzDefPoint(1,2){A}    \tkzDefPoint(3,4){B}
+  \tkzDefPoint(3,2){C}    \tkzDefPoint(3,1){D}
+  \tkzDrawSegments(A,B A,C A,D)
+  \tkzDrawPoints[color=red](A,B,C,D)  \tkzLabelPoints(A,B,C,D)
+  \tkzFindSlope(A,B){SAB} \tkzFindSlope(A,C){SAC}\tkzFindSlope(A,D){SAD}
+  \tkzText[fill=Gold!50,draw=brown](2.5,0){La pente de (AB) est : \SAB}
+  \tkzText[fill=Gold!50,draw=brown](2.5,-.5){La pente de (AC) est : \SAC}
+  \tkzText[fill=Gold!50,draw=brown](2.5,-1){La pente de (AD) est : \SAD}
+\end{tikzpicture}
+
+\end{document} 

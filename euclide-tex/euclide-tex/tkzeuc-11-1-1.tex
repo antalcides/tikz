@@ -1,0 +1,23 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[rotate=25]
+  \tkzInit
+  \tkzDefPoints{-2/0/A,1/2/B}
+  \tkzDefLine[mediator](A,B)          \tkzGetPoints{C}{D}
+  \tkzDefPointWith[linear,K=.75](C,D) \tkzGetPoint{D}
+  \tkzDefMidPoint(A,B)                \tkzGetPoint{I}
+  \tkzFillPolygon[color=orange!30](A,C,B,D)
+  \tkzDrawSegments(A,B C,D)
+  \tkzMarkRightAngle(B,I,C)
+  \tkzDrawSegments(D,B D,A)
+  \tkzDrawSegments(C,B C,A)
+\end{tikzpicture}
+
+\end{document} 

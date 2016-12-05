@@ -1,0 +1,51 @@
+%
+% tkzpreamble (december 2010)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Copyright (C) 2010 Alain Matthes
+%
+% It may be distributed and/or modified under the conditions
+% of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+%
+% See http://www.latex-project.org/lppl.txt for details.
+% 
+% You cand find these examples on altermundus.fr or altermundus.com
+% Please report typos or any other comments to this documentation to
+% al(dot)ma(at)mac(dot)com 
+% If you want to use only tkz-base, you can replace
+% \usepackage{tkz-tab,tkz-euclide,tkz-fct}
+% by
+% \usepackage{tkz-base}
+% 
+% \usepackage{tkz-fct} loads \usepackage{tkz-base}
+% \usepackage{tkz-euclide} loads \usepackage{tkz-base}
+% \usepackage{tkz-tab} comes from TeXLive or MikTeX,  only some examples need 
+% it
+% Only some examples need \usepackage{tkz-euclide}
+
+
+
+\documentclass{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}% utf8x
+\usepackage{lmodern} %  fourier
+%\usepackage{fullpage}
+\usepackage{amsmath,amssymb,amsfonts}  % amsmath only with fourier
+
+\usepackage{xcolor}   % before tikz or tkz
+
+\usepackage{tkz-tab,tkz-euclide,tkz-fct}
+\usetkzobj{all}
+
+\definecolor{bistre}{rgb}{.75,.50,.30}
+\definecolor{Maroon}{rgb}{0.5,0.0,0.0}%{.80,.80,.95}
+\definecolor{fondpaille}{cmyk}{0,0,0.1,0}
+\pagecolor{fondpaille}
+\color{Maroon}
+\tkzSetUpColors[background=fondpaille,text=Maroon]
+\usepackage[active,pdftex,tightpage]{preview}
+\usetikzlibrary{positioning}
+\PreviewEnvironment[]{tikzpicture}
+\PreviewEnvironment[]{pgfpicture}
+

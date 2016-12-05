@@ -1,0 +1,212 @@
+\documentclass[a4paper]{article}
+
+\usepackage{arrayjob}           % For arrays management
+\usepackage{calc}               % For computations on LaTeX lengths
+\usepackage{multido}            % For loop structure
+\usepackage{pstricks}           % PSTricks with the `color' interface
+\usepackage{pst-key}            % PSTricks interface to `keyval'
+\usepackage{pst-node}           % PSTricks nodes
+
+\makeatletter
+
+% To remove a spurious blank in `arrayjob' 1.03
+\def\one@VEC#1,#2\safty@mark{\def\temp@macro{#2}\temp@toks={#2}%
+  \ifx\temp@macro\empty \one@VECtrue \else \one@VECfalse \fi
+  \temp@count=#1\relax}
+
+% To allow the expansion of the content of an array
+\newif\ifexpandarrayreadelements
+
+\def\read@array[#1]#2#3{\temp@count=1
+  \def\one@item##1#1##2\safty@mark{\def\temp@macro{##2}\temp@toks={##2}%
+  \ifx\temp@macro\empty\else
+    \def\temp@macro{\one@item##2\safty@mark}\fi
+    {\temp@toks={##1}\def\temp@@macro{\array{#2}(\the\temp@count)=}%
+     \expandafter\temp@@macro\expandafter{\the\temp@toks}}%
+  \expandafter\edef\csname total@#2\endcsname{\the\temp@count}%
+  \advance\temp@count1\temp@macro}%
+% D.G. modification begin - Mar. 13, 2001
+%  \one@item#3#1\safty@mark}%
+  \ifexpandarrayreadelements
+    \expandafter\one@item#3#1\safty@mark%
+  \else
+    \one@item#3#1\safty@mark%
+  \fi}%
+% D.G. modification end
+
+% Line broken after these specified numbers of divisors
+\define@key{psset}{CascadingDivisionBreaks}{%
+\edef\CascadingDivision@Breaks{#1}}
+
+% Inter column space for divisions
+\newdimen\CascadingDivision@InterColumnSpace
+\define@key{psset}{CascadingDivisionInterColumnSpace}{%
+\pssetlength{\CascadingDivision@InterColumnSpace}{#1}}
+
+% Inter row space for divisions
+\newdimen\CascadingDivision@InterRowSpace
+\define@key{psset}{CascadingDivisionInterRowSpace}{%
+\pssetlength{\CascadingDivision@InterRowSpace}{#1}}
+
+% Inter column and row space (set equal) for divisions
+\define@key{psset}{CascadingDivisionInterColumnRowSpace}{%
+\pssetlength{\CascadingDivision@InterColumnSpace}{#1}%
+\pssetlength{\CascadingDivision@InterRowSpace}{#1}}
+
+% Font to use for all the numbers
+\define@key{psset}{CascadingDivisionFont}{%
+\def\CascadingDivision@Font{#1}}
+
+% Style to print the remainders of the divisions
+\define@key{psset}{CascadingDivisionRemainderStyle}{%
+\let\CascadingDivision@RemainderStyle#1}
+
+% Default values: current font, no line break, 0.2 units between columns
+%                 and rows, remainders in default text style
+\setkeys{psset}{%
+CascadingDivisionFont=,
+CascadingDivisionBreaks=999,CascadingDivisionInterColumnRowSpace=0.2,
+CascadingDivisionRemainderStyle=}
+
+\SpecialCoor                    % To use PSTricks nodes as coordinates
+
+\newarray\CD@Divisors           % Internal array to store the divisors
+\newarray\CD@DivisorsByLine     % Internal array to store the divisors by line
+
+\def\CascadingDivision{%
+\@ifnextchar[{\CascadingDivision@i}{\CascadingDivision@i[]}}
+\def\CascadingDivision@i[#1]#2#3{{%
+% #1 = number, #2 = list of divisors, separated by the & character,
+\setkeys{psset}{#1}%            % Store local parameter values
+\def\arraystretch{0}%           % No automatic spaces between rows in "tabular"
+\begingroup
+  \expandarrayreadelementstrue
+  \readarray{CD@DivisorsByLine}{\CascadingDivision@Breaks}% Store these numbers
+\endgroup
+\pst@cntc=\@ne                  % First index to use in this array
+\pst@cntd=\z@                   % To count the divisions inside a line
+\pnode{CD@Division}             % Initialize the starting node
+\pnode{CD@DivisionInit}         % Idem (useful if we must break the line)
+% Erase the preceding possible array values (to delete the array is not enough)
+\multido{\iDivisor=\@ne+\@ne}{100}{\CD@Divisors(\iDivisor)={}}
+\pst@cnta=#2                    % Initial number to divide
+\readarray{CD@Divisors}{#3}     % Store the divisors in an array
+\CascadingDivision@Font         % Font to use to print all the numbers
+\multido{\iDivisor=\@ne+\@ne}{100}{%
+  \checkCD@Divisors(\iDivisor)% % Next divisor
+  \ifemptydata                  % Do we reach the last divisor?
+    \multidostop                % Yes: it is finished
+  \else
+    \advance\pst@cntd\@ne       % No: one more division
+    \rput[lt](CD@Division){%
+      % Matrix environment to show the 4 values
+      \psmatrix[mcol=r,colsep=\CascadingDivision@InterColumnSpace,
+                       rowsep=\CascadingDivision@InterRowSpace]
+        \the\pst@cnta & \Rnode[vref=1.6ex]{CD@NodeA}{} &
+                        [mcol=l]\Rnode[href=1]{CD@NodeB}{\cachedata} \\[-2ex]
+                      & \Rnode{CD@NodeC}{} & \Rnode{CD@NodeD}{} \\[-2ex]
+        \pst@cntg=\pst@cnta
+        \global\divide\pst@cnta\cachedata
+        \pst@cnth=\pst@cnta
+        \multiply\pst@cnth\cachedata
+        \advance\pst@cntg-\pst@cnth
+        \CascadingDivision@RemainderStyle{\the\pst@cntg} & \pnode{CD@NodeE} &
+          [mcol=l]\rnode[lt]{CD@Division}{%
+                    \Rnode[href=1]{CD@NodeF}{\the\pst@cnta}}
+        \psline(CD@NodeA)(CD@NodeE) % Vertical line
+        % Horizontal line (it depend if denominator or numerator is the longest)
+        \psline(CD@NodeC)(CD@NodeB|CD@NodeD)
+        \psline(CD@NodeC)(CD@NodeF|CD@NodeD)
+        % Look if we must break the line
+        \checkCD@DivisorsByLine(\pst@cntc)%
+        \pst@cnth=\pst@cntd
+        \divide\pst@cnth\cachedata
+        \multiply\pst@cnth\cachedata
+        \pst@cntg=\pst@cntd
+        \advance\pst@cntg-\pst@cnth
+        \ifnum\pst@cntg=\z@     % Yes, we must break the line
+          \global\pst@cntd=\z@  % As we will start a new line next division
+          \global\advance\pst@cntc\@ne % Next number of divisors by line
+          \checkCD@DivisorsByLine(\pst@cntc)%
+          \ifemptydata
+            \global\advance\pst@cntc\m@ne% If it doesn't exist, kept last one
+          \fi
+          % Insert dots for continuation sign, but not if last divisor!
+          \pst@cnth=\iDivisor
+          \advance\pst@cnth\@ne
+          \checkCD@Divisors(\pst@cnth)% Will be the next divisor
+          \ifemptydata          % No dots if last divisor!
+          \else
+            \hbox{~$\ldots$}% Insert dots
+          \fi
+          \pnode(CD@DivisionInit|0,-0.5){CD@Division}% Breaks the line
+        \fi
+      \endpsmatrix}
+  \fi}}}
+
+\makeatother
+\begin{document}
+
+\CascadingDivision{25}{2&2&2&2&2}
+\hspace{3cm}
+\CascadingDivision{67587}{163&21&2}
+\hspace{4cm}
+\CascadingDivision{87}{2}
+\hspace{2cm}
+\CascadingDivision{987}{8&8&8}
+
+\def\CascadingDivisionRemainderRed#1{\textcolor{red}{#1}}
+\psset{CascadingDivisionRemainderStyle=\CascadingDivisionRemainderRed}
+
+\vspace{4cm}
+\CascadingDivision[CascadingDivisionFont=\tiny]
+                  {186324}{2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2}
+
+\vspace{10cm}
+\psframebox[linestyle=none,fillstyle=solid,fillcolor=yellow]{%
+  \begin{pspicture}(6.7,-3)
+    \CascadingDivision[CascadingDivisionFont=\LARGE]{65331267}{2591&7&21}
+  \end{pspicture}}
+
+\clearpage
+\CascadingDivision{4261367}{1&1&1}
+\hspace{6cm}
+\CascadingDivision{163525}{12&5342&2}
+
+\vspace{3cm}
+\CascadingDivision[CascadingDivisionFont=\Large,
+                   CascadingDivisionInterColumnRowSpace=5mm]{25}{2&2&2&2&2}
+
+\vspace{8cm}
+\scaleboxto(2,0){%
+  \psframebox[framesep=0,linestyle=none,fillstyle=solid,fillcolor=yellow]{%
+    \begin{pspicture}(3.5,-3.4)
+      \CascadingDivision{25}{2&2&2&2&2}
+    \end{pspicture}}}
+
+\vspace{1cm}
+\begin{minipage}{0.47\textwidth}
+  \CascadingDivision[CascadingDivisionBreaks=2]{25}{2&2&2&2&2}
+\end{minipage}%
+\begin{minipage}{0.47\textwidth}
+  \CascadingDivision[CascadingDivisionBreaks={1&2&1}]{25}{2&2&2&2&2}
+\end{minipage}
+
+\clearpage
+\newcommand{\MyRemainderStyle}[1]{%
+\makebox[\widthof{#1}]{%
+  \psframebox[framesep=0.05,linestyle=none,fillstyle=solid,fillcolor=yellow]{%
+    \textcolor{red}{#1}}}}
+\CascadingDivision[CascadingDivisionInterColumnRowSpace=1mm,
+                   CascadingDivisionRemainderStyle=\MyRemainderStyle]
+                  {25}{2&2&2&2&2}
+
+\vspace{4cm}
+\CascadingDivision[CascadingDivisionFont=\scriptsize]
+                  {186324}{2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2}
+
+\vspace{3cm}
+\CascadingDivision[CascadingDivisionBreaks={8&12}]
+                  {186324}{2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2&2}
+
+\end{document}

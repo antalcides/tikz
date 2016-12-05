@@ -1,0 +1,20 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+ \begin{tikzpicture}[scale=.75]
+   \tkzDefPoint(-1,1){A}
+   \tkzDefPoint(5,1){B}
+   \tkzDefEquilateral(A,B)\tkzGetPoint{C}
+   \tkzDrawPolygon[color=Maroon](A,B,C)
+   \tkzCentroid(A,B,C)\tkzGetPoint{G}
+   \tkzDrawPoint(G)
+   \tkzDrawLines[add = 0 and 2/3](A,G B,G C,G)
+ \end{tikzpicture}
+
+\end{document} 

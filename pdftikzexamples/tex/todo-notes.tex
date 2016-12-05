@@ -1,0 +1,105 @@
+% Todo notes
+% Author: Henrik Skov Midtiby
+% Source: http://midtiby.blogspot.com/2007/09/todo-notes-in-latex.html
+% PDFTeX required. Remember to compile the document twice. 
+\documentclass[11pt, a4paper]{article}
+\usepackage{tikz}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{verbatim}
+
+\begin{comment}
+:Title: Todo notes
+:Tags: Overlays, Remember picture
+
+A clever and elegant way of placing todo notes in your document. 
+The notes are shown in the margin and overlays are used to show where the
+notes were inserted. You can also create a list of todo notes with hyperlinks. 
+
+
+:Author: Henrik Skov Midtiby
+:Source: `Midtiby notes`_
+
+.. _Midtiby notes: http://midtiby.blogspot.com/2007/09/todo-notes-in-latex.html
+
+\end{comment}
+
+\makeatletter \newcommand \listoftodos{\section*{Todo list} \@starttoc{tdo}}
+\newcommand\l@todo[2]
+    {\par\noindent \textit{#2}, \parbox{10cm}{#1}\par} \makeatother
+
+% Command for inserting a todo item
+\newcommand{\todo}[1]{%
+% Add to todo list
+\addcontentsline{tdo}{todo}{\protect{#1}}%
+%
+\begin{tikzpicture}[remember picture, baseline=-0.75ex]%
+    \node [coordinate] (inText) {};
+\end{tikzpicture}%
+%
+% Make the margin par
+\marginpar{%
+    \begin{tikzpicture}[remember picture]%
+        \definecolor{orange}{rgb}{1,0.5,0}
+        \draw node[draw=black, fill=orange, text width = 3cm] (inNote)
+                 {#1};%
+    \end{tikzpicture}%
+}%
+%
+\begin{tikzpicture}[remember picture, overlay]%
+    \draw[draw = orange, thick]
+        ([yshift=-0.2cm] inText)
+            -| ([xshift=-0.2cm] inNote.west)
+            -| (inNote.west);
+\end{tikzpicture}%
+%
+}%
+
+\begin{document}
+
+\listoftodos
+
+\section{The first section}
+
+Praesent id lorem. Curabitur feugiat orci vel orci. Fusce dignissim.
+Duis pede velit, condimentum tempus, viverra a, vestibulum et, leo.
+Aenean ac felis. Aliquam id massa. Nulla nec libero ac metus ornare
+\todo{A simple test margin node. Note that the item appears in the todo list.}%
+gravida. Fusce vehicula, ipsum sit amet vestibulum semper, mauris
+eros egestas lectus, eget luctus sem sapien ut nisi. Ut vitae nunc
+et mi ullamcorper volutpat. In dui sem, volutpat eu, ultrices quis,
+suscipit in, nunc. Curabitur lorem. Aenean ut tellus euismod ligula
+\todo{Another note for / from the author.}%
+pharetra interdum. Maecenas nec ipsum in justo congue ultricies.
+Etiam in libero. Pellentesque habitant morbi tristique senectus et
+\todo{Marginpars is a really handsome thing.}%
+netus et malesuada fames ac turpis egestas. Quisque eleifend pede
+vel nibh.
+
+
+\section{The second section}
+
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc quis
+nunc sit amet tortor lacinia porttitor. Morbi sollicitudin, leo eu
+bibendum volutpat, nunc augue fringilla odio, non ullamcorper tortor
+nibh sed urna. Suspendisse et nisl. Etiam mattis eros aliquam
+ligula. Proin a mauris a massa cursus sodales. Curabitur bibendum
+vehicula quam. Etiam vulputate tellus sed lorem varius sagittis.
+\todo{Try to navigate to the marginnotes via the todolist. Hint just
+click on the blue text \ldots}%
+Suspendisse potenti. Aenean egestas velit nec mauris. Nullam eros
+velit, molestie quis, malesuada hendrerit, pulvinar at, risus. Donec
+suscipit arcu vestibulum sapien. Phasellus vel turpis. Sed fermentum
+porta lorem. Nullam sit amet neque. Cras nulla elit, aliquam quis,
+facilisis vel, nonummy non, dolor. Fusce volutpat ligula eget ipsum.
+Etiam pretium. Aenean a ligula.
+
+Nam eget neque. Morbi elit erat, lobortis sit amet, vehicula dictum,
+consequat vitae, orci. Vestibulum ante ipsum primis in faucibus orci
+luctus et ultrices posuere cubilia Curae; Nullam at quam mollis
+ipsum varius sollicitudin. Nam ligula. Suspendisse vitae neque.
+Maecenas vel purus in eros ultrices pharetra. Integer sed justo.
+Etiam eros. In tortor odio, ultrices a, ornare vel, placerat non,
+massa.
+
+\end{document}

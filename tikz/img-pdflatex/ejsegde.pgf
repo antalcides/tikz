@@ -1,0 +1,63 @@
+\tikzset{fontscale/.style = {font=\relsize{#1}}
+    }
+\begin{tikzpicture}[scale=1,
+fontscale=0.5,
+         dot/.style = {
+     fill = blue,
+      circle,
+      inner sep =2pt,
+      minimum size = 6pt
+    },
+  doth/.style = {
+draw
+     fill = white,
+      circle,
+      inner sep =2pt,
+      minimum size = 4pt
+    }
+  ]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\draw [very thin, style=gray!50, step=0.5] (-4,-0.5) grid (5.5,4);
+ %\draw [thin, gray!60] (0,0) grid (9,9);
+\coordinate (O) at (0,0);
+\coordinate (Y) at (0,5);
+\coordinate (X) at (6.5,0);
+\coordinate (X1) at (-3.5,0);
+\coordinate (Y1) at (0,-0.6);
+ \coordinate (A) at(-3,1.5);
+ \coordinate (B) at  (3,1.5) ;
+\coordinate (C) at(3,3);
+\coordinate (D) at (4.7,3.2);
+\coordinate (E) at(5.5,4);
+\coordinate (F) at (-3,0);
+\coordinate (G) at (3,0);
+\coordinate (H) at (5.5,0);
+\coordinate (I) at (0,0.97);
+%%%%%%%%%%%%%%ejes
+\draw[color=red,ultra thick,latex-latex]           (X)node[label={above left:$x$}
+                               ] {} -- (X1) node[
+                               label = {above:$$}] {};
+\draw[color=red,ultra thick,latex-latex]           (Y)node[,label={below right:$y$}
+                               ] {} -- (Y1) node[
+                               label = {above:$$}] {};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[color=red,ultra thick]           (A)node[dot,
+                               label = {below :$$}]{}-- (B) node[dot,
+                                label = {below:$$}] {};
+\draw[color=blue,ultra thick,dashed]           (A)node[
+                               label = {below :$$}]{}-- (F) node[
+                                label = {below:$a$}] {};
+\draw[color=blue,ultra thick,dashed]           (C)node[
+                               label = {}]{}--(G)node[
+                                label = {below:$b$}] {};
+\draw[color=blue,ultra thick,dashed]           (E)node[
+                               label = {}]{}-- (H) node[
+                                label = {below:$c$}] {};
+
+\draw [color=red,ultra thick]  plot[smooth, tension=.7] coordinates {(C) (D) (E)};
+\draw[red,ultra thick,fill=white](C) circle (2.5pt) node[above] {} ;
+\draw[red,ultra thick,fill=red](E) circle (2.5pt) node[above] {} ;
+\draw[red,ultra thick,fill=red](2,3) node[above] {$y=f'(x)$} ;
+\end{tikzpicture}
+

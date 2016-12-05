@@ -1,0 +1,26 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=2.5,rotate=180]
+  \tkzDefPoint(0,1){J} \tkzDefPoint(0,0){O}
+  \tkzDrawCircle[R](O,1 cm)
+  \tkzDrawArc[R,line width=1pt,color=Gold](J,2.5 cm)(180,0)
+  \foreach \i in {0,-5,-10,...,-85}{
+     \tkzDefPoint({2.5*cos(\i*\FPpi/180)},{1+2.5*sin(\i*\FPpi/180)}){P}
+     \tkzDrawSegment[color=orange](J,P)
+     \tkzInterLC[R](P,J)(O,1 cm) \tkzGetPoints{M}{N}
+     \tkzDrawPoints(N)}
+  \foreach \i in {-90,-95,...,-175,-180}{
+    \tkzDefPoint({2.5*cos(\i*\FPpi/180)},{1+2.5*sin(\i*\FPpi/180)}){P}
+    \tkzDrawSegment[color=orange](J,P)
+    \tkzInterLC[R](P,J)(O,1 cm) \tkzGetPoints{M}{N}
+    \tkzDrawPoints(M)}
+\end{tikzpicture}
+
+\end{document} 

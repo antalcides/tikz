@@ -1,0 +1,27 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc} 
+\usepackage[upright]{fourier} 
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{tkz-euclide,fullpage}
+\usepackage[frenchb]{babel}
+\definecolor{fondpaille}{cmyk}{0,0,0.1,0}
+\pagecolor{fondpaille}
+\color{Maroon} 
+
+\begin{document}
+   \begin{tikzpicture}[scale=1]
+  \tkzInit[xmax=14,ymax=10]
+  \tkzClip[space=1]
+  \tkzDefPoint(0,0){A}
+  \tkzDefPoint(8,0){B}
+  \tkzDefMidPoint(A,B)\tkzGetPoint{I}
+  \tkzDefSquare(A,B)\tkzGetPoints{C}{D} 
+  \tkzDrawPolygon(A,B,C,D)
+  \tkzInterLC(A,B)(I,C)\tkzGetSecondPoint{E}
+  \tkzDrawArc[style=dashed,color=gray](I,E)(D)
+  \tkzDefPointWith[colinear= at C](E,B)\tkzGetPoint{F}  
+  \tkzDrawPoints(A,B,C,D,E,F,I) 
+  \tkzLabelPoints(A,B,C,I,D,E,F) 
+  \tkzDrawSegments[style=dashed,color=gray](E,F C,F B,E)
+\end{tikzpicture}  
+\end{document}

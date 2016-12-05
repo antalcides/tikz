@@ -1,0 +1,38 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=.75]
+ \tkzInit[xmin=-5,ymin=-5,xmax=5,ymax=5]
+ \tkzClip
+ \tkzDefPoint(0,0){O}
+ \tkzDefPoint(-2,-3){A}
+ \tkzDefPoint(2,-3){B}
+ \tkzDefPoint(0,3){Q}
+ \tkzDrawCircle[R](O,5 cm)
+ \tkzInterLC[R](A,B)(O,5 cm)
+     \tkzGetPoints{M}{N}
+ \tkzDrawPoints(M,N)
+ \tkzClipCircle[R](O,5 cm)
+ \tkzDrawLines[add= 1 and 1](A,B M,Q N,Q)
+ \tkzDefMidPoint(M,N) \tkzGetPoint{R}
+ \tkzDefLine[orthogonal=through Q](O,Q)
+ \tkzGetPoint(q)
+ \tkzCalcLength(R,Q) \tkzGetLength{dRQ}
+ \tkzCalcLength(M,Q) \tkzGetLength{dMQ}
+ \pgfmathparse{(\dMQ)/(\dRQ)*1.5}
+ \edef\tkz@q{\pgfmathresult}%
+ \tkzDefPoint(\tkz@q,3){K}
+ \tkzDefPointBy[projection=onto N--Q](K)
+    \tkzGetPoint{G}
+  \tkzDrawCircle[R](K,1.5cm)
+  \tkzFillCircle[R,color=purple!50,%
+  opacity=.5](K,1.5 cm)
+\end{tikzpicture}
+
+\end{document} 

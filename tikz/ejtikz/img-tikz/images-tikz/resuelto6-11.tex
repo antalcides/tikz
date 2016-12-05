@@ -1,0 +1,25 @@
+\begin{tikzpicture}[scale=2,
+         dot/.style = {
+     fill = black!30!brown,
+      circle,
+      inner sep =2pt,
+      minimum size = 4pt
+    }
+  ]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \draw [very thin, style=gray!50, step=0.5] (-3,-2) grid (3,2);
+ %\draw [thin, gray!60] (0,0) grid (9,9);
+\coordinate (O) at (0,0);
+\coordinate (B) at (60:2);
+\coordinate (C) at (0:2);
+\draw[color=blue,ultra thick]           (O)node[
+                               label = {}]{}-- (B) node[
+                               label = {}] {};
+\draw[color=blue,ultra thick]           (O)node[
+                               label = {}]{}-- (C) node[
+                               label = {}] {};
+% %\draw[blue,ultra thick] (O) circle [radius=1cm];
+\draw[blue,ultra thick] (2,0) arc (360:60:2); 
+ \pic [ultra thick,red,draw, -latex, "$\vartheta$", angle eccentricity=1.5] {angle =B--O--C};
+
+  \end{tikzpicture}

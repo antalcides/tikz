@@ -1,0 +1,27 @@
+%
+% tkz-euclide (14/01/2011)
+%
+% Coding (utf8) Creator (TeX) Producer (pdfeTeX) 
+% Author Alain Matthes
+\input{tkzpreamble.ltx}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=.5]
+  \tkzInit
+  \tkzDefPoint(0,0){O}
+   \tkzDefPoint(6,6){E}
+  \tkzGetRandPointOn[circle=center O radius 4cm]{A}
+  \tkzDrawSegment(O,A)
+   \tkzDrawCircle(O,A)
+  \tkzTangent[at=A](O)
+   \tkzGetPoint{h}
+  \tkzTangent[from=E](O,A)  \tkzGetPoints{e}{f}
+    \tkzTangent[from with R=E](O,4 cm)
+    \tkzGetPoints{k}{l}
+    \tkzDrawLine[add = 5 and 4](A,h)
+    \tkzMarkRightAngle[fill=red!30](O,A,h)
+    \tkzDrawLines[](E,e E,l)
+\end{tikzpicture}
+
+\end{document} 
